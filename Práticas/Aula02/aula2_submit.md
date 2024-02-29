@@ -17,7 +17,14 @@ Considere um Sistema de Gestão de Stocks de uma empresa. O presente exercício 
 Identify the entities, attributes, and relationships of the database.
 
 ```
-... Write here your answer ...
+Entidades:
+Produto(codigo, nome, preco, IVA, num_unidades)
+Encomenda(num, data)
+Fornecedor(nome, nif, addr, fax, cond_pagamento)
+Tipo Fornecedor(cod_interno, nome)
+Relações:
+Encomenda - Produto
+Encomenda - Fornecedor
 
 ```
 
@@ -25,7 +32,10 @@ Identify the entities, attributes, and relationships of the database.
 Specify the relationships regarding the degree, cardinality and instances mandatory participation of the entities in the relationship.
 
 ```
-... Write here your answer ...
+Relação:Grau;Cardinalidade/Obrigatoriedade(min,max)
+Encomenda - Produto:2;(1,M)(0,N)
+Encomenda - Fornecedor:2;(1,N)(0,1)
+Fornecedor - Tipo Fornecedor:2;(1,N)(0,1)
 
 ```
 
