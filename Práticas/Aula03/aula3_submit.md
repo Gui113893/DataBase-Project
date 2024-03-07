@@ -6,14 +6,35 @@
 ### *a)*
 
 ```
-... Write here your answer ...
+VEICULO(matricula, marca, ano)
+TIPO_VEICULO(designacao, arcondicionado, codigo)
+LIGEIRO(codigo, numlugares, portas, combustivel)
+PESADO(codigo, peso, passageiros)    
+SIMILARIDADE(cod_veiculo1, cod_veiculo2)
 ```
 
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+Chaves Candidatas:
+    VEICULO: {matricula}
+    TIPO_VEICULO: {codigo}
+    LIGEIRO: {codigo}
+    PESADO: {codigo}
+    SIMILARIDADE: {cod_veiculo1, cod_veiculo2}
+
+Chaves Primárias:
+    VEICULO: {matricula}
+    TIPO_VEICULO: {codigo}
+    LIGEIRO: {codigo}
+    PESADO: {codigo}
+    SIMILARIDADE: {cod_veiculo1, cod_veiculo2}
+
+Chaves Estrangeiras:
+    LIGEIRO: {codigo}
+    PESADO: {codigo}
+    SIMILARIDADE: {cod_veiculo1, cod_veiculo2}
 ```
 
 
