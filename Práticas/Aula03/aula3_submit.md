@@ -6,14 +6,27 @@
 ### *a)*
 
 ```
-... Write here your answer ...
+Cliente (nome, endereço, num_carta, NIF)
+Aluguer (número, duração, data)
+Balcão (nome, número, endereço)
 ```
 
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+Chaves candidatas:
+Cliente - {num_carta}{NIF}
+Aluguer - {número}
+Balcão - {número}
+
+Chaves primárias:
+Cliente - {NIF}
+Aluguer - {número}
+Balcão - {número}
+
+Chaves estrangeiras:
+Aluguer - {cli_NIF}, {num_balcao}, {matrícula}
 ```
 
 
@@ -27,14 +40,51 @@
 ### *a)*
 
 ```
-... Write here your answer ...
+AIRPORT (Airport_code, City, State, Name)
+AIRPLANE_TYPE (Company, Type_name, Max_seats)
+AIRPLANE (Airplane_id, Total_no_of_seats)
+FLIGHT (Number, Airline, Weekdays)
+FLIGHT_LEG (Leg_no)
+FARE (Restrictions, Amount, Code)
+LEG_INSTANCE (Date, No_of_avail_seats)
+SEAT (Seat_no)
+CAN_LAND ()
 ```
 
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+Chaves candidatas:
+AIRPORT: {Airport_code}
+AIRPLANE_TYPE: {Type_name}
+AIRPLANE: {Airplane_id}
+FLIGHT: {Number}
+FLIGHT_LEG: {Leg_no, Flight}
+FARE: {Code, Flight}
+LEG_INSTANCE: {Date, Flight, Leg_no}
+SEAT: {Seat_no, Airplane}
+CAN_LAND: {Airport, Airplane_type}
+
+Chaves primárias:
+Chaves candidatas:
+AIRPORT: {Airport_code}
+AIRPLANE_TYPE: {Type_name}
+AIRPLANE: {Airplane_id}
+FLIGHT: {Number}
+FLIGHT_LEG: {Leg_no, Flight}
+FARE: {Code, Flight}
+LEG_INSTANCE: {Date, Flight, Leg_no}
+SEAT: {Seat_no, Airplane}
+CAN_LAND: {Airport, Airplane_type}
+
+Chaves estrangeiras:
+AIRPLANE: {Airplane_type}
+FLIGHT_LEG: {Flight}, {Dep_airport}, {Arr_airport}, {Scheduled_dep_time}, {Scheduled_arr_time}
+FARE: {Flight}
+LEG_INSTANCE: {Airplane}, {Dep_airport}, {Arr_airport}, {Dep_time}, {Arr_time}, {Flight}, {Leg_no}
+SEAT: {Customer_name}, {Cphone}, {Airplane}
+CAN_LAND: {Airport}, {Airplane_type}
 ```
 
 
