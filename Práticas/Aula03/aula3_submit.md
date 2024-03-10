@@ -9,6 +9,11 @@
 Cliente (nome, endereço, num_carta, NIF)
 Aluguer (número, duração, data)
 Balcão (nome, número, endereço)
+VEICULO(matricula, marca, ano)
+TIPO_VEICULO(designacao, arcondicionado, codigo)
+LIGEIRO(codigo, numlugares, portas, combustivel)
+PESADO(codigo, peso, passageiros)    
+SIMILARIDADE(cod_veiculo1, cod_veiculo2)
 ```
 
 
@@ -19,14 +24,27 @@ Chaves candidatas:
 Cliente - {num_carta}{NIF}
 Aluguer - {número}
 Balcão - {número}
+VEICULO: {matricula}
+TIPO_VEICULO: {codigo}
+LIGEIRO: {codigo}
+PESADO: {codigo}
+SIMILARIDADE: {cod_veiculo1, cod_veiculo2}
 
 Chaves primárias:
 Cliente - {NIF}
 Aluguer - {número}
 Balcão - {número}
+VEICULO: {matricula}
+TIPO_VEICULO: {codigo}
+LIGEIRO: {codigo}
+PESADO: {codigo}
+SIMILARIDADE: {cod_veiculo1, cod_veiculo2}
 
 Chaves estrangeiras:
 Aluguer - {cli_NIF}, {num_balcao}, {matrícula}
+LIGEIRO: {codigo}
+PESADO: {codigo}
+SIMILARIDADE: {cod_veiculo1, cod_veiculo2}
 ```
 
 
