@@ -67,7 +67,6 @@ SEAT: {Seat_no, Airplane}
 CAN_LAND: {Airport, Airplane_type}
 
 Chaves primárias:
-Chaves candidatas:
 AIRPORT: {Airport_code}
 AIRPLANE_TYPE: {Type_name}
 AIRPLANE: {Airplane_id}
