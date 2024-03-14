@@ -8,6 +8,16 @@ IF NOT EXISTS (
 )
 CREATE DATABASE DatabaseName
 
+-- Create the schema if it does not exist already
+USE Ex4_1_1
+GO
+IF NOT EXISTS (
+    SELECT schema_name
+        FROM information_schema.schemata
+        WHERE schema_name = N'RentACar'
+)
+EXEC('CREATE SCHEMA RentACar')
+
 -- Create a new table called 'CLIENTE' in schema 'RentACar'
 -- Drop the table if it already exists
 IF OBJECT_ID('RentACar.CLIENTE', 'U') IS NOT NULL
