@@ -1,19 +1,8 @@
--- Create the new database if it does not exist already
-USE master
+CREATE DATABASE RentACar
 GO
-IF NOT EXISTS (
-    SELECT name
-        FROM sys.databases
-        WHERE name = N'Ex4_1_1'
-)
-CREATE DATABASE DatabaseName
-
-
--- Create a new table called 'CLIENTE''
--- Drop the table if it already exists
-IF OBJECT_ID('CLIENTE', 'U') IS NOT NULL
-DROP TABLE CLIENTE
+USE RentACar
 GO
+
 CREATE TABLE CLIENTE
 (
     NIF         INT             PRIMARY KEY     NOT NULL    CHECK (NIF >= 100000000 AND NIF <= 999999999),
@@ -22,10 +11,14 @@ CREATE TABLE CLIENTE
     num_carta   INT             UNIQUE          NOT NULL    CHECK (num_carta >= 100000000 AND num_carta <= 999999999),
 );
 
--- Create a new table called 'ALUGUER'
--- Drop the table if it already exists
-IF OBJECT_ID('ALUGUER', 'U') IS NOT NULL
-DROP TABLE ALUGUER
+
+
+CREATE TABLE BALCAO
+(
+    numero      INT             PRIMARY KEY     NOT NULL,
+    nome        VARCHAR(100),                    
+    endereco    VARCHAR(100),                    
+);
 GO
 
 CREATE TABLE ALUGUER
@@ -42,43 +35,6 @@ CREATE TABLE ALUGUER
 );
 GO
 
--- Create a new table called 'BALCAO' in schema '
--- Drop the table if it already exists
-IF OBJECT_ID('BALCAO', 'U') IS NOT NULL
-DROP TABLE BALCAO
-GO
--- Create the table in the specified schema
-CREATE TABLE BALCAO
-(
-    numero      INT             PRIMARY KEY     NOT NULL,
-    nome        VARCHAR(100),                    
-    endereco    VARCHAR(100),                    
-);
-GO
-
--- Create a new table called 'VEICULO' in schema '
--- Drop the table if it already exists
-IF OBJECT_ID('VEICULO', 'U') IS NOT NULL
-DROP TABLE VEICULO
-GO
--- Create the table in the specified schema
-CREATE TABLE VEICULO
-(
-    matricula       CHAR(8)         PRIMARY KEY     NOT NULL,
-    marca           VARCHAR(100)                    NOT NULL,
-    tipo_veiculo    VARCHAR(100)                    NOT NULL,
-    ano             INT                             NOT NULL,
-
-    FOREIGN KEY (tipo_veiculo) REFERENCES TIPO_VEICULO(codigo),
-);
-GO
-
--- Create a new table called 'TIPO_VEICULO' in schema '
--- Drop the table if it already exists
-IF OBJECT_ID('TIPO_VEICULO', 'U') IS NOT NULL
-DROP TABLE TIPO_VEICULO
-
--- Create the table in the specified schema
 CREATE TABLE TIPO_VEICULO
 (
     codigo          INT             PRIMARY KEY     NOT NULL,
@@ -86,12 +42,19 @@ CREATE TABLE TIPO_VEICULO
     designacao      VARCHAR(100)                    NOT NULL, 
 );
 
--- Create a new table called 'SIMILARIDADE' in schema '
--- Drop the table if it already exists
-IF OBJECT_ID('SIMILARIDADE', 'U') IS NOT NULL
-DROP TABLE SIMILARIDADE
+
+CREATE TABLE VEICULO
+(
+    matricula       CHAR(8)         PRIMARY KEY     NOT NULL,
+    marca           VARCHAR(100)                    NOT NULL,
+    tipo_veiculo    INT								NOT NULL,
+    ano             INT                             NOT NULL,
+
+    FOREIGN KEY (tipo_veiculo) REFERENCES TIPO_VEICULO(codigo),
+);
 GO
--- Create the table in the specified schema
+
+
 CREATE TABLE SIMILARIDADE
 (
     cod_veiculo1    INT                NOT NULL,
@@ -103,12 +66,6 @@ CREATE TABLE SIMILARIDADE
 );
 GO
 
--- Create a new table called 'LIGEIRO' in schema '
--- Drop the table if it already exists
-IF OBJECT_ID('LIGEIRO', 'U') IS NOT NULL
-DROP TABLE LIGEIRO
-GO
--- Create the table in the specified schema
 CREATE TABLE LIGEIRO
 (
     codigo         INT             PRIMARY KEY      NOT NULL,
@@ -121,12 +78,6 @@ CREATE TABLE LIGEIRO
 GO
 
 
--- Create a new table called 'PESADO' in schema '
--- Drop the table if it already exists
-IF OBJECT_ID('PESADO', 'U') IS NOT NULL
-DROP TABLE PESADO
-GO
--- Create the table in the specified schema
 CREATE TABLE PESADO
 (
     codigo         INT             PRIMARY KEY      NOT NULL,
