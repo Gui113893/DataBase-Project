@@ -62,7 +62,7 @@
 ### *i)* 
 
 ```
-... Write here your answer ...
+(π Fname, Minit, Lname, Address (((works_on)⨝ Pno = Pnumber (σ Plocation = 'Aveiro' (project))) ⨝ Essn = Ssn (employee)))-(π Fname, Minit, Lname, Address ((employee)⨝ Dno = Dnumber (σ Dlocation = 'Aveiro' (dept_location))))
 ```
 
 
