@@ -48,7 +48,7 @@
 ### *g)* 
 
 ```
-... Write here your answer ...
+(employee) ⨝ (σ N_dependents > 2 (γ Fname, Minit, Lname; count(Dependent_name) -> N_dependents ((dependent) ⨝ Essn = Ssn (employee))))
 ```
 
 
