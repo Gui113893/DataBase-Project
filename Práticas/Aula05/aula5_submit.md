@@ -55,7 +55,7 @@
 ### *h)* 
 
 ```
-... Write here your answer ...
+(ρ targets (π Ssn ((employee) ⨝ Ssn = Mgr_ssn (department))) - (π Ssn ((employee) ⨝ Ssn = Essn (dependent)))) ⨝ targets.Ssn = employee.Ssn (employee)
 ```
 
 
