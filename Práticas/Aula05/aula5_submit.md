@@ -34,7 +34,7 @@
 ### *e)* 
 
 ```
-... Write here your answer ...
+(π Fname, Minit, Lname (employee)) - ((π Fname, Minit, Lname ((employee) ⨝ Ssn = Essn (works_on))))
 ```
 
 
