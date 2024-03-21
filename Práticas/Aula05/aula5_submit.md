@@ -41,7 +41,7 @@
 ### *f)* 
 
 ```
-... Write here your answer ...
+γ Dname; avg(Salary) -> F_AvgSalary (σ Sex = 'F' ((employee) ⨝ Dno = Dnumber (department)))
 ```
 
 
