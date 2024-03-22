@@ -71,13 +71,13 @@
 ### *a)*
 
 ```
-... Write here your answer ...
+fornecedor-(π nif,nome,fax,endereco,condpag,tipo (fornecedor ⨝ nif=fornecedor encomenda))
 ```
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+γ nome, codigo; avg(item.unidades) -> media (item ⨝ codProd=codigo produto)
 ```
 
 
@@ -100,37 +100,37 @@
 ### *a)*
 
 ```
-... Write here your answer ...
+π nome (paciente ▷ prescricao)
 ```
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+γ especialidade; count(numPresc) -> countPresc (medico ⨝ prescricao)
 ```
 
 
 ### *c)* 
 
 ```
-... Write here your answer ...
+γ nome; count(numPresc) -> countPresc (farmacia ⨝ prescricao)
 ```
 
 
 ### *d)* 
 
 ```
-... Write here your answer ...
+(σ numRegFarm=906 (farmaco)) - (π farmaco.numRegFarm, nome, formula ((σ numRegFarm=906 (farmaco)) ⨝ nome=nomeFarmaco ∧ farmaco.numRegFarm=presc_farmaco.numRegFarm presc_farmaco))
 ```
 
 ### *e)* 
 
 ```
-... Write here your answer ...
+γ farmacia.nome, farmaceutica.nome; count(nomeFarmaco) -> countFarmaco (((farmacia ⨝ nome=farmacia prescricao) ⨝ presc_farmaco) ⨝ numRegFarm=numReg farmaceutica)
 ```
 
 ### *f)* 
 
 ```
-... Write here your answer ...
+π nome, numUtente (σ max≠min (γ nome, numUtente; max(numMedico) -> max, min(numMedico) -> min (paciente ⨝ prescricao)))
 ```
