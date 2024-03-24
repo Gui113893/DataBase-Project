@@ -91,7 +91,7 @@ fornecedor-(π nif,nome,fax,endereco,condpag,tipo (fornecedor ⨝ nif=fornecedor
 ### *d)* 
 
 ```
-... Write here your answer ...
+π nif, item.unidades, codigo, nome, preco, iva ((π fornecedor.nif, item.codProd, item.unidades (((encomenda) ⨝ fornecedor = nif (fornecedor)) ⨝ encomenda.numero = item.numEnc (item))) ⨝ item.codProd = codigo (produto))
 ```
 
 
