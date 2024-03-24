@@ -84,7 +84,7 @@ fornecedor-(π nif,nome,fax,endereco,condpag,tipo (fornecedor ⨝ nif=fornecedor
 ### *c)* 
 
 ```
-... Write here your answer ...
+γ avg(nProd) -> avgProd (γ numEnc; count(codProd) -> nProd (item))
 ```
 
 
