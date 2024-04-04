@@ -274,7 +274,21 @@ JOIN (
 ##### *i)* 
 
 ```
-... Write here your answer ...
+SELECT employee.Fname, employee.Minit, employee.Lname, employee.Address
+FROM (
+    SELECT works_on.Essn
+    FROM works_on
+    JOIN project ON works_on.Pno = project.Pnumber
+    WHERE project.Plocation = 'Aveiro'
+) AS w_project
+JOIN employee ON w_project.Essn = employee.Ssn
+
+EXCEPT
+
+SELECT employee.Fname, employee.Minit, employee.Lname, employee.Address
+FROM employee 
+JOIN dept_location ON employee.Dno = dept_location.Dnumber
+WHERE dept_location.Dlocation = 'Aveiro'
 ```
 
 ### 5.2
