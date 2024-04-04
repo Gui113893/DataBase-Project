@@ -175,37 +175,62 @@ WHERE publishers.pub_id=titles.pub_id AND titles.title_id=sales.title_id AND sal
 ##### *a)*
 
 ```
-... Write here your answer ...
+SELECT DISTINCT project.Pname, employee.Fname, employee.Minit, employee.Lname, employee.Ssn
+FROM works_on
+JOIN project ON works_on.Pno = project.Pnumber
+JOIN employee ON works_on.Essn = employee.Ssn;
 ```
 
 ##### *b)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT employee.Fname, employee.Minit, employee.Lname
+FROM (SELECT employee.Ssn AS manager_Ssn
+      FROM employee
+      WHERE employee.Fname = 'Carlos' AND employee.Minit = 'D' AND employee.Lname = 'Gomes') AS manager
+JOIN employee ON manager.manager_Ssn = employee.Super_ssn;
 ```
 
 ##### *c)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT project.Pname, SUM(works_on.Hours) AS Hours
+FROM project
+JOIN works_on ON project.Pnumber = works_on.Pno
+GROUP BY project.Pname;
 ```
 
 ##### *d)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT employee.Fname, employee.Minit, employee.Lname, employee.Dno, project.Pname, works_on.Hours
+FROM project
+JOIN employee ON project.Dnum = employee.Dno
+JOIN works_on ON project.Pnumber = works_on.Pno AND employee.Ssn = works_on.Essn
+WHERE project.Pname = 'Aveiro Digital' AND works_on.Hours > 20 AND employee.Dno = 3;
 ```
 
 ##### *e)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT employee.Fname, employee.Minit, employee.Lname
+FROM employee
+
+EXCEPT
+
+SELECT DISTINCT employee.Fname, employee.Minit, employee.Lname
+FROM employee
+JOIN works_on ON employee.Ssn = works_on.Essn
 ```
 
 ##### *f)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT department.Dname, AVG(employee.Salary) AS F_AvgSalary
+FROM employee
+JOIN department ON employee.Dno = department.Dnumber
+WHERE employee.Sex = 'F'
+GROUP BY department.Dname
 ```
 
 ##### *g)* 
