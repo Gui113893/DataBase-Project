@@ -223,7 +223,7 @@ FROM employee
 JOIN works_on ON employee.Ssn = works_on.Essn
 ```
 
-##### *f)* 
+##### *f)*        
 
 ```
 SELECT DISTINCT department.Dname, AVG(employee.Salary) AS F_AvgSalary
@@ -236,13 +236,39 @@ GROUP BY department.Dname
 ##### *g)* 
 
 ```
-... Write here your answer ...
+SELECT employee.*
+FROM employee
+JOIN (
+    SELECT employee.Ssn, employee.Fname, employee.Minit, employee.Lname
+    FROM employee
+    JOIN (
+        SELECT Essn, COUNT(Dependent_name) AS N_dependents
+        FROM dependent
+        GROUP BY Essn
+        HAVING N_dependents > 2
+    ) AS emp_dependents ON employee.Ssn = emp_dependents.Essn
+) AS filtered_employees ON employee.Ssn = filtered_employees.Ssn
 ```
 
 ##### *h)* 
 
 ```
-... Write here your answer ...
+SELECT employee.*
+FROM employee
+JOIN (
+    SELECT Ssn
+    FROM (
+        SELECT employee.Ssn
+        FROM employee
+        JOIN department ON employee.Ssn = department.Mgr_ssn
+			
+        EXCEPT
+			
+        SELECT employee.Ssn
+        FROM employee
+        JOIN dependent ON employee.Ssn = dependent.Essn
+    ) AS targets
+) AS filtered_employees ON employee.Ssn = filtered_employees.Ssn
 ```
 
 ##### *i)* 
