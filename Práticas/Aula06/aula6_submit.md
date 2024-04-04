@@ -306,27 +306,49 @@ WHERE dept_location.Dlocation = 'Aveiro'
 ##### *a)*
 
 ```
-... Write here your answer ...
+SELECT *
+FROM fornecedor
+
+EXCEPT
+
+SELECT fornecedor.*
+FROM fornecedor
+JOIN encomenda ON fornecedor.nif = encomenda.fornecedor
 ```
 
 ##### *b)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT produto.nome, produto.codigo, AVG(item.unidades) AS media 
+FROM item
+JOIN produto ON item.codProd = produto.codigo
+GROUP BY produto.nome, produto.codigo
 ```
 
 
 ##### *c)* 
 
 ```
-... Write here your answer ...
+SELECT AVG(nProd) AS avgProd
+FROM (
+    SELECT item.numEnc, COUNT(item.codProd) AS nProd
+    FROM item
+    GROUP BY item.numEnc
+) AS count_item
 ```
 
 
 ##### *d)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT f_join_i.nif, f_join_i.unidades, produto.codigo, produto.nome, produto.preco, produto.iva
+FROM (
+    SELECT fornecedor.nif, item.codProd, item.unidades
+    FROM encomenda
+    JOIN fornecedor ON encomenda.fornecedor = fornecedor.nif
+    JOIN item ON encomenda.numero = item.numEnc
+) AS f_join_i
+JOIN produto ON f_join_i.codProd = produto.codigo
 ```
 
 ### 5.3
@@ -344,37 +366,74 @@ WHERE dept_location.Dlocation = 'Aveiro'
 ##### *a)*
 
 ```
-... Write here your answer ...
+SELECT *
+FROM paciente
+
+EXCEPT
+
+SELECT paciente.*
+FROM paciente
+JOIN prescricao ON paciente.numUtente = prescricao.numUtente
 ```
 
 ##### *b)* 
 
 ```
-... Write here your answer ...
+SELECT medico.especialidade, COUNT(prescricao.numPresc) AS countPresc
+FROM medico
+JOIN prescricao ON medico.numSNS = prescricao.numMedico
+GROUP BY medico.especialidade
 ```
 
 
 ##### *c)* 
 
 ```
-... Write here your answer ...
+SELECT farmacia.nome, COUNT(prescricao.numPresc) AS countPresc
+FROM farmacia
+JOIN prescricao ON farmacia.nome = prescricao.farmacia
+GROUP BY farmacia.nome
 ```
 
 
 ##### *d)* 
 
 ```
-... Write here your answer ...
+SELECT farmaco.numRegFarm, farmaco.nome, farmaco.formula
+FROM farmaco
+WHERE farmaco.numRegFarm = 906
+
+EXCEPT
+
+SELECT farmaco.numRegFarm, farmaco.nome, farmaco.formula
+FROM farmaco
+JOIN presc_farmaco ON farmaco.nome = presc_farmaco.nomeFarmaco 
+                    AND farmaco.numRegFarm = presc_farmaco.numRegFarm
+WHERE farmaco.numRegFarm = 906
 ```
 
 ##### *e)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT farmacia.nome, farmaceutica.nome, COUNT(presc_farmaco.nomeFarmaco) AS countFarmaco
+FROM farmacia
+JOIN prescricao ON farmacia.nome = prescricao.farmacia
+JOIN presc_farmaco ON prescricao.numPresc = presc_farmaco.numPresc
+JOIN farmaceutica ON presc_farmaco.numRegFarm = farmaceutica.numReg
+GROUP BY farmacia.nome, farmaceutica.nome
 ```
 
 ##### *f)* 
 
 ```
-... Write here your answer ...
+SELECT nome, numUtente
+FROM (
+    SELECT paciente.nome, paciente.numUtente, 
+           MAX(prescricao.numMedico) AS max_numMedico, 
+           MIN(prescricao.numMedico) AS min_numMedico
+    FROM paciente
+    JOIN prescricao ON paciente.numUtente = prescricao.numUtente
+    GROUP BY paciente.nome, paciente.numUtente
+) AS grouped
+WHERE grouped.max_numMedico != grouped.min_numMedico
 ```
