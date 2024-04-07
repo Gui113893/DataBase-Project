@@ -175,55 +175,120 @@ WHERE publishers.pub_id=titles.pub_id AND titles.title_id=sales.title_id AND sal
 ##### *a)*
 
 ```
-... Write here your answer ...
+SELECT DISTINCT project.Pname, employee.Fname, employee.Minit, employee.Lname, employee.Ssn
+FROM works_on
+JOIN project ON works_on.Pno = project.Pnumber
+JOIN employee ON works_on.Essn = employee.Ssn;
 ```
 
 ##### *b)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT employee.Fname, employee.Minit, employee.Lname
+FROM (SELECT employee.Ssn AS manager_Ssn
+      FROM employee
+      WHERE employee.Fname = 'Carlos' AND employee.Minit = 'D' AND employee.Lname = 'Gomes') AS manager
+JOIN employee ON manager.manager_Ssn = employee.Super_ssn;
 ```
 
 ##### *c)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT project.Pname, SUM(works_on.Hours) AS Hours
+FROM project
+JOIN works_on ON project.Pnumber = works_on.Pno
+GROUP BY project.Pname;
 ```
 
 ##### *d)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT employee.Fname, employee.Minit, employee.Lname, employee.Dno, project.Pname, works_on.Hours
+FROM project
+JOIN employee ON project.Dnum = employee.Dno
+JOIN works_on ON project.Pnumber = works_on.Pno AND employee.Ssn = works_on.Essn
+WHERE project.Pname = 'Aveiro Digital' AND works_on.Hours > 20 AND employee.Dno = 3;
 ```
 
 ##### *e)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT employee.Fname, employee.Minit, employee.Lname
+FROM employee
+
+EXCEPT
+
+SELECT DISTINCT employee.Fname, employee.Minit, employee.Lname
+FROM employee
+JOIN works_on ON employee.Ssn = works_on.Essn
 ```
 
-##### *f)* 
+##### *f)*        
 
 ```
-... Write here your answer ...
+SELECT DISTINCT department.Dname, AVG(employee.Salary) AS F_AvgSalary
+FROM employee
+JOIN department ON employee.Dno = department.Dnumber
+WHERE employee.Sex = 'F'
+GROUP BY department.Dname
 ```
 
 ##### *g)* 
 
 ```
-... Write here your answer ...
+SELECT employee.*
+FROM employee
+JOIN (
+    SELECT employee.Ssn, employee.Fname, employee.Minit, employee.Lname
+    FROM employee
+    JOIN (
+        SELECT Essn, COUNT(Dependent_name) AS N_dependents
+        FROM dependent
+        GROUP BY Essn
+        HAVING N_dependents > 2
+    ) AS emp_dependents ON employee.Ssn = emp_dependents.Essn
+) AS filtered_employees ON employee.Ssn = filtered_employees.Ssn
 ```
 
 ##### *h)* 
 
 ```
-... Write here your answer ...
+SELECT employee.*
+FROM employee
+JOIN (
+    SELECT Ssn
+    FROM (
+        SELECT employee.Ssn
+        FROM employee
+        JOIN department ON employee.Ssn = department.Mgr_ssn
+			
+        EXCEPT
+			
+        SELECT employee.Ssn
+        FROM employee
+        JOIN dependent ON employee.Ssn = dependent.Essn
+    ) AS targets
+) AS filtered_employees ON employee.Ssn = filtered_employees.Ssn
 ```
 
 ##### *i)* 
 
 ```
-... Write here your answer ...
+SELECT employee.Fname, employee.Minit, employee.Lname, employee.Address
+FROM (
+    SELECT works_on.Essn
+    FROM works_on
+    JOIN project ON works_on.Pno = project.Pnumber
+    WHERE project.Plocation = 'Aveiro'
+) AS w_project
+JOIN employee ON w_project.Essn = employee.Ssn
+
+EXCEPT
+
+SELECT employee.Fname, employee.Minit, employee.Lname, employee.Address
+FROM employee 
+JOIN dept_location ON employee.Dno = dept_location.Dnumber
+WHERE dept_location.Dlocation = 'Aveiro'
 ```
 
 ### 5.2
@@ -241,27 +306,49 @@ WHERE publishers.pub_id=titles.pub_id AND titles.title_id=sales.title_id AND sal
 ##### *a)*
 
 ```
-... Write here your answer ...
+SELECT *
+FROM fornecedor
+
+EXCEPT
+
+SELECT fornecedor.*
+FROM fornecedor
+JOIN encomenda ON fornecedor.nif = encomenda.fornecedor
 ```
 
 ##### *b)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT produto.nome, produto.codigo, AVG(item.unidades) AS media 
+FROM item
+JOIN produto ON item.codProd = produto.codigo
+GROUP BY produto.nome, produto.codigo
 ```
 
 
 ##### *c)* 
 
 ```
-... Write here your answer ...
+SELECT AVG(nProd) AS avgProd
+FROM (
+    SELECT item.numEnc, COUNT(item.codProd) AS nProd
+    FROM item
+    GROUP BY item.numEnc
+) AS count_item
 ```
 
 
 ##### *d)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT f_join_i.nif, f_join_i.unidades, produto.codigo, produto.nome, produto.preco, produto.iva
+FROM (
+    SELECT fornecedor.nif, item.codProd, item.unidades
+    FROM encomenda
+    JOIN fornecedor ON encomenda.fornecedor = fornecedor.nif
+    JOIN item ON encomenda.numero = item.numEnc
+) AS f_join_i
+JOIN produto ON f_join_i.codProd = produto.codigo
 ```
 
 ### 5.3
@@ -279,37 +366,74 @@ WHERE publishers.pub_id=titles.pub_id AND titles.title_id=sales.title_id AND sal
 ##### *a)*
 
 ```
-... Write here your answer ...
+SELECT *
+FROM paciente
+
+EXCEPT
+
+SELECT paciente.*
+FROM paciente
+JOIN prescricao ON paciente.numUtente = prescricao.numUtente
 ```
 
 ##### *b)* 
 
 ```
-... Write here your answer ...
+SELECT medico.especialidade, COUNT(prescricao.numPresc) AS countPresc
+FROM medico
+JOIN prescricao ON medico.numSNS = prescricao.numMedico
+GROUP BY medico.especialidade
 ```
 
 
 ##### *c)* 
 
 ```
-... Write here your answer ...
+SELECT farmacia.nome, COUNT(prescricao.numPresc) AS countPresc
+FROM farmacia
+JOIN prescricao ON farmacia.nome = prescricao.farmacia
+GROUP BY farmacia.nome
 ```
 
 
 ##### *d)* 
 
 ```
-... Write here your answer ...
+SELECT farmaco.numRegFarm, farmaco.nome, farmaco.formula
+FROM farmaco
+WHERE farmaco.numRegFarm = 906
+
+EXCEPT
+
+SELECT farmaco.numRegFarm, farmaco.nome, farmaco.formula
+FROM farmaco
+JOIN presc_farmaco ON farmaco.nome = presc_farmaco.nomeFarmaco 
+                    AND farmaco.numRegFarm = presc_farmaco.numRegFarm
+WHERE farmaco.numRegFarm = 906
 ```
 
 ##### *e)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT farmacia.nome, farmaceutica.nome, COUNT(presc_farmaco.nomeFarmaco) AS countFarmaco
+FROM farmacia
+JOIN prescricao ON farmacia.nome = prescricao.farmacia
+JOIN presc_farmaco ON prescricao.numPresc = presc_farmaco.numPresc
+JOIN farmaceutica ON presc_farmaco.numRegFarm = farmaceutica.numReg
+GROUP BY farmacia.nome, farmaceutica.nome
 ```
 
 ##### *f)* 
 
 ```
-... Write here your answer ...
+SELECT nome, numUtente
+FROM (
+    SELECT paciente.nome, paciente.numUtente, 
+           MAX(prescricao.numMedico) AS max_numMedico, 
+           MIN(prescricao.numMedico) AS min_numMedico
+    FROM paciente
+    JOIN prescricao ON paciente.numUtente = prescricao.numUtente
+    GROUP BY paciente.nome, paciente.numUtente
+) AS grouped
+WHERE grouped.max_numMedico != grouped.min_numMedico
 ```
