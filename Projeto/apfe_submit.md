@@ -96,8 +96,8 @@ O sistema funcionará com a sua hierarquia, ou seja, o que os de baixo conseguem
 ## DER
 
 
-![DER Diagram!](der.jpg "AnImage")
+![DER Diagram!](DER.jpeg "AnImage")
 
 ## ER
 
-![ER Diagram!](er.jpg "AnImage")
+![ER Diagram!](ER.jpeg "AnImage")
