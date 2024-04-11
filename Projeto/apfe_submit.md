@@ -19,6 +19,9 @@ Pessoa, que pode ser Funcionário ou Diretor ou Gerente, é identificada por nif
 #### Diretor
 Diretor é a entidade responsável por dirigir uma ou várias subempresas
 
+#### Gerente
+Gerente é a entidade que gere uma loja
+
 #### Funcionário
 Funcionário que é a entidade que vai trbalhar numa das lojas da empresa tem um tipo que pode ser ou Efetivo ou Part-Time
 
