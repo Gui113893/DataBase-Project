@@ -49,21 +49,24 @@ It is possible to <u>underline</u> -> {A, B,.. }
 ### *a)*
 
 ```
-... Write here your answer ...
+{A,B}
 ```
 
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+R1 = {A,B,C,D,E} F = {{A,B}->{C,D,E}, {C}->{A}}
+R2 = {D,E} F = {{D}->{E}}
 ```
 
 
 ### *c)* 
 
 ```
-... Write here your answer ...
+R1 = {B,C,D,E} F = {{B,C}->{D,E}}
+R2 = {D,E} F = {{D}->{E}}
+R3 = {C,A} F = {{C}->{A}}
 ```
 
 
@@ -73,13 +76,14 @@ It is possible to <u>underline</u> -> {A, B,.. }
 ### *a)*
 
 ```
-... Write here your answer ...
+{A,B}
 ```
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+R1 = {C,D} F = {{C}->{D}}
+R2 = {A, B, C, E} F = {{A, B}→{C,E}, {A}->{C}}
 ```
 
 
