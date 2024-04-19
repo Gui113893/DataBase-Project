@@ -82,20 +82,23 @@ R3 = {C,A} F = {{C}->{A}}
 ### *b)* 
 
 ```
-R1 = {C,D} F = {{C}->{D}}
-R2 = {A, B, C, E} F = {{A, B}→{C,E}, {A}->{C}}
+R1 = {A,B,C,D,E} F = {{A,B}->{C,D,E}}
+R2 = {A,C,D} F = {{A}->{C}, {C}->{D}}
 ```
 
 
 ### *c)* 
 
 ```
-R1 = {C,D} F = {{C}->{D}}
-R2 = {A, B, C, E} F = {{A, B}→{C,E}, {A}->{C}}
+R1 = {A,B,C,D,E} F = {{A,B}->{C,D,E}}
+R2 = {A,C} F = {{A}->{C}}
+R3 = {C,D} F = {{C}->{D}}
 ```
 
 ### *d)* 
 
 ```
-... Write here your answer ...
+R1 = {A,B,C,D,E} F = {{A,B}->{C,D,E}}
+R2 = {A,C} F = {{A}->{C}}
+R3 = {C,D} F = {{C}->{D}}
 ```
