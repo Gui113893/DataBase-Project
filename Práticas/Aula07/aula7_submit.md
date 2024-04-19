@@ -90,7 +90,8 @@ R2 = {A, B, C, E} F = {{A, B}→{C,E}, {A}->{C}}
 ### *c)* 
 
 ```
-... Write here your answer ...
+R1 = {C,D} F = {{C}->{D}}
+R2 = {A, B, C, E} F = {{A, B}→{C,E}, {A}->{C}}
 ```
 
 ### *d)* 
