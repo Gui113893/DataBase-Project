@@ -34,35 +34,35 @@
 ### *e)* 
 
 ```
-... Write here your answer ...
+(π Fname, Minit, Lname (employee)) - ((π Fname, Minit, Lname ((employee) ⨝ Ssn = Essn (works_on))))
 ```
 
 
 ### *f)* 
 
 ```
-... Write here your answer ...
+γ Dname; avg(Salary) -> F_AvgSalary (σ Sex = 'F' ((employee) ⨝ Dno = Dnumber (department)))
 ```
 
 
 ### *g)* 
 
 ```
-... Write here your answer ...
+(employee) ⨝ (σ N_dependents > 2 (γ Fname, Minit, Lname; count(Dependent_name) -> N_dependents ((dependent) ⨝ Essn = Ssn (employee))))
 ```
 
 
 ### *h)* 
 
 ```
-... Write here your answer ...
+(ρ targets (π Ssn ((employee) ⨝ Ssn = Mgr_ssn (department))) - (π Ssn ((employee) ⨝ Ssn = Essn (dependent)))) ⨝ targets.Ssn = employee.Ssn (employee)
 ```
 
 
 ### *i)* 
 
 ```
-... Write here your answer ...
+(π Fname, Minit, Lname, Address (((works_on)⨝ Pno = Pnumber (σ Plocation = 'Aveiro' (project))) ⨝ Essn = Ssn (employee)))-(π Fname, Minit, Lname, Address ((employee)⨝ Dno = Dnumber (σ Dlocation = 'Aveiro' (dept_location))))
 ```
 
 
@@ -84,14 +84,14 @@ fornecedor-(π nif,nome,fax,endereco,condpag,tipo (fornecedor ⨝ nif=fornecedor
 ### *c)* 
 
 ```
-... Write here your answer ...
+γ avg(nProd) -> avgProd (γ numEnc; count(codProd) -> nProd (item))
 ```
 
 
 ### *d)* 
 
 ```
-... Write here your answer ...
+π nif, item.unidades, codigo, nome, preco, iva ((π fornecedor.nif, item.codProd, item.unidades (((encomenda) ⨝ fornecedor = nif (fornecedor)) ⨝ encomenda.numero = item.numEnc (item))) ⨝ item.codProd = codigo (produto))
 ```
 
 

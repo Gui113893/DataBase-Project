@@ -6,7 +6,11 @@
 ### *a)*
 
 ```
+<<<<<<< HEAD
 Está na 1FN - nome_autor tem dependências parciais
+=======
+Está na 1FN - nome_autor tem dependencias parciais
+>>>>>>> 9585ed576d88305cb45a327ee21f399abd9a6d6f
 ```
 
 ### *b)* 
