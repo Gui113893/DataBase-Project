@@ -6,16 +6,25 @@
 ### *a)*
 
 ```
-... Write here your answer ...
-It is possible to <u>underline</u> -> {A, B,.. }
--> R1 (_A_, B, C)
--> R2 (B,F)
+Está na 1FN - nome_autor tem dependencias parciais
 ```
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+1FN:
+Livro (<u>Titulo_Livro</u>, <u>Nome_Autor</u>, Afiliacao_Autor, Tipo_Livro, Preco, NoPaginas, Editor, Endereco_Editor, Ano_Publicacao)
+
+
+2FN:
+Livro (<u>Titulo_Livro</u>, <u>Nome_Autor</u>, Tipo_Livro, Preco, NoPaginas, Editor, Endereco_Editor, Ano_Publicacao)
+Autor (<u>Nome_Autor</u>, Afiliacao_Autor) 
+
+3FN
+Livro (<u>Titulo_Livro</u>, <u>Nome_Autor</u>, Tipo_Livro, NoPaginas, Editor, Ano_Publicacao)
+Autor (<u>Nome_Autor</u>, Afiliacao_Autor)
+Editor (<u>Editor</u>, Endereco_Editor)
+Valor_Livro (<u>Tipo_Livro</u>, <u>NoPaginas</u>, Preco)
 ```
 
 
@@ -26,21 +35,27 @@ It is possible to <u>underline</u> -> {A, B,.. }
 ### *a)*
 
 ```
-... Write here your answer ...
+Chave de R: {A,B}
 ```
 
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+R1={<u>A</u>,<u>B</u>,C,G,H,I,J}
+R2={<u>A</u>,D,E}
+R3={<u>B</u>,F}
 ```
 
 
 ### *c)* 
 
 ```
-... Write here your answer ...
+R1={<u>A</u>,<u>B</u>,C}
+R2={<u>A</u>,D,E}
+R3={<u>B</u>,F}
+R4={<u>F</u>,G,H}
+R5={<u>D</u>,I,J}
 ```
 
 
