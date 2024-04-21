@@ -19,6 +19,35 @@ namespace Contacts
         public Form1()
         {
             InitializeComponent();
+            cn = getSGBDConnection();
+            if (!verifySGBDConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Customers", cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            listBox1.Items.Clear();
+
+            while (reader.Read())
+            {
+                Contact C = new Contact();
+                C.CustomerID = reader["CustomerID"].ToString();
+                C.CompanyName = reader["CompanyName"].ToString();
+                C.ContactName = reader["ContactName"].ToString();
+                C.Address1 = reader["Address"].ToString();
+                C.City = reader["City"].ToString();
+                C.State = reader["Region"].ToString();
+                C.ZIP = reader["PostalCode"].ToString();
+                C.Country = reader["Country"].ToString();
+                C.tel = reader["Phone"].ToString();
+                C.FAX = reader["Fax"].ToString();
+                listBox1.Items.Add(C);
+            }
+
+            cn.Close();
+
+
+            currentContact = 0;
+            ShowContact();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -29,7 +58,7 @@ namespace Contacts
 
         private SqlConnection getSGBDConnection() 
         {
-            return new SqlConnection("Data Source = localhost; Initial Catalog = Northwind; uid = sa; password = sql123");
+            return new SqlConnection("Data Source = localhost; Initial Catalog = Northwind;uid = sa; password = sql123");
         }
 
         private bool verifySGBDConnection() 
@@ -73,6 +102,8 @@ namespace Contacts
                 C.State = reader["Region"].ToString();
                 C.ZIP = reader["PostalCode"].ToString();
                 C.Country = reader["Country"].ToString();
+                C.tel = reader["Phone"].ToString();
+                C.FAX = reader["Fax"].ToString();
                 listBox1.Items.Add(C);
             }
 
@@ -329,7 +360,7 @@ namespace Contacts
         private void bttnEdit_Click(object sender, EventArgs e)
         {
             currentContact = listBox1.SelectedIndex;
-            if (currentContact <= 0)
+            if (currentContact < 0)
             {
                 MessageBox.Show("Please select a contact to edit");
                 return;

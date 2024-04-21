@@ -64,21 +64,24 @@ R5={<u>D</u>,I,J}
 ### *a)*
 
 ```
-... Write here your answer ...
+{A,B}
 ```
 
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+R1 = {A,B,C,D,E} F = {{A,B}->{C,D,E}, {C}->{A}}
+R2 = {D,E} F = {{D}->{E}}
 ```
 
 
 ### *c)* 
 
 ```
-... Write here your answer ...
+R1 = {B,C,D,E} F = {{B,C}->{D,E}}
+R2 = {D,E} F = {{D}->{E}}
+R3 = {C,A} F = {{C}->{A}}
 ```
 
 
@@ -88,24 +91,29 @@ R5={<u>D</u>,I,J}
 ### *a)*
 
 ```
-... Write here your answer ...
+{A,B}
 ```
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+R1 = {A,B,C,D,E} F = {{A,B}->{C,D,E}}
+R2 = {A,C,D} F = {{A}->{C}, {C}->{D}}
 ```
 
 
 ### *c)* 
 
 ```
-... Write here your answer ...
+R1 = {A,B,C,D,E} F = {{A,B}->{C,D,E}}
+R2 = {A,C} F = {{A}->{C}}
+R3 = {C,D} F = {{C}->{D}}
 ```
 
 ### *d)* 
 
 ```
-... Write here your answer ...
+R1 = {A,B,C,D,E} F = {{A,B}->{C,D,E}}
+R2 = {A,C} F = {{A}->{C}}
+R3 = {C,D} F = {{C}->{D}}
 ```
