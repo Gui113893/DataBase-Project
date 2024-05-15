@@ -7,13 +7,13 @@ CREATE TABLE Patente (
     id_patente INT PRIMARY KEY,
     data_registo DATE NOT NULL,
     data_vencimento DATE NOT NULL,
-    territorio VARCHAR(100) NOT NULL
+    logo VARCHAR(100),
 );
 
 -- Tabela Pat_Locs
 CREATE TABLE Pat_Locs (
-    patente INT,
-    Ploc VARCHAR(100),
+    patente INT PRIMARY KEY,
+    Ploc VARCHAR(100) NOT NULL,
     FOREIGN KEY (patente) REFERENCES Patente(id_patente)
 );
 
@@ -38,7 +38,7 @@ CREATE TABLE Produto (
     id_produto INT PRIMARY KEY,
     preco DECIMAL(10, 2) NOT NULL,
     nome VARCHAR(100) NOT NULL,
-    marca INT,
+    marca INT NOT NULL,
     FOREIGN KEY (marca) REFERENCES Marca(patente)
 );
 
@@ -56,12 +56,13 @@ CREATE TABLE Stock_Fornecido (
 CREATE TABLE Pessoa (
     nif INT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    sexo CHAR(1),
+    sexo CHAR(1) NOT NULL,
     email VARCHAR(100),
     telefone VARCHAR(20),
     rua VARCHAR(100),
     codigo_postal VARCHAR(10),
-    localidade VARCHAR(100)
+    localidade VARCHAR(100),
+    salario INT, 
 );
 
 -- Tabela Diretor
@@ -105,7 +106,6 @@ CREATE TABLE Contrato (
     id_contrato INT PRIMARY KEY,
     data_inicio DATE NOT NULL,
     data_fim DATE,
-    -- Outros atributos do contrato podem ser adicionados aqui
 );
 
 -- Tabela Efetivo
