@@ -5,28 +5,36 @@ GO
 USE CompanyBrandManager;
 GO
 
+-- TABELAS
 -- Tabela Patente
+GO
 CREATE TABLE Patente (
     id_patente INT PRIMARY KEY,
     data_registo DATE NOT NULL,
     data_vencimento DATE NOT NULL,
     logo VARCHAR(100),
 );
+GO
 
+GO
 -- Tabela Pat_Locs
 CREATE TABLE Pat_Locs (
     patente INT PRIMARY KEY,
     Ploc VARCHAR(100) NOT NULL,
     FOREIGN KEY (patente) REFERENCES Patente(id_patente)
 );
+GO
 
+GO
 -- Tabela Marca
 CREATE TABLE Marca (
     patente INT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     FOREIGN KEY (patente) REFERENCES Patente(id_patente)
 );
+GO
 
+GO
 -- Tabela Fornecedor
 CREATE TABLE Fornecedor (
     id_fornecedor INT PRIMARY KEY,
@@ -35,7 +43,9 @@ CREATE TABLE Fornecedor (
     codigo_postal VARCHAR(10) NOT NULL,
     localidade VARCHAR(100) NOT NULL
 );
+GO
 
+GO
 -- Tabela Produto
 CREATE TABLE Produto (
     id_produto INT PRIMARY KEY,
@@ -44,7 +54,9 @@ CREATE TABLE Produto (
     marca INT NOT NULL,
     FOREIGN KEY (marca) REFERENCES Marca(patente)
 );
+GO
 
+GO
 -- Tabela Stock_Fornecido
 CREATE TABLE Stock_Fornecido (
     fornecedor INT,
@@ -54,7 +66,9 @@ CREATE TABLE Stock_Fornecido (
     FOREIGN KEY (fornecedor) REFERENCES Fornecedor(id_fornecedor),
     FOREIGN KEY (produto) REFERENCES Produto(id_produto)
 );
+GO
 
+GO
 -- Tabela Pessoa
 CREATE TABLE Pessoa (
     nif INT PRIMARY KEY,
@@ -65,15 +79,19 @@ CREATE TABLE Pessoa (
     rua VARCHAR(100),
     codigo_postal VARCHAR(10),
     localidade VARCHAR(100),
-    salario INT, 
+    salario DECIMAL(5,2) CHECK (salario > 740) NOT NULL,  
 );
+GO
 
+GO
 -- Tabela Diretor
 CREATE TABLE Diretor (
     nif INT PRIMARY KEY,
     FOREIGN KEY (nif) REFERENCES Pessoa(nif)
 );
+GO
 
+GO
 -- Tabela SubEmpresa
 CREATE TABLE SubEmpresa (
     id INT PRIMARY KEY,
@@ -81,7 +99,9 @@ CREATE TABLE SubEmpresa (
     diretor INT,
     FOREIGN KEY (diretor) REFERENCES Diretor(nif)
 );
+GO
 
+GO
 -- Tabela Loja
 CREATE TABLE Loja (
     id_loja INT PRIMARY KEY,
@@ -94,7 +114,9 @@ CREATE TABLE Loja (
     FOREIGN KEY (subempresa) REFERENCES SubEmpresa(id),
     FOREIGN KEY (gerente) REFERENCES Funcionario(nif)
 );
+GO
 
+GO
 -- Tabela Funcionario
 CREATE TABLE Funcionario (
     nif INT PRIMARY KEY,
@@ -103,14 +125,18 @@ CREATE TABLE Funcionario (
     FOREIGN KEY (nif) REFERENCES Pessoa(nif),
     FOREIGN KEY (loja) REFERENCES Loja(id_loja)
 );
+GO
 
+GO
 -- Tabela Contrato
 CREATE TABLE Contrato (
     id_contrato INT PRIMARY KEY,
     data_inicio DATE NOT NULL,
     data_fim DATE,
 );
+GO
 
+GO
 -- Tabela Efetivo
 CREATE TABLE Efetivo (
     nif INT PRIMARY KEY,
@@ -118,14 +144,18 @@ CREATE TABLE Efetivo (
     FOREIGN KEY (nif) REFERENCES Funcionario(nif),
     FOREIGN KEY (contrato) REFERENCES Contrato(id_contrato)
 );
+GO
 
+GO
 -- Tabela Part-Time
 CREATE TABLE Part_Time (
     nif INT PRIMARY KEY,
-    horas_semanais INT NOT NULL,
+    horas_semanais INT NOT NULL CHECK (horas_semanais >= 0 AND horas_semanais <= 40),
     FOREIGN KEY (nif) REFERENCES Funcionario(nif)
 );
+GO
 
+GO
 -- Tabela Stock_Loja
 CREATE TABLE Stock_Loja (
     loja INT,
@@ -135,3 +165,4 @@ CREATE TABLE Stock_Loja (
     FOREIGN KEY (loja) REFERENCES Loja(id_loja),
     FOREIGN KEY (produto) REFERENCES Produto(id_produto)
 );
+GO
