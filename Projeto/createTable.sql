@@ -1,6 +1,9 @@
--- Criação do banco de dados
-CREATE DATABASE IF NOT EXISTS CompanyBrandManager;
+DROP DATABASE IF EXISTS CompanyBrandManager;
+GO
+CREATE DATABASE CompanyBrandManager;
+GO
 USE CompanyBrandManager;
+GO
 
 -- Tabela Patente
 CREATE TABLE Patente (
