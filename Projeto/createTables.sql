@@ -1,13 +1,9 @@
-DROP DATABASE IF EXISTS CompanyBrandManager;
-GO
-CREATE DATABASE CompanyBrandManager;
-GO
 USE CompanyBrandManager;
 GO
 
 -- TABELAS
 -- Tabela Patente
-GO
+
 CREATE TABLE Patente (
     id_patente INT PRIMARY KEY,
     data_registo DATE NOT NULL,
@@ -16,7 +12,7 @@ CREATE TABLE Patente (
 );
 GO
 
-GO
+
 -- Tabela Pat_Locs
 CREATE TABLE Pat_Locs (
     patente INT PRIMARY KEY,
@@ -25,7 +21,7 @@ CREATE TABLE Pat_Locs (
 );
 GO
 
-GO
+
 -- Tabela Marca
 CREATE TABLE Marca (
     patente INT PRIMARY KEY,
@@ -34,7 +30,7 @@ CREATE TABLE Marca (
 );
 GO
 
-GO
+
 -- Tabela Fornecedor
 CREATE TABLE Fornecedor (
     id_fornecedor INT PRIMARY KEY,
@@ -45,7 +41,7 @@ CREATE TABLE Fornecedor (
 );
 GO
 
-GO
+
 -- Tabela Produto
 CREATE TABLE Produto (
     id_produto INT PRIMARY KEY,
@@ -56,7 +52,7 @@ CREATE TABLE Produto (
 );
 GO
 
-GO
+
 -- Tabela Stock_Fornecido
 CREATE TABLE Stock_Fornecido (
     fornecedor INT,
@@ -68,7 +64,7 @@ CREATE TABLE Stock_Fornecido (
 );
 GO
 
-GO
+
 -- Tabela Pessoa
 CREATE TABLE Pessoa (
     nif INT PRIMARY KEY,
@@ -83,7 +79,7 @@ CREATE TABLE Pessoa (
 );
 GO
 
-GO
+
 -- Tabela Diretor
 CREATE TABLE Diretor (
     nif INT PRIMARY KEY,
@@ -91,7 +87,7 @@ CREATE TABLE Diretor (
 );
 GO
 
-GO
+
 -- Tabela SubEmpresa
 CREATE TABLE SubEmpresa (
     id INT PRIMARY KEY,
@@ -101,7 +97,7 @@ CREATE TABLE SubEmpresa (
 );
 GO
 
-GO
+
 -- Tabela Loja
 CREATE TABLE Loja (
     id_loja INT PRIMARY KEY,
@@ -116,7 +112,7 @@ CREATE TABLE Loja (
 );
 GO
 
-GO
+
 -- Tabela Funcionario
 CREATE TABLE Funcionario (
     nif INT PRIMARY KEY,
@@ -127,7 +123,7 @@ CREATE TABLE Funcionario (
 );
 GO
 
-GO
+
 -- Tabela Contrato
 CREATE TABLE Contrato (
     id_contrato INT PRIMARY KEY,
@@ -136,7 +132,7 @@ CREATE TABLE Contrato (
 );
 GO
 
-GO
+
 -- Tabela Efetivo
 CREATE TABLE Efetivo (
     nif INT PRIMARY KEY,
@@ -146,7 +142,7 @@ CREATE TABLE Efetivo (
 );
 GO
 
-GO
+
 -- Tabela Part-Time
 CREATE TABLE Part_Time (
     nif INT PRIMARY KEY,
@@ -155,7 +151,7 @@ CREATE TABLE Part_Time (
 );
 GO
 
-GO
+
 -- Tabela Stock_Loja
 CREATE TABLE Stock_Loja (
     loja INT,
