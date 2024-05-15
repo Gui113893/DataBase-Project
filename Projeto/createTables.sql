@@ -17,7 +17,7 @@ GO
 CREATE TABLE Pat_Locs (
     patente INT PRIMARY KEY,
     Ploc VARCHAR(100) NOT NULL,
-    FOREIGN KEY (patente) REFERENCES Patente(id_patente)
+    FOREIGN KEY (patente) REFERENCES Patente(id_patente) ON DELETE CASCADE
 );
 GO
 
@@ -25,8 +25,8 @@ GO
 -- Tabela Marca
 CREATE TABLE Marca (
     patente INT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    FOREIGN KEY (patente) REFERENCES Patente(id_patente)
+    nome VARCHAR(100) UNIQUE,
+    FOREIGN KEY (patente) REFERENCES Patente(id_patente) ON DELETE CASCADE
 );
 GO
 
@@ -48,7 +48,7 @@ CREATE TABLE Produto (
     preco DECIMAL(10, 2) NOT NULL,
     nome VARCHAR(100) NOT NULL,
     marca INT NOT NULL,
-    FOREIGN KEY (marca) REFERENCES Marca(patente)
+    FOREIGN KEY (marca) REFERENCES Marca(patente) ON DELETE CASCADE -- OR SET NULL
 );
 GO
 
@@ -59,8 +59,8 @@ CREATE TABLE Stock_Fornecido (
     produto INT,
     quantidade INT,
     PRIMARY KEY (fornecedor, produto),
-    FOREIGN KEY (fornecedor) REFERENCES Fornecedor(id_fornecedor),
-    FOREIGN KEY (produto) REFERENCES Produto(id_produto)
+    FOREIGN KEY (fornecedor) REFERENCES Fornecedor(id_fornecedor) ON DELETE CASCADE,
+    FOREIGN KEY (produto) REFERENCES Produto(id_produto) ON DELETE CASCADE
 );
 GO
 
@@ -83,7 +83,7 @@ GO
 -- Tabela Diretor
 CREATE TABLE Diretor (
     nif INT PRIMARY KEY,
-    FOREIGN KEY (nif) REFERENCES Pessoa(nif)
+    FOREIGN KEY (nif) REFERENCES Pessoa(nif) ON DELETE CASCADE
 );
 GO
 
@@ -93,7 +93,7 @@ CREATE TABLE SubEmpresa (
     id INT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     diretor INT,
-    FOREIGN KEY (diretor) REFERENCES Diretor(nif)
+    FOREIGN KEY (diretor) REFERENCES Diretor(nif) ON DELETE SET NULL
 );
 GO
 
@@ -107,8 +107,7 @@ CREATE TABLE Loja (
     localidade VARCHAR(100) NOT NULL,
     subempresa INT NOT NULL,
     gerente INT,
-    FOREIGN KEY (subempresa) REFERENCES SubEmpresa(id),
-    FOREIGN KEY (gerente) REFERENCES Funcionario(nif)
+    FOREIGN KEY (subempresa) REFERENCES SubEmpresa(id) ON DELETE SET NULL,
 );
 GO
 
@@ -117,16 +116,16 @@ GO
 CREATE TABLE Funcionario (
     nif INT PRIMARY KEY,
     tipo VARCHAR(20) NOT NULL CHECK (tipo IN ('Efetivo', 'Part-Time')),
-    loja INT NOT NULL,
-    FOREIGN KEY (nif) REFERENCES Pessoa(nif),
-    FOREIGN KEY (loja) REFERENCES Loja(id_loja)
+    loja INT,
+    FOREIGN KEY (nif) REFERENCES Pessoa(nif) ON DELETE CASCADE,
+    FOREIGN KEY (loja) REFERENCES Loja(id_loja) ON DELETE SET NULL,
 );
 GO
 
 
 -- Tabela Contrato
 CREATE TABLE Contrato (
-    id_contrato INT PRIMARY KEY,
+    id_contrato INT PRIMARY KEY AUTO_INCREMENT,
     data_inicio DATE NOT NULL,
     data_fim DATE,
 );
@@ -136,9 +135,9 @@ GO
 -- Tabela Efetivo
 CREATE TABLE Efetivo (
     nif INT PRIMARY KEY,
-    contrato INT NOT NULL,
-    FOREIGN KEY (nif) REFERENCES Funcionario(nif),
-    FOREIGN KEY (contrato) REFERENCES Contrato(id_contrato)
+    contrato INT UNIQUE,
+    FOREIGN KEY (nif) REFERENCES Funcionario(nif) ON DELETE CASCADE,
+    FOREIGN KEY (contrato) REFERENCES Contrato(id_contrato) ON DELETE CASCADE
 );
 GO
 
@@ -147,7 +146,7 @@ GO
 CREATE TABLE Part_Time (
     nif INT PRIMARY KEY,
     horas_semanais INT NOT NULL CHECK (horas_semanais >= 0 AND horas_semanais <= 40),
-    FOREIGN KEY (nif) REFERENCES Funcionario(nif)
+    FOREIGN KEY (nif) REFERENCES Funcionario(nif) ON DELETE CASCADE,
 );
 GO
 
@@ -158,7 +157,12 @@ CREATE TABLE Stock_Loja (
     produto INT,
     quantidade INT,
     PRIMARY KEY (loja, produto),
-    FOREIGN KEY (loja) REFERENCES Loja(id_loja),
-    FOREIGN KEY (produto) REFERENCES Produto(id_produto)
+    FOREIGN KEY (loja) REFERENCES Loja(id_loja) ON DELETE CASCADE,
+    FOREIGN KEY (produto) REFERENCES Produto(id_produto) ON DELETE CASCADE
 );
 GO
+
+ALTER TABLE Loja
+ADD FOREIGN KEY (gerente)
+REFERENCES Funcionario(nif) 
+ON DELETE SET NULL;
