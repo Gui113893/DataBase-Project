@@ -105,7 +105,7 @@ CREATE TABLE Loja (
     rua VARCHAR(100) NOT NULL,
     codigo_postal VARCHAR(10) NOT NULL,
     localidade VARCHAR(100) NOT NULL,
-    subempresa INT NOT NULL,
+    subempresa INT,
     gerente INT,
     FOREIGN KEY (subempresa) REFERENCES SubEmpresa(id) ON DELETE SET NULL,
 );
@@ -125,7 +125,7 @@ GO
 
 -- Tabela Contrato
 CREATE TABLE Contrato (
-    id_contrato INT PRIMARY KEY AUTO_INCREMENT,
+    id_contrato INT PRIMARY KEY,
     data_inicio DATE NOT NULL,
     data_fim DATE,
 );
