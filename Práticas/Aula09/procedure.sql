@@ -1,12 +1,15 @@
 GO
-CREATE PROC Delete_Employee @Emp_Ssn INT
+CREATE PROC DepartmentMgr
 AS
     BEGIN
-        DELETE FROM [dependent] WHERE Essn = @Emp_Ssn;
-        UPDATE employee SET Super_ssn = NULL WHERE Super_ssn = @Emp_Ssn;
-        DELETE FROM works_on WHERE Essn = @Emp_Ssn;
-        DELETE FROM employee WHERE Ssn = @Emp_Ssn;       
+            SELECT e.ssn, DATEDIFF(YEAR, e.start_date, GETDATE()) AS years_as_manager
+            FROM employees e
+            WHERE e.employee_id IN (SELECT DISTINCT manager_id FROM departments)
+            ORDER BY e.start_date ASC;
+
+            SELECT *
+            FROM employees
+            JOIN departments ON employees.employee_id = departments.manager_id;
     END
 GO
 
-EXEC Delete_Employee 123456789
