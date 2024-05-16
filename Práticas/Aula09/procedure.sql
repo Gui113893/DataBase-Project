@@ -1,15 +1,17 @@
-GO
-CREATE PROC DepartmentMgr
+CREATE TRIGGER PreventMultipleManagers
+ON department
+AFTER INSERT, UPDATE
 AS
+BEGIN
+    IF EXISTS (
+        SELECT Mgr_ssn
+        FROM inserted
+        GROUP BY Mgr_ssn
+        HAVING COUNT(*) > 1
+    )
     BEGIN
-            SELECT e.ssn, DATEDIFF(YEAR, e.start_date, GETDATE()) AS years_as_manager
-            FROM employees e
-            WHERE e.employee_id IN (SELECT DISTINCT manager_id FROM departments)
-            ORDER BY e.start_date ASC;
-
-            SELECT *
-            FROM employees
-            JOIN departments ON employees.employee_id = departments.manager_id;
+        RAISERROR ('Um funcionário não pode ser definido como gerente de mais de um departamento.', 16, 1)
+        ROLLBACK TRANSACTION
     END
-GO
+END
 

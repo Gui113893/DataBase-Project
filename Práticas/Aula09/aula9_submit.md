@@ -13,6 +13,7 @@ AS
         DELETE FROM [dependent] WHERE Essn = @Emp_Ssn;
         UPDATE employee SET Super_ssn = NULL WHERE Super_ssn = @Emp_Ssn;
 		UPDATE department SET Mgr_ssn = NULL WHERE Mgr_ssn = @Emp_Ssn;
+		UPDATE department SET Mgr_start_date = NULL WHERE Mgr_ssn = @Emp_Ssn;
         DELETE FROM works_on WHERE Essn = @Emp_Ssn;
         DELETE FROM employee WHERE Ssn = @Emp_Ssn;       
     END
@@ -33,15 +34,13 @@ AS
             FROM employee
             JOIN department ON employee.Ssn = department.Mgr_ssn;
 
-			SELECT e.ssn, DATEDIFF(YEAR, department.Mgr_start_date, GETDATE()) AS years_as_manager
+			SELECT TOP 1 e.ssn, DATEDIFF(YEAR, department.Mgr_start_date, GETDATE()) AS years_as_manager
             FROM employee e
 			JOIN department ON e.Ssn = department.Mgr_ssn
             WHERE e.Ssn IN (SELECT DISTINCT Mgr_ssn FROM department)
             ORDER BY department.Mgr_start_date;
     END
 GO
-
-EXEC DepartmentMgr;
 ```
 
 ### *c)* 
