@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CompanyBrandManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d1fa209573df91fa81b7e8904118870345d01453")]
 [assembly: System.Reflection.AssemblyProductAttribute("CompanyBrandManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CompanyBrandManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

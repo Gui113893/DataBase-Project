@@ -1,0 +1,17 @@
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\bin\Debug\net6.0-windows\CompanyBrandManager.exe
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\bin\Debug\net6.0-windows\CompanyBrandManager.deps.json
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\bin\Debug\net6.0-windows\CompanyBrandManager.runtimeconfig.json
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\bin\Debug\net6.0-windows\CompanyBrandManager.dll
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\bin\Debug\net6.0-windows\CompanyBrandManager.pdb
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\net6.0-windows\CompanyBrandManager.Form1.resources
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\net6.0-windows\CompanyBrandManager.csproj.GenerateResource.cache
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\net6.0-windows\CompanyBrandManager.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\net6.0-windows\CompanyBrandManager.AssemblyInfoInputs.cache
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\net6.0-windows\CompanyBrandManager.AssemblyInfo.cs
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\net6.0-windows\CompanyBrandManager.csproj.CoreCompileInputs.cache
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\net6.0-windows\CompanyBrandManager.sourcelink.json
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\net6.0-windows\CompanyBrandManager.dll
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\net6.0-windows\refint\CompanyBrandManager.dll
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\net6.0-windows\CompanyBrandManager.pdb
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\net6.0-windows\CompanyBrandManager.genruntimeconfig.cache
+C:\Users\guilh\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\net6.0-windows\ref\CompanyBrandManager.dll
