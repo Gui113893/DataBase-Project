@@ -18,7 +18,6 @@ cursor.execute('''
     DECLARE @sql NVARCHAR(MAX) = N'';
     SELECT @sql += 'DROP TABLE [' + t.name + '];' 
     FROM sys.tables AS t
-    WHERE t.schema_id = SCHEMA_ID();
     EXEC sp_executesql @sql;
 ''')
 
