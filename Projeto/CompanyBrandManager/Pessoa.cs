@@ -126,24 +126,7 @@ namespace CompanyBrandManager
 
         public override string ToString()
         {
-            string result = "NIF: " + Nif;
-            result += (Nif != null ? " " : "");
-            result += "Nome: " + Nome;
-            result += (Nome != null ? " " : "");
-            result += "Email: " + Email;
-            result += (Email != null ? " " : "");
-            result += "Sexo: " + Sexo;
-            result += (Sexo != null ? " " : "");
-            result += "Telefone: " + Telefone;
-            result += (Telefone != null ? " " : "");
-            result += "Rua: " + Rua;
-            result += (Rua != null ? " " : "");
-            result += "Codigo Postal: " + Codigo_Postal;
-            result += (Codigo_Postal != null ? " " : "");
-            result += "\nLocalidade: " + Localidade;
-            result += (Localidade != null ? " " : "");
-            result += "\nSalário: " + Salario;
-            return result;
+            return Nif + " - " + Nome + " - " + Sexo + " - " + Salario;
         }
     }
 }
