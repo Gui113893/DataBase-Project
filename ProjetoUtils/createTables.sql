@@ -76,7 +76,7 @@ GO
 
 -- Tabela Pessoa
 CREATE TABLE Pessoa (
-    nif INT PRIMARY KEY,
+    nif NUMERIC(9,0) PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     sexo CHAR(1) NOT NULL,
     email VARCHAR(100),
@@ -84,14 +84,14 @@ CREATE TABLE Pessoa (
     rua VARCHAR(100),
     codigo_postal VARCHAR(10),
     localidade VARCHAR(100),
-    salario DECIMAL(5,2) CHECK (salario > 740) NOT NULL,  
+    salario DECIMAL(10,2) CHECK (salario > 740) NOT NULL,  
 );
 GO
 
 
 -- Tabela Diretor
 CREATE TABLE Diretor (
-    nif INT PRIMARY KEY,
+    nif NUMERIC(9,0) PRIMARY KEY,
     FOREIGN KEY (nif) REFERENCES Pessoa(nif) ON DELETE CASCADE
 );
 GO
@@ -124,7 +124,7 @@ GO
 
 -- Tabela Funcionario
 CREATE TABLE Funcionario (
-    nif INT PRIMARY KEY,
+    nif NUMERIC(9,0) PRIMARY KEY,
     tipo VARCHAR(20) NOT NULL CHECK (tipo IN ('Efetivo', 'Part-Time')),
     loja INT,
     FOREIGN KEY (nif) REFERENCES Pessoa(nif) ON DELETE CASCADE,
@@ -144,7 +144,7 @@ GO
 
 -- Tabela Efetivo
 CREATE TABLE Efetivo (
-    nif INT PRIMARY KEY,
+    nif NUMERIC(9,0) PRIMARY KEY,
     contrato INT UNIQUE,
     FOREIGN KEY (nif) REFERENCES Funcionario(nif) ON DELETE CASCADE,
     FOREIGN KEY (contrato) REFERENCES Contrato(id_contrato) ON DELETE CASCADE
@@ -154,7 +154,7 @@ GO
 
 -- Tabela Part-Time
 CREATE TABLE Part_Time (
-    nif INT PRIMARY KEY,
+    nif NUMERIC(9,0) PRIMARY KEY,
     horas_semanais INT NOT NULL CHECK (horas_semanais >= 0 AND horas_semanais <= 40),
     FOREIGN KEY (nif) REFERENCES Funcionario(nif) ON DELETE CASCADE,
 );

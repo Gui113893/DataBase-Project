@@ -124,6 +124,7 @@
             // 
             // deleteButtonPessoa
             // 
+            this.deleteButtonPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteButtonPessoa.Location = new System.Drawing.Point(480, 488);
             this.deleteButtonPessoa.Name = "deleteButtonPessoa";
             this.deleteButtonPessoa.Size = new System.Drawing.Size(120, 45);
@@ -133,15 +134,18 @@
             // 
             // editButtonPessoa
             // 
+            this.editButtonPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editButtonPessoa.Location = new System.Drawing.Point(275, 488);
             this.editButtonPessoa.Name = "editButtonPessoa";
             this.editButtonPessoa.Size = new System.Drawing.Size(120, 45);
             this.editButtonPessoa.TabIndex = 28;
             this.editButtonPessoa.Text = "Edit";
             this.editButtonPessoa.UseVisualStyleBackColor = true;
+            this.editButtonPessoa.Click += new System.EventHandler(this.EditButtonPessoa_Click);
             // 
             // addButtonPessoa
             // 
+            this.addButtonPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addButtonPessoa.Location = new System.Drawing.Point(72, 488);
             this.addButtonPessoa.Name = "addButtonPessoa";
             this.addButtonPessoa.Size = new System.Drawing.Size(120, 45);
@@ -151,9 +155,10 @@
             // 
             // lojaTxtPessoa
             // 
-            this.lojaTxtPessoa.Location = new System.Drawing.Point(426, 364);
+            this.lojaTxtPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lojaTxtPessoa.Location = new System.Drawing.Point(426, 360);
             this.lojaTxtPessoa.Name = "lojaTxtPessoa";
-            this.lojaTxtPessoa.Size = new System.Drawing.Size(69, 22);
+            this.lojaTxtPessoa.Size = new System.Drawing.Size(69, 30);
             this.lojaTxtPessoa.TabIndex = 26;
             this.lojaTxtPessoa.Visible = false;
             // 
@@ -181,6 +186,7 @@
             // 
             // createContratoButton
             // 
+            this.createContratoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createContratoButton.Location = new System.Drawing.Point(132, 360);
             this.createContratoButton.Name = "createContratoButton";
             this.createContratoButton.Size = new System.Drawing.Size(95, 31);
@@ -202,9 +208,10 @@
             // 
             // horasTxtPessoa
             // 
-            this.horasTxtPessoa.Location = new System.Drawing.Point(534, 300);
+            this.horasTxtPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.horasTxtPessoa.Location = new System.Drawing.Point(530, 300);
             this.horasTxtPessoa.Name = "horasTxtPessoa";
-            this.horasTxtPessoa.Size = new System.Drawing.Size(70, 22);
+            this.horasTxtPessoa.Size = new System.Drawing.Size(70, 30);
             this.horasTxtPessoa.TabIndex = 21;
             this.horasTxtPessoa.Visible = false;
             // 
@@ -231,9 +238,10 @@
             // 
             // salarioTxtPessoa
             // 
-            this.salarioTxtPessoa.Location = new System.Drawing.Point(118, 304);
+            this.salarioTxtPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.salarioTxtPessoa.Location = new System.Drawing.Point(118, 301);
             this.salarioTxtPessoa.Name = "salarioTxtPessoa";
-            this.salarioTxtPessoa.Size = new System.Drawing.Size(86, 22);
+            this.salarioTxtPessoa.Size = new System.Drawing.Size(86, 30);
             this.salarioTxtPessoa.TabIndex = 18;
             // 
             // salarioLabelPessoa
@@ -248,9 +256,10 @@
             // 
             // codpostalTxtPessoa
             // 
-            this.codpostalTxtPessoa.Location = new System.Drawing.Point(480, 243);
+            this.codpostalTxtPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.codpostalTxtPessoa.Location = new System.Drawing.Point(480, 239);
             this.codpostalTxtPessoa.Name = "codpostalTxtPessoa";
-            this.codpostalTxtPessoa.Size = new System.Drawing.Size(124, 22);
+            this.codpostalTxtPessoa.Size = new System.Drawing.Size(124, 30);
             this.codpostalTxtPessoa.TabIndex = 16;
             // 
             // codpostalLabelPessoa
@@ -265,9 +274,10 @@
             // 
             // localidadeTxtPessoa
             // 
-            this.localidadeTxtPessoa.Location = new System.Drawing.Point(152, 243);
+            this.localidadeTxtPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.localidadeTxtPessoa.Location = new System.Drawing.Point(152, 239);
             this.localidadeTxtPessoa.Name = "localidadeTxtPessoa";
-            this.localidadeTxtPessoa.Size = new System.Drawing.Size(194, 22);
+            this.localidadeTxtPessoa.Size = new System.Drawing.Size(194, 30);
             this.localidadeTxtPessoa.TabIndex = 14;
             // 
             // loacalidadeLabelPessoa
@@ -282,16 +292,17 @@
             // 
             // ruaTxtPessoa
             // 
-            this.ruaTxtPessoa.Location = new System.Drawing.Point(307, 180);
+            this.ruaTxtPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ruaTxtPessoa.Location = new System.Drawing.Point(341, 176);
             this.ruaTxtPessoa.Name = "ruaTxtPessoa";
-            this.ruaTxtPessoa.Size = new System.Drawing.Size(297, 22);
+            this.ruaTxtPessoa.Size = new System.Drawing.Size(297, 30);
             this.ruaTxtPessoa.TabIndex = 12;
             // 
             // ruaLabelPessoa
             // 
             this.ruaLabelPessoa.AutoSize = true;
             this.ruaLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ruaLabelPessoa.Location = new System.Drawing.Point(235, 176);
+            this.ruaLabelPessoa.Location = new System.Drawing.Point(270, 176);
             this.ruaLabelPessoa.Name = "ruaLabelPessoa";
             this.ruaLabelPessoa.Size = new System.Drawing.Size(53, 25);
             this.ruaLabelPessoa.TabIndex = 11;
@@ -299,9 +310,10 @@
             // 
             // telefoneTxtPessoa
             // 
-            this.telefoneTxtPessoa.Location = new System.Drawing.Point(134, 179);
+            this.telefoneTxtPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.telefoneTxtPessoa.Location = new System.Drawing.Point(132, 176);
             this.telefoneTxtPessoa.Name = "telefoneTxtPessoa";
-            this.telefoneTxtPessoa.Size = new System.Drawing.Size(95, 22);
+            this.telefoneTxtPessoa.Size = new System.Drawing.Size(127, 30);
             this.telefoneTxtPessoa.TabIndex = 10;
             // 
             // telefoneLabelPessoa
@@ -316,16 +328,17 @@
             // 
             // emailTxtPessoa
             // 
-            this.emailTxtPessoa.Location = new System.Drawing.Point(307, 120);
+            this.emailTxtPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailTxtPessoa.Location = new System.Drawing.Point(341, 116);
             this.emailTxtPessoa.Name = "emailTxtPessoa";
-            this.emailTxtPessoa.Size = new System.Drawing.Size(297, 22);
+            this.emailTxtPessoa.Size = new System.Drawing.Size(297, 30);
             this.emailTxtPessoa.TabIndex = 8;
             // 
             // emailLabelPessoa
             // 
             this.emailLabelPessoa.AutoSize = true;
             this.emailLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emailLabelPessoa.Location = new System.Drawing.Point(231, 116);
+            this.emailLabelPessoa.Location = new System.Drawing.Point(265, 116);
             this.emailLabelPessoa.Name = "emailLabelPessoa";
             this.emailLabelPessoa.Size = new System.Drawing.Size(66, 25);
             this.emailLabelPessoa.TabIndex = 7;
@@ -333,9 +346,10 @@
             // 
             // sexoTxtPessoa
             // 
-            this.sexoTxtPessoa.Location = new System.Drawing.Point(103, 116);
+            this.sexoTxtPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sexoTxtPessoa.Location = new System.Drawing.Point(103, 113);
             this.sexoTxtPessoa.Name = "sexoTxtPessoa";
-            this.sexoTxtPessoa.Size = new System.Drawing.Size(32, 22);
+            this.sexoTxtPessoa.Size = new System.Drawing.Size(32, 30);
             this.sexoTxtPessoa.TabIndex = 6;
             // 
             // SexoLabelPessoa
@@ -350,25 +364,28 @@
             // 
             // PessoasList
             // 
+            this.PessoasList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PessoasList.FormattingEnabled = true;
-            this.PessoasList.ItemHeight = 16;
+            this.PessoasList.ItemHeight = 25;
             this.PessoasList.Location = new System.Drawing.Point(674, 48);
             this.PessoasList.Name = "PessoasList";
-            this.PessoasList.Size = new System.Drawing.Size(505, 516);
+            this.PessoasList.Size = new System.Drawing.Size(505, 504);
             this.PessoasList.TabIndex = 4;
+            this.PessoasList.SelectedIndexChanged += new System.EventHandler(this.PessoasList_SelectedIndexChanged);
             // 
             // nomeTxtPessoa
             // 
-            this.nomeTxtPessoa.Location = new System.Drawing.Point(307, 52);
+            this.nomeTxtPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nomeTxtPessoa.Location = new System.Drawing.Point(341, 48);
             this.nomeTxtPessoa.Name = "nomeTxtPessoa";
-            this.nomeTxtPessoa.Size = new System.Drawing.Size(297, 22);
+            this.nomeTxtPessoa.Size = new System.Drawing.Size(297, 30);
             this.nomeTxtPessoa.TabIndex = 3;
             // 
             // NomeLabelPessoa
             // 
             this.NomeLabelPessoa.AutoSize = true;
             this.NomeLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NomeLabelPessoa.Location = new System.Drawing.Point(231, 48);
+            this.NomeLabelPessoa.Location = new System.Drawing.Point(265, 48);
             this.NomeLabelPessoa.Name = "NomeLabelPessoa";
             this.NomeLabelPessoa.Size = new System.Drawing.Size(70, 25);
             this.NomeLabelPessoa.TabIndex = 2;
@@ -376,9 +393,10 @@
             // 
             // nifTxtPessoa
             // 
-            this.nifTxtPessoa.Location = new System.Drawing.Point(88, 52);
+            this.nifTxtPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nifTxtPessoa.Location = new System.Drawing.Point(88, 48);
             this.nifTxtPessoa.Name = "nifTxtPessoa";
-            this.nifTxtPessoa.Size = new System.Drawing.Size(95, 22);
+            this.nifTxtPessoa.Size = new System.Drawing.Size(171, 30);
             this.nifTxtPessoa.TabIndex = 1;
             // 
             // nifLabelPessoa
