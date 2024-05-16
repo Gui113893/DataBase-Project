@@ -1,3 +1,12 @@
+USE master
+GO
+if exists (select * from sysdatabases where name='CompanyBrandManager')
+		drop database CompanyBrandManager
+go
+
+CREATE DATABASE CompanyBrandManager;
+GO
+
 USE CompanyBrandManager;
 GO
 
@@ -108,6 +117,7 @@ CREATE TABLE Loja (
     subempresa INT,
     gerente INT,
     FOREIGN KEY (subempresa) REFERENCES SubEmpresa(id) ON DELETE SET NULL,
+    -- Como o gerente depende da tabela Funcionario, a FK é adicionada mais em baixo (CTRL-F -> FK para Loja)
 );
 GO
 
@@ -162,6 +172,7 @@ CREATE TABLE Stock_Loja (
 );
 GO
 
+-- FK para Loja
 ALTER TABLE Loja
 ADD FOREIGN KEY (gerente)
 REFERENCES Funcionario(nif) 
