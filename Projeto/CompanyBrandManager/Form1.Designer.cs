@@ -3,14 +3,14 @@
     partial class Form1
     {
         /// <summary>
-        ///  Required designer variable.
+        /// Variável de designer necessária.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Limpar os recursos que estão sendo usados.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true se for necessário descartar os recursos gerenciados; caso contrário, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,446 +20,485 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Código gerado pelo Windows Form Designer
 
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        /// Método necessário para suporte ao Designer - não modifique 
+        /// o conteúdo deste método com o editor de código.
         /// </summary>
         private void InitializeComponent()
         {
-            tabControl1 = new TabControl();
-            FuncionarioPage = new TabPage();
-            textHoras1 = new TextBox();
-            HorasLabel1 = new Label();
-            label1 = new Label();
-            createContrato = new Button();
-            ContratoLabel1 = new Label();
-            textSalario1 = new TextBox();
-            SalarioLabel1 = new Label();
-            textCodPostal1 = new TextBox();
-            CodPostalLabel1 = new Label();
-            textLocalidade1 = new TextBox();
-            LocalidadeLabel1 = new Label();
-            textRua1 = new TextBox();
-            RuaLabel1 = new Label();
-            textTelefone1 = new TextBox();
-            TelefoneLabel1 = new Label();
-            textEmail1 = new TextBox();
-            EmailLabel1 = new Label();
-            textSex1 = new TextBox();
-            SexoLabel1 = new Label();
-            textNome1 = new TextBox();
-            NomeLabel1 = new Label();
-            textNif1 = new TextBox();
-            nifLabel1 = new Label();
-            ListPessoas = new ListBox();
-            menuAdd = new MenuStrip();
-            adicionarToolStripMenuItem = new ToolStripMenuItem();
-            funcionárioEfetivoToolStripMenuItem = new ToolStripMenuItem();
-            funcionárioPartTimeToolStripMenuItem = new ToolStripMenuItem();
-            diretorToolStripMenuItem = new ToolStripMenuItem();
-            tabPage2 = new TabPage();
-            Addbutton1 = new Button();
-            Editbutton1 = new Button();
-            Deletebutton1 = new Button();
-            tabControl1.SuspendLayout();
-            FuncionarioPage.SuspendLayout();
-            menuAdd.SuspendLayout();
-            SuspendLayout();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.pessoasTab = new System.Windows.Forms.TabPage();
+            this.deleteButtonPessoa = new System.Windows.Forms.Button();
+            this.editButtonPessoa = new System.Windows.Forms.Button();
+            this.addButtonPessoa = new System.Windows.Forms.Button();
+            this.lojaTxtPessoa = new System.Windows.Forms.TextBox();
+            this.lojaLabelPessoa = new System.Windows.Forms.Label();
+            this.idContratoLabel = new System.Windows.Forms.Label();
+            this.createContratoButton = new System.Windows.Forms.Button();
+            this.contratoLabelPessoa = new System.Windows.Forms.Label();
+            this.horasTxtPessoa = new System.Windows.Forms.TextBox();
+            this.horasLabelPessoa = new System.Windows.Forms.Label();
+            this.eurosign = new System.Windows.Forms.Label();
+            this.salarioTxtPessoa = new System.Windows.Forms.TextBox();
+            this.salarioLabelPessoa = new System.Windows.Forms.Label();
+            this.codpostalTxtPessoa = new System.Windows.Forms.TextBox();
+            this.codpostalLabelPessoa = new System.Windows.Forms.Label();
+            this.localidadeTxtPessoa = new System.Windows.Forms.TextBox();
+            this.loacalidadeLabelPessoa = new System.Windows.Forms.Label();
+            this.ruaTxtPessoa = new System.Windows.Forms.TextBox();
+            this.ruaLabelPessoa = new System.Windows.Forms.Label();
+            this.telefoneTxtPessoa = new System.Windows.Forms.TextBox();
+            this.telefoneLabelPessoa = new System.Windows.Forms.Label();
+            this.emailTxtPessoa = new System.Windows.Forms.TextBox();
+            this.emailLabelPessoa = new System.Windows.Forms.Label();
+            this.sexoTxtPessoa = new System.Windows.Forms.TextBox();
+            this.SexoLabelPessoa = new System.Windows.Forms.Label();
+            this.PessoasList = new System.Windows.Forms.ListBox();
+            this.nomeTxtPessoa = new System.Windows.Forms.TextBox();
+            this.NomeLabelPessoa = new System.Windows.Forms.Label();
+            this.nifTxtPessoa = new System.Windows.Forms.TextBox();
+            this.nifLabelPessoa = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.adicionarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.funcionárioEfetivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.funcionárioPartTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diretorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabControl1.SuspendLayout();
+            this.pessoasTab.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // tabControl1
             // 
-            tabControl1.Controls.Add(FuncionarioPage);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new Point(12, 12);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(946, 525);
-            tabControl1.TabIndex = 0;
+            this.tabControl1.Controls.Add(this.pessoasTab);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(28, 25);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1206, 619);
+            this.tabControl1.TabIndex = 0;
             // 
-            // FuncionarioPage
+            // pessoasTab
             // 
-            FuncionarioPage.Controls.Add(Deletebutton1);
-            FuncionarioPage.Controls.Add(Editbutton1);
-            FuncionarioPage.Controls.Add(Addbutton1);
-            FuncionarioPage.Controls.Add(textHoras1);
-            FuncionarioPage.Controls.Add(HorasLabel1);
-            FuncionarioPage.Controls.Add(label1);
-            FuncionarioPage.Controls.Add(createContrato);
-            FuncionarioPage.Controls.Add(ContratoLabel1);
-            FuncionarioPage.Controls.Add(textSalario1);
-            FuncionarioPage.Controls.Add(SalarioLabel1);
-            FuncionarioPage.Controls.Add(textCodPostal1);
-            FuncionarioPage.Controls.Add(CodPostalLabel1);
-            FuncionarioPage.Controls.Add(textLocalidade1);
-            FuncionarioPage.Controls.Add(LocalidadeLabel1);
-            FuncionarioPage.Controls.Add(textRua1);
-            FuncionarioPage.Controls.Add(RuaLabel1);
-            FuncionarioPage.Controls.Add(textTelefone1);
-            FuncionarioPage.Controls.Add(TelefoneLabel1);
-            FuncionarioPage.Controls.Add(textEmail1);
-            FuncionarioPage.Controls.Add(EmailLabel1);
-            FuncionarioPage.Controls.Add(textSex1);
-            FuncionarioPage.Controls.Add(SexoLabel1);
-            FuncionarioPage.Controls.Add(textNome1);
-            FuncionarioPage.Controls.Add(NomeLabel1);
-            FuncionarioPage.Controls.Add(textNif1);
-            FuncionarioPage.Controls.Add(nifLabel1);
-            FuncionarioPage.Controls.Add(ListPessoas);
-            FuncionarioPage.Controls.Add(menuAdd);
-            FuncionarioPage.Location = new Point(4, 24);
-            FuncionarioPage.Name = "FuncionarioPage";
-            FuncionarioPage.Padding = new Padding(3);
-            FuncionarioPage.Size = new Size(938, 497);
-            FuncionarioPage.TabIndex = 0;
-            FuncionarioPage.Text = "Pessoas";
-            FuncionarioPage.UseVisualStyleBackColor = true;
+            this.pessoasTab.Controls.Add(this.deleteButtonPessoa);
+            this.pessoasTab.Controls.Add(this.editButtonPessoa);
+            this.pessoasTab.Controls.Add(this.addButtonPessoa);
+            this.pessoasTab.Controls.Add(this.lojaTxtPessoa);
+            this.pessoasTab.Controls.Add(this.lojaLabelPessoa);
+            this.pessoasTab.Controls.Add(this.idContratoLabel);
+            this.pessoasTab.Controls.Add(this.createContratoButton);
+            this.pessoasTab.Controls.Add(this.contratoLabelPessoa);
+            this.pessoasTab.Controls.Add(this.horasTxtPessoa);
+            this.pessoasTab.Controls.Add(this.horasLabelPessoa);
+            this.pessoasTab.Controls.Add(this.eurosign);
+            this.pessoasTab.Controls.Add(this.salarioTxtPessoa);
+            this.pessoasTab.Controls.Add(this.salarioLabelPessoa);
+            this.pessoasTab.Controls.Add(this.codpostalTxtPessoa);
+            this.pessoasTab.Controls.Add(this.codpostalLabelPessoa);
+            this.pessoasTab.Controls.Add(this.localidadeTxtPessoa);
+            this.pessoasTab.Controls.Add(this.loacalidadeLabelPessoa);
+            this.pessoasTab.Controls.Add(this.ruaTxtPessoa);
+            this.pessoasTab.Controls.Add(this.ruaLabelPessoa);
+            this.pessoasTab.Controls.Add(this.telefoneTxtPessoa);
+            this.pessoasTab.Controls.Add(this.telefoneLabelPessoa);
+            this.pessoasTab.Controls.Add(this.emailTxtPessoa);
+            this.pessoasTab.Controls.Add(this.emailLabelPessoa);
+            this.pessoasTab.Controls.Add(this.sexoTxtPessoa);
+            this.pessoasTab.Controls.Add(this.SexoLabelPessoa);
+            this.pessoasTab.Controls.Add(this.PessoasList);
+            this.pessoasTab.Controls.Add(this.nomeTxtPessoa);
+            this.pessoasTab.Controls.Add(this.NomeLabelPessoa);
+            this.pessoasTab.Controls.Add(this.nifTxtPessoa);
+            this.pessoasTab.Controls.Add(this.nifLabelPessoa);
+            this.pessoasTab.Controls.Add(this.menuStrip1);
+            this.pessoasTab.Location = new System.Drawing.Point(4, 25);
+            this.pessoasTab.Name = "pessoasTab";
+            this.pessoasTab.Padding = new System.Windows.Forms.Padding(3);
+            this.pessoasTab.Size = new System.Drawing.Size(1198, 590);
+            this.pessoasTab.TabIndex = 0;
+            this.pessoasTab.Text = "Pessoas";
+            this.pessoasTab.UseVisualStyleBackColor = true;
             // 
-            // textHoras1
+            // deleteButtonPessoa
             // 
-            textHoras1.Location = new Point(382, 267);
-            textHoras1.Name = "textHoras1";
-            textHoras1.Size = new Size(35, 23);
-            textHoras1.TabIndex = 24;
-            textHoras1.Visible = false;
+            this.deleteButtonPessoa.Location = new System.Drawing.Point(480, 488);
+            this.deleteButtonPessoa.Name = "deleteButtonPessoa";
+            this.deleteButtonPessoa.Size = new System.Drawing.Size(120, 45);
+            this.deleteButtonPessoa.TabIndex = 29;
+            this.deleteButtonPessoa.Text = "Delete";
+            this.deleteButtonPessoa.UseVisualStyleBackColor = true;
             // 
-            // HorasLabel1
+            // editButtonPessoa
             // 
-            HorasLabel1.AutoSize = true;
-            HorasLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            HorasLabel1.Location = new Point(251, 269);
-            HorasLabel1.Name = "HorasLabel1";
-            HorasLabel1.RightToLeft = RightToLeft.No;
-            HorasLabel1.Size = new Size(125, 21);
-            HorasLabel1.TabIndex = 23;
-            HorasLabel1.Text = "Horas Semanais:";
-            HorasLabel1.Visible = false;
+            this.editButtonPessoa.Location = new System.Drawing.Point(275, 488);
+            this.editButtonPessoa.Name = "editButtonPessoa";
+            this.editButtonPessoa.Size = new System.Drawing.Size(120, 45);
+            this.editButtonPessoa.TabIndex = 28;
+            this.editButtonPessoa.Text = "Edit";
+            this.editButtonPessoa.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // addButtonPessoa
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(140, 315);
-            label1.Name = "label1";
-            label1.RightToLeft = RightToLeft.No;
-            label1.Size = new Size(23, 21);
-            label1.TabIndex = 22;
-            label1.Text = "id";
-            label1.Visible = false;
+            this.addButtonPessoa.Location = new System.Drawing.Point(72, 488);
+            this.addButtonPessoa.Name = "addButtonPessoa";
+            this.addButtonPessoa.Size = new System.Drawing.Size(120, 45);
+            this.addButtonPessoa.TabIndex = 27;
+            this.addButtonPessoa.Text = "Add";
+            this.addButtonPessoa.UseVisualStyleBackColor = true;
             // 
-            // createContrato
+            // lojaTxtPessoa
             // 
-            createContrato.Location = new Point(99, 315);
-            createContrato.Name = "createContrato";
-            createContrato.Size = new Size(106, 23);
-            createContrato.TabIndex = 21;
-            createContrato.Text = "Create +";
-            createContrato.UseVisualStyleBackColor = true;
-            createContrato.Visible = false;
+            this.lojaTxtPessoa.Location = new System.Drawing.Point(426, 364);
+            this.lojaTxtPessoa.Name = "lojaTxtPessoa";
+            this.lojaTxtPessoa.Size = new System.Drawing.Size(69, 22);
+            this.lojaTxtPessoa.TabIndex = 26;
+            this.lojaTxtPessoa.Visible = false;
             // 
-            // ContratoLabel1
+            // lojaLabelPessoa
             // 
-            ContratoLabel1.AutoSize = true;
-            ContratoLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            ContratoLabel1.Location = new Point(23, 314);
-            ContratoLabel1.Name = "ContratoLabel1";
-            ContratoLabel1.RightToLeft = RightToLeft.No;
-            ContratoLabel1.Size = new Size(74, 21);
-            ContratoLabel1.TabIndex = 20;
-            ContratoLabel1.Text = "Contrato:";
-            ContratoLabel1.Visible = false;
+            this.lojaLabelPessoa.AutoSize = true;
+            this.lojaLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lojaLabelPessoa.Location = new System.Drawing.Point(365, 360);
+            this.lojaLabelPessoa.Name = "lojaLabelPessoa";
+            this.lojaLabelPessoa.Size = new System.Drawing.Size(55, 25);
+            this.lojaLabelPessoa.TabIndex = 25;
+            this.lojaLabelPessoa.Text = "Loja:";
+            this.lojaLabelPessoa.Visible = false;
             // 
-            // textSalario1
+            // idContratoLabel
             // 
-            textSalario1.Location = new Point(99, 271);
-            textSalario1.Name = "textSalario1";
-            textSalario1.Size = new Size(106, 23);
-            textSalario1.TabIndex = 18;
+            this.idContratoLabel.AutoSize = true;
+            this.idContratoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.idContratoLabel.Location = new System.Drawing.Point(165, 360);
+            this.idContratoLabel.Name = "idContratoLabel";
+            this.idContratoLabel.Size = new System.Drawing.Size(27, 25);
+            this.idContratoLabel.TabIndex = 24;
+            this.idContratoLabel.Text = "id";
+            this.idContratoLabel.Visible = false;
             // 
-            // SalarioLabel1
+            // createContratoButton
             // 
-            SalarioLabel1.AutoSize = true;
-            SalarioLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            SalarioLabel1.Location = new Point(23, 269);
-            SalarioLabel1.Name = "SalarioLabel1";
-            SalarioLabel1.RightToLeft = RightToLeft.No;
-            SalarioLabel1.Size = new Size(65, 21);
-            SalarioLabel1.TabIndex = 17;
-            SalarioLabel1.Text = "Salário: ";
+            this.createContratoButton.Location = new System.Drawing.Point(132, 360);
+            this.createContratoButton.Name = "createContratoButton";
+            this.createContratoButton.Size = new System.Drawing.Size(95, 31);
+            this.createContratoButton.TabIndex = 23;
+            this.createContratoButton.Text = "Criar +";
+            this.createContratoButton.UseVisualStyleBackColor = true;
+            this.createContratoButton.Visible = false;
             // 
-            // textCodPostal1
+            // contratoLabelPessoa
             // 
-            textCodPostal1.Location = new Point(437, 213);
-            textCodPostal1.Name = "textCodPostal1";
-            textCodPostal1.Size = new Size(98, 23);
-            textCodPostal1.TabIndex = 16;
+            this.contratoLabelPessoa.AutoSize = true;
+            this.contratoLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.contratoLabelPessoa.Location = new System.Drawing.Point(33, 360);
+            this.contratoLabelPessoa.Name = "contratoLabelPessoa";
+            this.contratoLabelPessoa.Size = new System.Drawing.Size(93, 25);
+            this.contratoLabelPessoa.TabIndex = 22;
+            this.contratoLabelPessoa.Text = "Contrato:";
+            this.contratoLabelPessoa.Visible = false;
             // 
-            // CodPostalLabel1
+            // horasTxtPessoa
             // 
-            CodPostalLabel1.AutoSize = true;
-            CodPostalLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            CodPostalLabel1.Location = new Point(349, 211);
-            CodPostalLabel1.Name = "CodPostalLabel1";
-            CodPostalLabel1.Size = new Size(82, 21);
-            CodPostalLabel1.TabIndex = 15;
-            CodPostalLabel1.Text = "CodPostal:";
+            this.horasTxtPessoa.Location = new System.Drawing.Point(534, 300);
+            this.horasTxtPessoa.Name = "horasTxtPessoa";
+            this.horasTxtPessoa.Size = new System.Drawing.Size(70, 22);
+            this.horasTxtPessoa.TabIndex = 21;
+            this.horasTxtPessoa.Visible = false;
             // 
-            // textLocalidade1
+            // horasLabelPessoa
             // 
-            textLocalidade1.Location = new Point(116, 213);
-            textLocalidade1.Name = "textLocalidade1";
-            textLocalidade1.Size = new Size(210, 23);
-            textLocalidade1.TabIndex = 14;
+            this.horasLabelPessoa.AutoSize = true;
+            this.horasLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.horasLabelPessoa.Location = new System.Drawing.Point(365, 300);
+            this.horasLabelPessoa.Name = "horasLabelPessoa";
+            this.horasLabelPessoa.Size = new System.Drawing.Size(163, 25);
+            this.horasLabelPessoa.TabIndex = 20;
+            this.horasLabelPessoa.Text = "Horas Semanais:";
+            this.horasLabelPessoa.Visible = false;
             // 
-            // LocalidadeLabel1
+            // eurosign
             // 
-            LocalidadeLabel1.AutoSize = true;
-            LocalidadeLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            LocalidadeLabel1.Location = new Point(23, 211);
-            LocalidadeLabel1.Name = "LocalidadeLabel1";
-            LocalidadeLabel1.Size = new Size(87, 21);
-            LocalidadeLabel1.TabIndex = 13;
-            LocalidadeLabel1.Text = "Localidade:";
+            this.eurosign.AutoSize = true;
+            this.eurosign.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eurosign.Location = new System.Drawing.Point(210, 304);
+            this.eurosign.Name = "eurosign";
+            this.eurosign.Size = new System.Drawing.Size(23, 25);
+            this.eurosign.TabIndex = 19;
+            this.eurosign.Text = "€";
             // 
-            // textRua1
+            // salarioTxtPessoa
             // 
-            textRua1.Location = new Point(258, 155);
-            textRua1.Name = "textRua1";
-            textRua1.Size = new Size(277, 23);
-            textRua1.TabIndex = 12;
+            this.salarioTxtPessoa.Location = new System.Drawing.Point(118, 304);
+            this.salarioTxtPessoa.Name = "salarioTxtPessoa";
+            this.salarioTxtPessoa.Size = new System.Drawing.Size(86, 22);
+            this.salarioTxtPessoa.TabIndex = 18;
             // 
-            // RuaLabel1
+            // salarioLabelPessoa
             // 
-            RuaLabel1.AutoSize = true;
-            RuaLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            RuaLabel1.Location = new Point(212, 153);
-            RuaLabel1.Name = "RuaLabel1";
-            RuaLabel1.Size = new Size(40, 21);
-            RuaLabel1.TabIndex = 11;
-            RuaLabel1.Text = "Rua:";
-            RuaLabel1.Click += label1_Click_1;
+            this.salarioLabelPessoa.AutoSize = true;
+            this.salarioLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.salarioLabelPessoa.Location = new System.Drawing.Point(33, 300);
+            this.salarioLabelPessoa.Name = "salarioLabelPessoa";
+            this.salarioLabelPessoa.Size = new System.Drawing.Size(79, 25);
+            this.salarioLabelPessoa.TabIndex = 17;
+            this.salarioLabelPessoa.Text = "Salário:";
             // 
-            // textTelefone1
+            // codpostalTxtPessoa
             // 
-            textTelefone1.Location = new Point(99, 153);
-            textTelefone1.Name = "textTelefone1";
-            textTelefone1.Size = new Size(88, 23);
-            textTelefone1.TabIndex = 10;
+            this.codpostalTxtPessoa.Location = new System.Drawing.Point(480, 243);
+            this.codpostalTxtPessoa.Name = "codpostalTxtPessoa";
+            this.codpostalTxtPessoa.Size = new System.Drawing.Size(124, 22);
+            this.codpostalTxtPessoa.TabIndex = 16;
             // 
-            // TelefoneLabel1
+            // codpostalLabelPessoa
             // 
-            TelefoneLabel1.AutoSize = true;
-            TelefoneLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            TelefoneLabel1.Location = new Point(23, 153);
-            TelefoneLabel1.Name = "TelefoneLabel1";
-            TelefoneLabel1.Size = new Size(70, 21);
-            TelefoneLabel1.TabIndex = 9;
-            TelefoneLabel1.Text = "Telefone:";
+            this.codpostalLabelPessoa.AutoSize = true;
+            this.codpostalLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.codpostalLabelPessoa.Location = new System.Drawing.Point(365, 239);
+            this.codpostalLabelPessoa.Name = "codpostalLabelPessoa";
+            this.codpostalLabelPessoa.Size = new System.Drawing.Size(109, 25);
+            this.codpostalLabelPessoa.TabIndex = 15;
+            this.codpostalLabelPessoa.Text = "CodPostal:";
             // 
-            // textEmail1
+            // localidadeTxtPessoa
             // 
-            textEmail1.Location = new Point(251, 96);
-            textEmail1.Name = "textEmail1";
-            textEmail1.Size = new Size(284, 23);
-            textEmail1.TabIndex = 8;
+            this.localidadeTxtPessoa.Location = new System.Drawing.Point(152, 243);
+            this.localidadeTxtPessoa.Name = "localidadeTxtPessoa";
+            this.localidadeTxtPessoa.Size = new System.Drawing.Size(194, 22);
+            this.localidadeTxtPessoa.TabIndex = 14;
             // 
-            // EmailLabel1
+            // loacalidadeLabelPessoa
             // 
-            EmailLabel1.AutoSize = true;
-            EmailLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            EmailLabel1.Location = new Point(189, 94);
-            EmailLabel1.Name = "EmailLabel1";
-            EmailLabel1.Size = new Size(51, 21);
-            EmailLabel1.TabIndex = 7;
-            EmailLabel1.Text = "Email:";
-            EmailLabel1.Click += label1_Click;
+            this.loacalidadeLabelPessoa.AutoSize = true;
+            this.loacalidadeLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loacalidadeLabelPessoa.Location = new System.Drawing.Point(33, 239);
+            this.loacalidadeLabelPessoa.Name = "loacalidadeLabelPessoa";
+            this.loacalidadeLabelPessoa.Size = new System.Drawing.Size(113, 25);
+            this.loacalidadeLabelPessoa.TabIndex = 13;
+            this.loacalidadeLabelPessoa.Text = "Localidade:";
             // 
-            // textSex1
+            // ruaTxtPessoa
             // 
-            textSex1.Location = new Point(75, 96);
-            textSex1.Name = "textSex1";
-            textSex1.Size = new Size(40, 23);
-            textSex1.TabIndex = 6;
+            this.ruaTxtPessoa.Location = new System.Drawing.Point(307, 180);
+            this.ruaTxtPessoa.Name = "ruaTxtPessoa";
+            this.ruaTxtPessoa.Size = new System.Drawing.Size(297, 22);
+            this.ruaTxtPessoa.TabIndex = 12;
             // 
-            // SexoLabel1
+            // ruaLabelPessoa
             // 
-            SexoLabel1.AutoSize = true;
-            SexoLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            SexoLabel1.Location = new Point(23, 94);
-            SexoLabel1.Name = "SexoLabel1";
-            SexoLabel1.Size = new Size(46, 21);
-            SexoLabel1.TabIndex = 5;
-            SexoLabel1.Text = "Sexo:";
+            this.ruaLabelPessoa.AutoSize = true;
+            this.ruaLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ruaLabelPessoa.Location = new System.Drawing.Point(235, 176);
+            this.ruaLabelPessoa.Name = "ruaLabelPessoa";
+            this.ruaLabelPessoa.Size = new System.Drawing.Size(53, 25);
+            this.ruaLabelPessoa.TabIndex = 11;
+            this.ruaLabelPessoa.Text = "Rua:";
             // 
-            // textNome1
+            // telefoneTxtPessoa
             // 
-            textNome1.Location = new Point(251, 36);
-            textNome1.Name = "textNome1";
-            textNome1.Size = new Size(284, 23);
-            textNome1.TabIndex = 4;
+            this.telefoneTxtPessoa.Location = new System.Drawing.Point(134, 179);
+            this.telefoneTxtPessoa.Name = "telefoneTxtPessoa";
+            this.telefoneTxtPessoa.Size = new System.Drawing.Size(95, 22);
+            this.telefoneTxtPessoa.TabIndex = 10;
             // 
-            // NomeLabel1
+            // telefoneLabelPessoa
             // 
-            NomeLabel1.AutoSize = true;
-            NomeLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            NomeLabel1.Location = new Point(189, 34);
-            NomeLabel1.Name = "NomeLabel1";
-            NomeLabel1.Size = new Size(56, 21);
-            NomeLabel1.TabIndex = 3;
-            NomeLabel1.Text = "Nome:";
+            this.telefoneLabelPessoa.AutoSize = true;
+            this.telefoneLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.telefoneLabelPessoa.Location = new System.Drawing.Point(33, 176);
+            this.telefoneLabelPessoa.Name = "telefoneLabelPessoa";
+            this.telefoneLabelPessoa.Size = new System.Drawing.Size(95, 25);
+            this.telefoneLabelPessoa.TabIndex = 9;
+            this.telefoneLabelPessoa.Text = "Telefone:";
             // 
-            // textNif1
+            // emailTxtPessoa
             // 
-            textNif1.Location = new Point(66, 36);
-            textNif1.Name = "textNif1";
-            textNif1.Size = new Size(97, 23);
-            textNif1.TabIndex = 2;
-            textNif1.TextChanged += textBox1_TextChanged;
+            this.emailTxtPessoa.Location = new System.Drawing.Point(307, 120);
+            this.emailTxtPessoa.Name = "emailTxtPessoa";
+            this.emailTxtPessoa.Size = new System.Drawing.Size(297, 22);
+            this.emailTxtPessoa.TabIndex = 8;
             // 
-            // nifLabel1
+            // emailLabelPessoa
             // 
-            nifLabel1.AutoSize = true;
-            nifLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            nifLabel1.Location = new Point(23, 34);
-            nifLabel1.Name = "nifLabel1";
-            nifLabel1.Size = new Size(37, 21);
-            nifLabel1.TabIndex = 1;
-            nifLabel1.Text = "NIF:";
+            this.emailLabelPessoa.AutoSize = true;
+            this.emailLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailLabelPessoa.Location = new System.Drawing.Point(231, 116);
+            this.emailLabelPessoa.Name = "emailLabelPessoa";
+            this.emailLabelPessoa.Size = new System.Drawing.Size(66, 25);
+            this.emailLabelPessoa.TabIndex = 7;
+            this.emailLabelPessoa.Text = "Email:";
             // 
-            // ListPessoas
+            // sexoTxtPessoa
             // 
-            ListPessoas.FormattingEnabled = true;
-            ListPessoas.ItemHeight = 15;
-            ListPessoas.Location = new Point(553, 7);
-            ListPessoas.Name = "ListPessoas";
-            ListPessoas.Size = new Size(379, 484);
-            ListPessoas.TabIndex = 0;
+            this.sexoTxtPessoa.Location = new System.Drawing.Point(103, 116);
+            this.sexoTxtPessoa.Name = "sexoTxtPessoa";
+            this.sexoTxtPessoa.Size = new System.Drawing.Size(32, 22);
+            this.sexoTxtPessoa.TabIndex = 6;
             // 
-            // menuAdd
+            // SexoLabelPessoa
             // 
-            menuAdd.Items.AddRange(new ToolStripItem[] { adicionarToolStripMenuItem });
-            menuAdd.Location = new Point(3, 3);
-            menuAdd.Name = "menuAdd";
-            menuAdd.Size = new Size(932, 24);
-            menuAdd.TabIndex = 19;
-            menuAdd.Text = "menuAdd";
+            this.SexoLabelPessoa.AutoSize = true;
+            this.SexoLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SexoLabelPessoa.Location = new System.Drawing.Point(33, 113);
+            this.SexoLabelPessoa.Name = "SexoLabelPessoa";
+            this.SexoLabelPessoa.Size = new System.Drawing.Size(64, 25);
+            this.SexoLabelPessoa.TabIndex = 5;
+            this.SexoLabelPessoa.Text = "Sexo:";
+            // 
+            // PessoasList
+            // 
+            this.PessoasList.FormattingEnabled = true;
+            this.PessoasList.ItemHeight = 16;
+            this.PessoasList.Location = new System.Drawing.Point(674, 48);
+            this.PessoasList.Name = "PessoasList";
+            this.PessoasList.Size = new System.Drawing.Size(505, 516);
+            this.PessoasList.TabIndex = 4;
+            // 
+            // nomeTxtPessoa
+            // 
+            this.nomeTxtPessoa.Location = new System.Drawing.Point(307, 52);
+            this.nomeTxtPessoa.Name = "nomeTxtPessoa";
+            this.nomeTxtPessoa.Size = new System.Drawing.Size(297, 22);
+            this.nomeTxtPessoa.TabIndex = 3;
+            // 
+            // NomeLabelPessoa
+            // 
+            this.NomeLabelPessoa.AutoSize = true;
+            this.NomeLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NomeLabelPessoa.Location = new System.Drawing.Point(231, 48);
+            this.NomeLabelPessoa.Name = "NomeLabelPessoa";
+            this.NomeLabelPessoa.Size = new System.Drawing.Size(70, 25);
+            this.NomeLabelPessoa.TabIndex = 2;
+            this.NomeLabelPessoa.Text = "Nome:";
+            // 
+            // nifTxtPessoa
+            // 
+            this.nifTxtPessoa.Location = new System.Drawing.Point(88, 52);
+            this.nifTxtPessoa.Name = "nifTxtPessoa";
+            this.nifTxtPessoa.Size = new System.Drawing.Size(95, 22);
+            this.nifTxtPessoa.TabIndex = 1;
+            // 
+            // nifLabelPessoa
+            // 
+            this.nifLabelPessoa.AutoSize = true;
+            this.nifLabelPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nifLabelPessoa.Location = new System.Drawing.Point(33, 48);
+            this.nifLabelPessoa.Name = "nifLabelPessoa";
+            this.nifLabelPessoa.Size = new System.Drawing.Size(49, 25);
+            this.nifLabelPessoa.TabIndex = 0;
+            this.nifLabelPessoa.Text = "NIF:";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adicionarToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(3, 3);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1192, 28);
+            this.menuStrip1.TabIndex = 30;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // adicionarToolStripMenuItem
             // 
-            adicionarToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { funcionárioEfetivoToolStripMenuItem, funcionárioPartTimeToolStripMenuItem, diretorToolStripMenuItem });
-            adicionarToolStripMenuItem.Name = "adicionarToolStripMenuItem";
-            adicionarToolStripMenuItem.Size = new Size(70, 20);
-            adicionarToolStripMenuItem.Text = "Adicionar";
+            this.adicionarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.funcionárioEfetivoToolStripMenuItem,
+            this.funcionárioPartTimeToolStripMenuItem,
+            this.diretorToolStripMenuItem});
+            this.adicionarToolStripMenuItem.Name = "adicionarToolStripMenuItem";
+            this.adicionarToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
+            this.adicionarToolStripMenuItem.Text = "Adicionar";
             // 
             // funcionárioEfetivoToolStripMenuItem
             // 
-            funcionárioEfetivoToolStripMenuItem.Name = "funcionárioEfetivoToolStripMenuItem";
-            funcionárioEfetivoToolStripMenuItem.Size = new Size(192, 22);
-            funcionárioEfetivoToolStripMenuItem.Text = "Funcionário Efetivo";
+            this.funcionárioEfetivoToolStripMenuItem.Name = "funcionárioEfetivoToolStripMenuItem";
+            this.funcionárioEfetivoToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
+            this.funcionárioEfetivoToolStripMenuItem.Text = "Funcionário Efetivo";
             // 
             // funcionárioPartTimeToolStripMenuItem
             // 
-            funcionárioPartTimeToolStripMenuItem.Name = "funcionárioPartTimeToolStripMenuItem";
-            funcionárioPartTimeToolStripMenuItem.Size = new Size(192, 22);
-            funcionárioPartTimeToolStripMenuItem.Text = "Funcionário Part-Time";
+            this.funcionárioPartTimeToolStripMenuItem.Name = "funcionárioPartTimeToolStripMenuItem";
+            this.funcionárioPartTimeToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
+            this.funcionárioPartTimeToolStripMenuItem.Text = "Funcionário Part-Time";
             // 
             // diretorToolStripMenuItem
             // 
-            diretorToolStripMenuItem.Name = "diretorToolStripMenuItem";
-            diretorToolStripMenuItem.Size = new Size(192, 22);
-            diretorToolStripMenuItem.Text = "Diretor";
+            this.diretorToolStripMenuItem.Name = "diretorToolStripMenuItem";
+            this.diretorToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
+            this.diretorToolStripMenuItem.Text = "Diretor";
             // 
             // tabPage2
             // 
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(938, 497);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            // 
-            // Addbutton1
-            // 
-            Addbutton1.Location = new Point(66, 404);
-            Addbutton1.Name = "Addbutton1";
-            Addbutton1.Size = new Size(109, 37);
-            Addbutton1.TabIndex = 25;
-            Addbutton1.Text = "Add";
-            Addbutton1.UseVisualStyleBackColor = true;
-            // 
-            // Editbutton1
-            // 
-            Editbutton1.Location = new Point(217, 404);
-            Editbutton1.Name = "Editbutton1";
-            Editbutton1.Size = new Size(109, 37);
-            Editbutton1.TabIndex = 26;
-            Editbutton1.Text = "Edit";
-            Editbutton1.UseVisualStyleBackColor = true;
-            // 
-            // Deletebutton1
-            // 
-            Deletebutton1.Location = new Point(365, 404);
-            Deletebutton1.Name = "Deletebutton1";
-            Deletebutton1.Size = new Size(109, 37);
-            Deletebutton1.TabIndex = 27;
-            Deletebutton1.Text = "Delete";
-            Deletebutton1.UseVisualStyleBackColor = true;
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1198, 590);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(970, 549);
-            Controls.Add(tabControl1);
-            MainMenuStrip = menuAdd;
-            Margin = new Padding(3, 2, 3, 2);
-            Name = "Form1";
-            Text = "CompanyBrandManager";
-            tabControl1.ResumeLayout(false);
-            FuncionarioPage.ResumeLayout(false);
-            FuncionarioPage.PerformLayout();
-            menuAdd.ResumeLayout(false);
-            menuAdd.PerformLayout();
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1257, 670);
+            this.Controls.Add(this.tabControl1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "Form1";
+            this.Text = "CompanyBrandManager";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.tabControl1.ResumeLayout(false);
+            this.pessoasTab.ResumeLayout(false);
+            this.pessoasTab.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
 
-        private TabControl tabControl1;
-        private TabPage FuncionarioPage;
-        private TabPage tabPage2;
-        private ListBox ListPessoas;
-        private Label nifLabel1;
-        private TextBox textNif1;
-        private TextBox textSex1;
-        private Label SexoLabel1;
-        private Label NomeLabel1;
-        private Label TelefoneLabel1;
-        private TextBox textEmail1;
-        private Label EmailLabel1;
-        private TextBox textNome1;
-        private TextBox textTelefone1;
-        private Label RuaLabel1;
-        private TextBox textRua1;
-        private TextBox textLocalidade1;
-        private Label LocalidadeLabel1;
-        private Label CodPostalLabel1;
-        private TextBox textSalario1;
-        private Label SalarioLabel1;
-        private TextBox textCodPostal1;
-        private MenuStrip menuAdd;
-        private ToolStripMenuItem adicionarToolStripMenuItem;
-        private ToolStripMenuItem funcionárioEfetivoToolStripMenuItem;
-        private ToolStripMenuItem funcionárioPartTimeToolStripMenuItem;
-        private ToolStripMenuItem diretorToolStripMenuItem;
-        private Button createContrato;
-        private Label ContratoLabel1;
-        private Label HorasLabel1;
-        private Label label1;
-        private TextBox textHoras1;
-        private Button Deletebutton1;
-        private Button Editbutton1;
-        private Button Addbutton1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage pessoasTab;
+        private System.Windows.Forms.Button deleteButtonPessoa;
+        private System.Windows.Forms.Button editButtonPessoa;
+        private System.Windows.Forms.Button addButtonPessoa;
+        private System.Windows.Forms.TextBox lojaTxtPessoa;
+        private System.Windows.Forms.Label lojaLabelPessoa;
+        private System.Windows.Forms.Label idContratoLabel;
+        private System.Windows.Forms.Button createContratoButton;
+        private System.Windows.Forms.Label contratoLabelPessoa;
+        private System.Windows.Forms.TextBox horasTxtPessoa;
+        private System.Windows.Forms.Label horasLabelPessoa;
+        private System.Windows.Forms.Label eurosign;
+        private System.Windows.Forms.TextBox salarioTxtPessoa;
+        private System.Windows.Forms.Label salarioLabelPessoa;
+        private System.Windows.Forms.TextBox codpostalTxtPessoa;
+        private System.Windows.Forms.Label codpostalLabelPessoa;
+        private System.Windows.Forms.TextBox localidadeTxtPessoa;
+        private System.Windows.Forms.Label loacalidadeLabelPessoa;
+        private System.Windows.Forms.TextBox ruaTxtPessoa;
+        private System.Windows.Forms.Label ruaLabelPessoa;
+        private System.Windows.Forms.TextBox telefoneTxtPessoa;
+        private System.Windows.Forms.Label telefoneLabelPessoa;
+        private System.Windows.Forms.TextBox emailTxtPessoa;
+        private System.Windows.Forms.Label emailLabelPessoa;
+        private System.Windows.Forms.TextBox sexoTxtPessoa;
+        private System.Windows.Forms.Label SexoLabelPessoa;
+        private System.Windows.Forms.ListBox PessoasList;
+        private System.Windows.Forms.TextBox nomeTxtPessoa;
+        private System.Windows.Forms.Label NomeLabelPessoa;
+        private System.Windows.Forms.TextBox nifTxtPessoa;
+        private System.Windows.Forms.Label nifLabelPessoa;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem adicionarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem funcionárioEfetivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem funcionárioPartTimeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem diretorToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
+
