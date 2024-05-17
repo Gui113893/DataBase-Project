@@ -6,8 +6,8 @@ INSERT INTO Pessoa (nif, nome, sexo, email, telefone, rua, codigo_postal, locali
 (567890123, 'Joao Santos', 'M', NULL, '956789012', 'Rua da Alegria 567', '5678-901', 'Porto', 'Part-Time' ,750.00),
 (678901234, 'Luis Silva', 'M', NULL, '967890123', 'Rua da Tristeza 678', '6789-012', 'Lisboa', 'Part-Time' ,750.00),
 (789012345, 'Rita Santos', 'F', NULL, '978901234', 'Rua da Alegria 789', '7890-123', 'Porto', 'Part-Time' ,750.00),
-(890123456, 'Marta Silva', 'F', NULL, '989012345', 'Rua da Tristeza 890', '8901-234', 'Lisboa', 'Part-Time' ,750.00),
-(901234567, 'Pedro Santos', 'M', NULL, '900123456', 'Rua da Alegria 901', '9012-345', 'Porto', 'Part-Time' ,750.00),
+(890123456, 'Marta Silva', 'F', NULL, '989012345', 'Rua da Tristeza 890', '8901-234', 'Lisboa', 'Efetivo' ,750.00),
+(901234567, 'Pedro Santos', 'M', NULL, '900123456', 'Rua da Alegria 901', '9012-345', 'Porto', 'Efetivo' ,750.00),
 (123456780, 'Mariana Silva', 'F', NULL, '912345670', 'Rua da Tristeza 123', '1234-567', 'Lisboa', 'Part-Time' ,750.00);
 
 INSERT INTO Diretor (nif) VALUES
@@ -42,6 +42,14 @@ INSERT INTO Funcionario (nif, loja) VALUES
 (890123456, 2),
 (901234567, 1),
 (123456780, 3);
+
+INSERT INTO Contrato(data_inicio, data_fim) VALUES
+('2023-05-16', '2025-09-28'),
+('2023-05-16', '2025-09-07');
+
+INSERT INTO Efetivo(nif, contrato) VALUES
+(890123456, 1),
+(901234567, 2);
 
 INSERT INTO Part_Time (nif, horas_semanais) VALUES
 (123456789, 20),

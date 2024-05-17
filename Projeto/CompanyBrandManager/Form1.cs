@@ -99,21 +99,22 @@ namespace CompanyBrandManager
         private void AddButtonPessoa_Click(object sender, EventArgs e)
         {
             adding = true;
-            String tipo;
+            String tipo = "";
             if (horasTxtPessoa.Visible) // se estou a adicionar um Part-Time
             {
                 tipo = "Part-Time";
-                PessoasList.Enabled = false;
-                SavePessoa(adding, currentPessoa, tipo);
-                PessoasList.Enabled = true;
             }
             else if (!lojaTxtPessoa.Visible) // se a loja não está visível então estou a adicionar um Diretor
             {
                 tipo = "Diretor";
-                PessoasList.Enabled = false;
-                SavePessoa(adding, currentPessoa, tipo);
-                PessoasList.Enabled = true;
             }
+            else if (contratoLabelPessoa.Visible) // se o contrato está visível então estou a adicionar um Efetivo
+            {
+                tipo = "Efetivo";
+            }
+            PessoasList.Enabled = false;
+            SavePessoa(adding, currentPessoa, tipo);
+            PessoasList.Enabled = true;
 
         }
 
@@ -126,6 +127,11 @@ namespace CompanyBrandManager
         private void AddPartTime_Click(object sender, EventArgs e)
         {
             showPartTimeSpecifics();
+        }
+
+        private void AddEfetivo_Click(object sender, EventArgs e)
+        {
+            showEfetivoSpecifics();
         }
 
 
@@ -147,6 +153,7 @@ namespace CompanyBrandManager
             salarioTxtPessoa.Text = pessoa.Salario;
 
             if (pessoa.Tipo == "Part-Time"){
+                HideSpecifics();
                 showPartTimeSpecifics();
                 if (!verifyConnection())
                     return;
@@ -166,6 +173,28 @@ namespace CompanyBrandManager
             {
                 HideSpecifics();
             }
+            else if (pessoa.Tipo == "Efetivo")
+            {
+                HideSpecifics();
+                showEfetivoSpecifics();
+                if (!verifyConnection())
+                    return;
+                // Obter loja e datas de contrato
+                SqlCommand cmd = new SqlCommand("SELECT \r\n    Funcionario.loja,\r\n    Contrato.data_inicio,\r\n    Contrato.data_fim\r\nFROM \r\n    Funcionario\r\nJOIN \r\n    Efetivo ON Funcionario.nif = Efetivo.nif\r\nJOIN \r\n    Contrato ON Efetivo.contrato = Contrato.id_contrato\r\nWHERE \r\n    Funcionario.nif = @Nif;\r\n", cn);
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@nif", SqlDbType.Decimal) { Precision = 9, Scale = 0, Value = pessoa.Nif });
+                cmd.Connection = cn;
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    lojaTxtPessoa.Text = reader["loja"].ToString();
+                    DateTime dataInicio = reader.GetDateTime(reader.GetOrdinal("data_inicio"));
+                    DateTime dataFim = reader.GetDateTime(reader.GetOrdinal("data_fim"));
+
+                    inicioContratoTxt.Text = dataInicio.ToString("yyyy-MM-dd");
+                    fimContratoTxt.Text = dataFim.ToString("yyyy-MM-dd");
+                }
+            }
             cn.Close();
         }
 
@@ -182,17 +211,22 @@ namespace CompanyBrandManager
             salarioTxtPessoa.Text = "";
             horasTxtPessoa.Text = "";
             lojaTxtPessoa.Text = "";
+            DateTime now = DateTime.Now;
+            inicioContratoTxt.Text = now.ToString("yyyy-MM-dd");
+            fimContratoTxt.Text = "";
         }
 
         public void HideSpecifics()
         {
             horasLabelPessoa.Visible = false;
             horasTxtPessoa.Visible = false;
-            contratoLabelPessoa.Visible = false;
-            idContratoLabel.Visible = false;
-            createContratoButton.Visible = false;
             lojaLabelPessoa.Visible = false;
             lojaTxtPessoa.Visible = false;
+            contratoLabelPessoa.Visible = false;
+            inicioContratoLabel.Visible = false;
+            inicioContratoTxt.Visible = false;  
+            fimContratoLabel.Visible = false;
+            fimContratoTxt.Visible = false;
         }
 
         private bool SavePessoa(bool adding, Pessoa currentPessoa, String tipo)
@@ -295,6 +329,37 @@ namespace CompanyBrandManager
                     }
                 }
             }
+            else if (tipo == "Efetivo")
+            {
+                using (SqlCommand cmd = new SqlCommand("AddEffectiveEmployee", cn))
+                {
+                    try
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add(new SqlParameter("@Nif", SqlDbType.Decimal) { Value = pessoa.Nif });
+                        cmd.Parameters.Add(new SqlParameter("@Nome", SqlDbType.VarChar, 100) { Value = pessoa.Nome });
+                        cmd.Parameters.Add(new SqlParameter("@Sexo", SqlDbType.Char, 1) { Value = pessoa.Sexo });
+                        cmd.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100) { Value = pessoa.Email });
+                        cmd.Parameters.Add(new SqlParameter("@Telefone", SqlDbType.VarChar, 20) { Value = pessoa.Telefone });
+                        cmd.Parameters.Add(new SqlParameter("@Rua", SqlDbType.VarChar, 100) { Value = pessoa.Rua });
+                        cmd.Parameters.Add(new SqlParameter("@CodigoPostal", SqlDbType.VarChar, 10) { Value = pessoa.Codigo_Postal });
+                        cmd.Parameters.Add(new SqlParameter("@Localidade", SqlDbType.VarChar, 100) { Value = pessoa.Localidade });
+                        cmd.Parameters.Add(new SqlParameter("@Salario", SqlDbType.Decimal) { Value = pessoa.Salario });
+                        cmd.Parameters.Add(new SqlParameter("@Loja", SqlDbType.Int) { Value = lojaTxtPessoa.Text });
+                        cmd.Parameters.Add(new SqlParameter("@InicioContrato", SqlDbType.Date) { Value = inicioContratoTxt.Text });
+                        cmd.Parameters.Add(new SqlParameter("@FimContrato", SqlDbType.Date) { Value = fimContratoTxt.Text });
+
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show("Erro ao adicionar esta pessoa| " + exc.Message);
+                        cn.Close();
+                        return false;
+                    }
+                }
+            }
             MessageBox.Show("Pessoa adicionada com sucesso");
             cn.Close();
             return true;
@@ -348,6 +413,25 @@ namespace CompanyBrandManager
             lojaTxtPessoa.Enabled = true;
             lojaLabelPessoa.Visible = true;
             lojaLabelPessoa.Enabled = true;
+        }
+
+        private void showEfetivoSpecifics()
+        {
+            lojaTxtPessoa.Visible = true;
+            lojaTxtPessoa.Enabled = true;
+            lojaLabelPessoa.Visible = true;
+            lojaLabelPessoa.Enabled = true;
+            contratoLabelPessoa.Visible = true;
+            contratoLabelPessoa.Enabled = true;
+            inicioContratoLabel.Visible = true;
+            inicioContratoLabel.Enabled = true;
+            inicioContratoTxt.Visible = true;
+            inicioContratoTxt.Enabled = true;
+            fimContratoLabel.Visible = true;
+            fimContratoLabel.Enabled = true;
+            fimContratoTxt.Visible = true;
+            fimContratoTxt.Enabled = true;
+
         }
     }
 }

@@ -35,8 +35,6 @@
             this.addButtonPessoa = new System.Windows.Forms.Button();
             this.lojaTxtPessoa = new System.Windows.Forms.TextBox();
             this.lojaLabelPessoa = new System.Windows.Forms.Label();
-            this.idContratoLabel = new System.Windows.Forms.Label();
-            this.createContratoButton = new System.Windows.Forms.Button();
             this.contratoLabelPessoa = new System.Windows.Forms.Label();
             this.horasTxtPessoa = new System.Windows.Forms.TextBox();
             this.horasLabelPessoa = new System.Windows.Forms.Label();
@@ -66,6 +64,10 @@
             this.funcionárioPartTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diretorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.inicioContratoLabel = new System.Windows.Forms.Label();
+            this.fimContratoLabel = new System.Windows.Forms.Label();
+            this.inicioContratoTxt = new System.Windows.Forms.TextBox();
+            this.fimContratoTxt = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.pessoasTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -83,13 +85,15 @@
             // 
             // pessoasTab
             // 
+            this.pessoasTab.Controls.Add(this.fimContratoTxt);
+            this.pessoasTab.Controls.Add(this.inicioContratoTxt);
+            this.pessoasTab.Controls.Add(this.fimContratoLabel);
+            this.pessoasTab.Controls.Add(this.inicioContratoLabel);
             this.pessoasTab.Controls.Add(this.deleteButtonPessoa);
             this.pessoasTab.Controls.Add(this.editButtonPessoa);
             this.pessoasTab.Controls.Add(this.addButtonPessoa);
             this.pessoasTab.Controls.Add(this.lojaTxtPessoa);
             this.pessoasTab.Controls.Add(this.lojaLabelPessoa);
-            this.pessoasTab.Controls.Add(this.idContratoLabel);
-            this.pessoasTab.Controls.Add(this.createContratoButton);
             this.pessoasTab.Controls.Add(this.contratoLabelPessoa);
             this.pessoasTab.Controls.Add(this.horasTxtPessoa);
             this.pessoasTab.Controls.Add(this.horasLabelPessoa);
@@ -173,28 +177,6 @@
             this.lojaLabelPessoa.TabIndex = 25;
             this.lojaLabelPessoa.Text = "Loja:";
             this.lojaLabelPessoa.Visible = false;
-            // 
-            // idContratoLabel
-            // 
-            this.idContratoLabel.AutoSize = true;
-            this.idContratoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.idContratoLabel.Location = new System.Drawing.Point(165, 360);
-            this.idContratoLabel.Name = "idContratoLabel";
-            this.idContratoLabel.Size = new System.Drawing.Size(27, 25);
-            this.idContratoLabel.TabIndex = 24;
-            this.idContratoLabel.Text = "id";
-            this.idContratoLabel.Visible = false;
-            // 
-            // createContratoButton
-            // 
-            this.createContratoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.createContratoButton.Location = new System.Drawing.Point(132, 360);
-            this.createContratoButton.Name = "createContratoButton";
-            this.createContratoButton.Size = new System.Drawing.Size(95, 31);
-            this.createContratoButton.TabIndex = 23;
-            this.createContratoButton.Text = "Criar +";
-            this.createContratoButton.UseVisualStyleBackColor = true;
-            this.createContratoButton.Visible = false;
             // 
             // contratoLabelPessoa
             // 
@@ -437,6 +419,7 @@
             this.funcionárioEfetivoToolStripMenuItem.Name = "funcionárioEfetivoToolStripMenuItem";
             this.funcionárioEfetivoToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.funcionárioEfetivoToolStripMenuItem.Text = "Funcionário Efetivo";
+            this.funcionárioEfetivoToolStripMenuItem.Click += new System.EventHandler(this.AddEfetivo_Click);
             // 
             // funcionárioPartTimeToolStripMenuItem
             // 
@@ -460,6 +443,46 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // inicioContratoLabel
+            // 
+            this.inicioContratoLabel.AutoSize = true;
+            this.inicioContratoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inicioContratoLabel.Location = new System.Drawing.Point(67, 385);
+            this.inicioContratoLabel.Name = "inicioContratoLabel";
+            this.inicioContratoLabel.Size = new System.Drawing.Size(109, 25);
+            this.inicioContratoLabel.TabIndex = 31;
+            this.inicioContratoLabel.Text = "Data Início:";
+            this.inicioContratoLabel.Visible = false;
+            // 
+            // fimContratoLabel
+            // 
+            this.fimContratoLabel.AutoSize = true;
+            this.fimContratoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fimContratoLabel.Location = new System.Drawing.Point(67, 422);
+            this.fimContratoLabel.Name = "fimContratoLabel";
+            this.fimContratoLabel.Size = new System.Drawing.Size(96, 25);
+            this.fimContratoLabel.TabIndex = 32;
+            this.fimContratoLabel.Text = "Data Fim:";
+            this.fimContratoLabel.Visible = false;
+            // 
+            // inicioContratoTxt
+            // 
+            this.inicioContratoTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inicioContratoTxt.Location = new System.Drawing.Point(182, 385);
+            this.inicioContratoTxt.Name = "inicioContratoTxt";
+            this.inicioContratoTxt.Size = new System.Drawing.Size(141, 30);
+            this.inicioContratoTxt.TabIndex = 33;
+            this.inicioContratoTxt.Visible = false;
+            // 
+            // fimContratoTxt
+            // 
+            this.fimContratoTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fimContratoTxt.Location = new System.Drawing.Point(182, 422);
+            this.fimContratoTxt.Name = "fimContratoTxt";
+            this.fimContratoTxt.Size = new System.Drawing.Size(141, 30);
+            this.fimContratoTxt.TabIndex = 34;
+            this.fimContratoTxt.Visible = false;
             // 
             // Form1
             // 
@@ -489,8 +512,6 @@
         private System.Windows.Forms.Button addButtonPessoa;
         private System.Windows.Forms.TextBox lojaTxtPessoa;
         private System.Windows.Forms.Label lojaLabelPessoa;
-        private System.Windows.Forms.Label idContratoLabel;
-        private System.Windows.Forms.Button createContratoButton;
         private System.Windows.Forms.Label contratoLabelPessoa;
         private System.Windows.Forms.TextBox horasTxtPessoa;
         private System.Windows.Forms.Label horasLabelPessoa;
@@ -520,6 +541,10 @@
         private System.Windows.Forms.ToolStripMenuItem funcionárioPartTimeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diretorToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TextBox fimContratoTxt;
+        private System.Windows.Forms.TextBox inicioContratoTxt;
+        private System.Windows.Forms.Label fimContratoLabel;
+        private System.Windows.Forms.Label inicioContratoLabel;
     }
 }
 

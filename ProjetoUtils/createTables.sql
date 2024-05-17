@@ -137,7 +137,7 @@ GO
 CREATE TABLE Contrato (
     id_contrato INT IDENTITY(1,1) PRIMARY KEY,
     data_inicio DATE NOT NULL,
-    data_fim DATE,
+    data_fim DATE NOT NULL,
 );
 GO
 
