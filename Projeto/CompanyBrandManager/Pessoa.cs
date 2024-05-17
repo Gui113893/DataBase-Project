@@ -18,6 +18,7 @@ namespace CompanyBrandManager
         private String _codigo_postal;
         private String _localidade;
         private String _salario;
+        private String _tipo;
 
         public String Nif
         {
@@ -107,7 +108,13 @@ namespace CompanyBrandManager
             }
         }
 
-        public Pessoa(String nif, String nome, String email, String sexo, String telefone, String rua, String codigo_postal, String localidade, String _salario) : base()
+        public String Tipo
+        {
+            get { return _tipo; }
+            set { _tipo = value; }
+        }
+
+        public Pessoa(String nif, String nome, String email, String sexo, String telefone, String rua, String codigo_postal, String localidade, String _salario, String tipo) : base()
         {
             Nif = nif;
             Nome = nome;
@@ -118,6 +125,7 @@ namespace CompanyBrandManager
             Codigo_Postal = codigo_postal;
             Localidade = localidade;
             Salario = _salario;
+            Tipo = tipo;
         }
 
         public Pessoa() : base()
@@ -126,7 +134,7 @@ namespace CompanyBrandManager
 
         public override string ToString()
         {
-            return Nif + " - " + Nome + " - " + Sexo + " - " + Salario;
+            return Nif + " - " + Nome + " - " + Sexo + " - " + Salario + " - " + Tipo;
         }
     }
 }

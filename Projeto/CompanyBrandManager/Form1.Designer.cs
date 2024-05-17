@@ -429,6 +429,7 @@
             this.adicionarToolStripMenuItem.Name = "adicionarToolStripMenuItem";
             this.adicionarToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
             this.adicionarToolStripMenuItem.Text = "Adicionar";
+            this.adicionarToolStripMenuItem.Click += new System.EventHandler(this.AddToolStripPessoa_Click);
             // 
             // funcionárioEfetivoToolStripMenuItem
             // 
@@ -441,6 +442,7 @@
             this.funcionárioPartTimeToolStripMenuItem.Name = "funcionárioPartTimeToolStripMenuItem";
             this.funcionárioPartTimeToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.funcionárioPartTimeToolStripMenuItem.Text = "Funcionário Part-Time";
+            this.funcionárioPartTimeToolStripMenuItem.Click += new System.EventHandler(this.AddPartTime_Click);
             // 
             // diretorToolStripMenuItem
             // 
