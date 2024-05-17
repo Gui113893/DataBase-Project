@@ -84,6 +84,7 @@ CREATE TABLE Pessoa (
     rua VARCHAR(100),
     codigo_postal VARCHAR(10),
     localidade VARCHAR(100),
+    tipo VARCHAR(20) NOT NULL CHECK (tipo IN ('Efetivo', 'Part-Time', 'Diretor')),
     salario DECIMAL(10,2) CHECK (salario > 740) NOT NULL,  
 );
 GO
@@ -101,7 +102,7 @@ GO
 CREATE TABLE SubEmpresa (
     id INT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    diretor INT,
+    diretor NUMERIC(9,0),
     FOREIGN KEY (diretor) REFERENCES Diretor(nif) ON DELETE SET NULL
 );
 GO
@@ -115,7 +116,7 @@ CREATE TABLE Loja (
     codigo_postal VARCHAR(10) NOT NULL,
     localidade VARCHAR(100) NOT NULL,
     subempresa INT,
-    gerente INT,
+    gerente NUMERIC(9,0),
     FOREIGN KEY (subempresa) REFERENCES SubEmpresa(id) ON DELETE SET NULL,
     -- Como o gerente depende da tabela Funcionario, a FK é adicionada mais em baixo (CTRL-F -> FK para Loja)
 );
@@ -125,7 +126,6 @@ GO
 -- Tabela Funcionario
 CREATE TABLE Funcionario (
     nif NUMERIC(9,0) PRIMARY KEY,
-    tipo VARCHAR(20) NOT NULL CHECK (tipo IN ('Efetivo', 'Part-Time')),
     loja INT,
     FOREIGN KEY (nif) REFERENCES Pessoa(nif) ON DELETE CASCADE,
     FOREIGN KEY (loja) REFERENCES Loja(id_loja) ON DELETE SET NULL,
