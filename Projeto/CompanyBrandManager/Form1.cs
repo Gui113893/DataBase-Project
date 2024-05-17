@@ -107,6 +107,13 @@ namespace CompanyBrandManager
                 SavePessoa(adding, currentPessoa, tipo);
                 PessoasList.Enabled = true;
             }
+            else if (!lojaTxtPessoa.Visible) // se a loja não está visível então estou a adicionar um Diretor
+            {
+                tipo = "Diretor";
+                PessoasList.Enabled = false;
+                SavePessoa(adding, currentPessoa, tipo);
+                PessoasList.Enabled = true;
+            }
 
         }
 
@@ -115,7 +122,6 @@ namespace CompanyBrandManager
             ClearPessoaFields();
             HideSpecifics();
         }
-
 
         private void AddPartTime_Click(object sender, EventArgs e)
         {
@@ -155,8 +161,12 @@ namespace CompanyBrandManager
                     horasTxtPessoa.Text = reader["horas_semanais"].ToString();
                     lojaTxtPessoa.Text = reader["loja"].ToString();
                 }
-                cn.Close();
             }
+            else if (pessoa.Tipo == "Diretor")
+            {
+                HideSpecifics();
+            }
+            cn.Close();
         }
 
         public void ClearPessoaFields()
@@ -200,6 +210,7 @@ namespace CompanyBrandManager
                 pessoa.Codigo_Postal = codpostalTxtPessoa.Text;
                 pessoa.Localidade = localidadeTxtPessoa.Text;
                 pessoa.Salario = salarioTxtPessoa.Text;
+                pessoa.Tipo = tipo;
             }
             catch (Exception exc)
             {
@@ -213,17 +224,80 @@ namespace CompanyBrandManager
             }
             else
             {
-                AddPessoa(pessoa, tipo);
+                if (AddPessoa(pessoa, tipo))
+                    PessoasList.Items.Add(pessoa);
+                else
+                    return false;
             }
             return true;
         }
 
-        private void AddPessoa(Pessoa pessoa, String tipo)
+        private bool AddPessoa(Pessoa pessoa, String tipo)
         {
+            if (!verifyConnection())
+                return false;
+            
             if (tipo == "Part-Time")
             {
-                
+                using (SqlCommand cmd = new SqlCommand("AddPartTimeEmployee", cn))
+                {
+                    try
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add(new SqlParameter("@Nif", SqlDbType.Decimal) { Value = pessoa.Nif });
+                        cmd.Parameters.Add(new SqlParameter("@Nome", SqlDbType.VarChar, 100) { Value = pessoa.Nome });
+                        cmd.Parameters.Add(new SqlParameter("@Sexo", SqlDbType.Char, 1) { Value = pessoa.Sexo });
+                        cmd.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100) { Value = pessoa.Email });
+                        cmd.Parameters.Add(new SqlParameter("@Telefone", SqlDbType.VarChar, 20) { Value = pessoa.Telefone });
+                        cmd.Parameters.Add(new SqlParameter("@Rua", SqlDbType.VarChar, 100) { Value = pessoa.Rua });
+                        cmd.Parameters.Add(new SqlParameter("@CodigoPostal", SqlDbType.VarChar, 10) { Value = pessoa.Codigo_Postal });
+                        cmd.Parameters.Add(new SqlParameter("@Localidade", SqlDbType.VarChar, 100) { Value = pessoa.Localidade });
+                        cmd.Parameters.Add(new SqlParameter("@Salario", SqlDbType.Decimal) { Value = pessoa.Salario });
+                        cmd.Parameters.Add(new SqlParameter("@Loja", SqlDbType.Int) { Value = lojaTxtPessoa.Text });
+                        cmd.Parameters.Add(new SqlParameter("@HorasSemanais", SqlDbType.Int) { Value = horasTxtPessoa.Text });
+
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show("Erro ao adicionar esta pessoa| " + exc.Message);
+                        cn.Close();
+                        return false;
+                    }
+                }
             }
+            else if (tipo == "Diretor")
+            {
+                using (SqlCommand cmd = new SqlCommand("AddDirector", cn))
+                {
+                    try
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add(new SqlParameter("@Nif", SqlDbType.Decimal) { Value = pessoa.Nif });
+                        cmd.Parameters.Add(new SqlParameter("@Nome", SqlDbType.VarChar, 100) { Value = pessoa.Nome });
+                        cmd.Parameters.Add(new SqlParameter("@Sexo", SqlDbType.Char, 1) { Value = pessoa.Sexo });
+                        cmd.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100) { Value = pessoa.Email });
+                        cmd.Parameters.Add(new SqlParameter("@Telefone", SqlDbType.VarChar, 20) { Value = pessoa.Telefone });
+                        cmd.Parameters.Add(new SqlParameter("@Rua", SqlDbType.VarChar, 100) { Value = pessoa.Rua });
+                        cmd.Parameters.Add(new SqlParameter("@CodigoPostal", SqlDbType.VarChar, 10) { Value = pessoa.Codigo_Postal });
+                        cmd.Parameters.Add(new SqlParameter("@Localidade", SqlDbType.VarChar, 100) { Value = pessoa.Localidade });
+                        cmd.Parameters.Add(new SqlParameter("@Salario", SqlDbType.Decimal) { Value = pessoa.Salario });
+
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show("Erro ao adicionar esta pessoa| " + exc.Message);
+                        cn.Close();
+                        return false;
+                    }
+                }
+            }
+            MessageBox.Show("Pessoa adicionada com sucesso");
+            cn.Close();
+            return true;
         }
 
         private void UpdatePessoa(Pessoa pessoa, Pessoa anteriorPessoa)

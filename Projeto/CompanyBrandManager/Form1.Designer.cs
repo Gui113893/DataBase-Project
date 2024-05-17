@@ -152,6 +152,7 @@
             this.addButtonPessoa.TabIndex = 27;
             this.addButtonPessoa.Text = "Add";
             this.addButtonPessoa.UseVisualStyleBackColor = true;
+            this.addButtonPessoa.Click += new System.EventHandler(this.AddButtonPessoa_Click);
             // 
             // lojaTxtPessoa
             // 

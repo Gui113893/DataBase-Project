@@ -14,7 +14,7 @@ GO
 -- Tabela Patente
 
 CREATE TABLE Patente (
-    id_patente INT PRIMARY KEY,
+    id_patente INT IDENTITY(1,1) PRIMARY KEY,
     data_registo DATE NOT NULL,
     data_vencimento DATE NOT NULL,
     logo VARCHAR(100),
@@ -42,7 +42,7 @@ GO
 
 -- Tabela Fornecedor
 CREATE TABLE Fornecedor (
-    id_fornecedor INT PRIMARY KEY,
+    id_fornecedor INT IDENTITY(1,1) PRIMARY KEY,
     telefone VARCHAR(20) NOT NULL,
     rua VARCHAR(100) NOT NULL,
     codigo_postal VARCHAR(10) NOT NULL,
@@ -53,7 +53,7 @@ GO
 
 -- Tabela Produto
 CREATE TABLE Produto (
-    id_produto INT PRIMARY KEY,
+    id_produto INT IDENTITY(1,1) PRIMARY KEY,
     preco DECIMAL(10, 2) NOT NULL,
     nome VARCHAR(100) NOT NULL,
     marca INT NOT NULL,
@@ -100,7 +100,7 @@ GO
 
 -- Tabela SubEmpresa
 CREATE TABLE SubEmpresa (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     diretor NUMERIC(9,0),
     FOREIGN KEY (diretor) REFERENCES Diretor(nif) ON DELETE SET NULL
@@ -110,7 +110,7 @@ GO
 
 -- Tabela Loja
 CREATE TABLE Loja (
-    id_loja INT PRIMARY KEY,
+    id_loja INT IDENTITY(1,1) PRIMARY KEY,
     telefone VARCHAR(20) NOT NULL,
     rua VARCHAR(100) NOT NULL,
     codigo_postal VARCHAR(10) NOT NULL,
@@ -135,7 +135,7 @@ GO
 
 -- Tabela Contrato
 CREATE TABLE Contrato (
-    id_contrato INT PRIMARY KEY,
+    id_contrato INT IDENTITY(1,1) PRIMARY KEY,
     data_inicio DATE NOT NULL,
     data_fim DATE,
 );
