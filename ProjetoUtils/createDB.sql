@@ -1,4 +1,0 @@
-DROP DATABASE IF EXISTS CompanyBrandManager;
-GO
-CREATE DATABASE CompanyBrandManager;
-GO

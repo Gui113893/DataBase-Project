@@ -30,6 +30,10 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pessoasTab = new System.Windows.Forms.TabPage();
+            this.fimContratoTxt = new System.Windows.Forms.TextBox();
+            this.inicioContratoTxt = new System.Windows.Forms.TextBox();
+            this.fimContratoLabel = new System.Windows.Forms.Label();
+            this.inicioContratoLabel = new System.Windows.Forms.Label();
             this.deleteButtonPessoa = new System.Windows.Forms.Button();
             this.editButtonPessoa = new System.Windows.Forms.Button();
             this.addButtonPessoa = new System.Windows.Forms.Button();
@@ -64,10 +68,6 @@
             this.funcionárioPartTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diretorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.inicioContratoLabel = new System.Windows.Forms.Label();
-            this.fimContratoLabel = new System.Windows.Forms.Label();
-            this.inicioContratoTxt = new System.Windows.Forms.TextBox();
-            this.fimContratoTxt = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.pessoasTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -126,6 +126,46 @@
             this.pessoasTab.Text = "Pessoas";
             this.pessoasTab.UseVisualStyleBackColor = true;
             // 
+            // fimContratoTxt
+            // 
+            this.fimContratoTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fimContratoTxt.Location = new System.Drawing.Point(182, 422);
+            this.fimContratoTxt.Name = "fimContratoTxt";
+            this.fimContratoTxt.Size = new System.Drawing.Size(141, 30);
+            this.fimContratoTxt.TabIndex = 34;
+            this.fimContratoTxt.Visible = false;
+            // 
+            // inicioContratoTxt
+            // 
+            this.inicioContratoTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inicioContratoTxt.Location = new System.Drawing.Point(182, 385);
+            this.inicioContratoTxt.Name = "inicioContratoTxt";
+            this.inicioContratoTxt.Size = new System.Drawing.Size(141, 30);
+            this.inicioContratoTxt.TabIndex = 33;
+            this.inicioContratoTxt.Visible = false;
+            // 
+            // fimContratoLabel
+            // 
+            this.fimContratoLabel.AutoSize = true;
+            this.fimContratoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fimContratoLabel.Location = new System.Drawing.Point(67, 422);
+            this.fimContratoLabel.Name = "fimContratoLabel";
+            this.fimContratoLabel.Size = new System.Drawing.Size(96, 25);
+            this.fimContratoLabel.TabIndex = 32;
+            this.fimContratoLabel.Text = "Data Fim:";
+            this.fimContratoLabel.Visible = false;
+            // 
+            // inicioContratoLabel
+            // 
+            this.inicioContratoLabel.AutoSize = true;
+            this.inicioContratoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inicioContratoLabel.Location = new System.Drawing.Point(67, 385);
+            this.inicioContratoLabel.Name = "inicioContratoLabel";
+            this.inicioContratoLabel.Size = new System.Drawing.Size(109, 25);
+            this.inicioContratoLabel.TabIndex = 31;
+            this.inicioContratoLabel.Text = "Data Início:";
+            this.inicioContratoLabel.Visible = false;
+            // 
             // deleteButtonPessoa
             // 
             this.deleteButtonPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -135,6 +175,7 @@
             this.deleteButtonPessoa.TabIndex = 29;
             this.deleteButtonPessoa.Text = "Delete";
             this.deleteButtonPessoa.UseVisualStyleBackColor = true;
+            this.deleteButtonPessoa.Click += new System.EventHandler(this.DeleteButtonPessoa_Click);
             // 
             // editButtonPessoa
             // 
@@ -443,46 +484,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // inicioContratoLabel
-            // 
-            this.inicioContratoLabel.AutoSize = true;
-            this.inicioContratoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inicioContratoLabel.Location = new System.Drawing.Point(67, 385);
-            this.inicioContratoLabel.Name = "inicioContratoLabel";
-            this.inicioContratoLabel.Size = new System.Drawing.Size(109, 25);
-            this.inicioContratoLabel.TabIndex = 31;
-            this.inicioContratoLabel.Text = "Data Início:";
-            this.inicioContratoLabel.Visible = false;
-            // 
-            // fimContratoLabel
-            // 
-            this.fimContratoLabel.AutoSize = true;
-            this.fimContratoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fimContratoLabel.Location = new System.Drawing.Point(67, 422);
-            this.fimContratoLabel.Name = "fimContratoLabel";
-            this.fimContratoLabel.Size = new System.Drawing.Size(96, 25);
-            this.fimContratoLabel.TabIndex = 32;
-            this.fimContratoLabel.Text = "Data Fim:";
-            this.fimContratoLabel.Visible = false;
-            // 
-            // inicioContratoTxt
-            // 
-            this.inicioContratoTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inicioContratoTxt.Location = new System.Drawing.Point(182, 385);
-            this.inicioContratoTxt.Name = "inicioContratoTxt";
-            this.inicioContratoTxt.Size = new System.Drawing.Size(141, 30);
-            this.inicioContratoTxt.TabIndex = 33;
-            this.inicioContratoTxt.Visible = false;
-            // 
-            // fimContratoTxt
-            // 
-            this.fimContratoTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fimContratoTxt.Location = new System.Drawing.Point(182, 422);
-            this.fimContratoTxt.Name = "fimContratoTxt";
-            this.fimContratoTxt.Size = new System.Drawing.Size(141, 30);
-            this.fimContratoTxt.TabIndex = 34;
-            this.fimContratoTxt.Visible = false;
             // 
             // Form1
             // 

@@ -87,13 +87,43 @@ namespace CompanyBrandManager
             currentPessoaIndex = PessoasList.SelectedIndex;
             if (currentPessoaIndex < 0)
             {
-                MessageBox.Show("Seleciona um contacto para editar");
+                MessageBox.Show("Seleciona uma pessoa para editar");
                 return;
             } 
             adding = false;
             PessoasList.Enabled = false;
             SavePessoa(adding, currentPessoa, "");
             PessoasList.Enabled = true;
+        }
+
+        private void DeleteButtonPessoa_Click(object sender, EventArgs e)
+        {
+            if  (currentPessoaIndex < 0)
+            {
+                MessageBox.Show("Seleciona uma pessoa para eliminar ");
+                return;
+            }
+
+            if (RemovePessoa(currentPessoa))
+            {
+                PessoasList.Items.RemoveAt(PessoasList.SelectedIndex);
+                if (currentPessoaIndex == PessoasList.Items.Count)
+                {
+                    currentPessoaIndex = PessoasList.Items.Count - 1;
+                    currentPessoa = (Pessoa)PessoasList.Items[currentPessoaIndex];
+                }
+
+                if (currentPessoaIndex == -1)
+                {
+                    ClearPessoaFields();
+                    MessageBox.Show("Não há mais pessoas na base de dados");
+                }
+                else
+                {
+                    ShowPessoa();
+                }
+
+            }
         }
 
         private void AddButtonPessoa_Click(object sender, EventArgs e)
@@ -133,7 +163,6 @@ namespace CompanyBrandManager
         {
             showEfetivoSpecifics();
         }
-
 
         // Aux Funcs
         public void ShowPessoa()
@@ -401,6 +430,31 @@ namespace CompanyBrandManager
                     MessageBox.Show("Erro ao atualizar pessoa");
                 cn.Close();
             }
+        }
+
+        private bool RemovePessoa(Pessoa currentPessoa)
+        {
+            if (!verifyConnection())
+                return false;
+
+            using (SqlCommand cmd = new SqlCommand("DeletePerson", cn))
+            {
+                try
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@Nif", SqlDbType.Decimal) { Value = currentPessoa.Nif });
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao eliminar esta pessoa| " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+            MessageBox.Show("Pessoa eliminada com sucesso");
+            cn.Close();
+            return true;
         }
 
         private void showPartTimeSpecifics()

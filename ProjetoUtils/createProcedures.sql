@@ -116,3 +116,144 @@ BEGIN
         THROW;
     END CATCH
 END;
+GO 
+
+-- Procedure para deletar um diretor
+CREATE PROCEDURE DeleteDirector
+    @Nif NUMERIC(9,0)
+AS
+BEGIN
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        -- Atualiza as subempresas para definir o diretor como NULL
+        UPDATE SubEmpresa
+        SET diretor = NULL
+        WHERE diretor = @Nif;
+
+        -- Deleta o Diretor da tabela Diretor
+        DELETE FROM Diretor
+        WHERE nif = @Nif;
+
+        -- Deleta o Diretor da tabela Pessoa
+        DELETE FROM Pessoa
+        WHERE nif = @Nif;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+GO
+
+-- Procedure para deletar um funcionário efetivo
+CREATE PROCEDURE DeleteEfetivo
+    @Nif NUMERIC(9,0)
+AS
+BEGIN
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        DECLARE @deleted_contrato INT;
+
+        -- Captura o contrato do efetivo a ser deletado
+        SELECT @deleted_contrato = contrato FROM Efetivo WHERE nif = @Nif;
+
+        -- Se o Efetivo deletado for gerente de alguma loja, definir o gerente como NULL
+        UPDATE Loja
+        SET gerente = NULL
+        WHERE gerente = @Nif;
+
+        -- Deleta o Efetivo da tabela Efetivo
+        DELETE FROM Efetivo
+        WHERE nif = @Nif;
+
+        -- Deleta o Contrato relacionado
+        DELETE FROM Contrato
+        WHERE id_contrato = @deleted_contrato;
+
+        -- Deleta o Funcionario relacionado
+        DELETE FROM Funcionario
+        WHERE nif = @Nif;
+
+        -- Finalmente, deleta a Pessoa da tabela Pessoa
+        DELETE FROM Pessoa
+        WHERE nif = @Nif;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+GO
+
+-- Procedure para deletar um funcionário part-time
+CREATE PROCEDURE DeletePartTime
+    @Nif NUMERIC(9,0)
+AS
+BEGIN
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        -- Se o Part-Time deletado for gerente de alguma loja, definir o gerente como NULL
+        UPDATE Loja
+        SET gerente = NULL
+        WHERE gerente = @Nif;
+
+        -- Deleta o Part-Time da tabela Part_Time
+        DELETE FROM Part_Time
+        WHERE nif = @Nif;
+
+        -- Deleta o Funcionario relacionado
+        DELETE FROM Funcionario
+        WHERE nif = @Nif;
+
+        -- Finalmente, deleta a Pessoa da tabela Pessoa
+        DELETE FROM Pessoa
+        WHERE nif = @Nif;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+GO
+
+-- Procedure para deletar uma pessoa
+CREATE PROCEDURE DeletePerson
+    @Nif NUMERIC(9,0)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @tipo VARCHAR(20);
+
+    -- Captura o tipo da pessoa a ser deletada
+    SELECT @tipo = tipo
+    FROM Pessoa
+    WHERE nif = @Nif;
+
+    -- Chama a procedure correspondente com base no tipo da pessoa
+    IF @tipo = 'Diretor'
+    BEGIN
+        EXEC DeleteDirector @Nif = @Nif;
+    END
+    ELSE IF @tipo = 'Efetivo'
+    BEGIN
+        EXEC DeleteEfetivo @Nif = @Nif;
+    END
+    ELSE IF @tipo = 'Part-Time'
+    BEGIN
+        EXEC DeletePartTime @Nif = @Nif;
+    END
+END;
+GO
+
+
+
