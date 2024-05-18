@@ -68,6 +68,12 @@
             this.funcionárioPartTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diretorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.filtrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diretorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.funcionarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.efetivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.partTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removerFiltroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.pessoasTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -77,6 +83,7 @@
             // 
             this.tabControl1.Controls.Add(this.pessoasTab);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(28, 25);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -118,10 +125,11 @@
             this.pessoasTab.Controls.Add(this.nifTxtPessoa);
             this.pessoasTab.Controls.Add(this.nifLabelPessoa);
             this.pessoasTab.Controls.Add(this.menuStrip1);
-            this.pessoasTab.Location = new System.Drawing.Point(4, 25);
+            this.pessoasTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pessoasTab.Location = new System.Drawing.Point(4, 34);
             this.pessoasTab.Name = "pessoasTab";
             this.pessoasTab.Padding = new System.Windows.Forms.Padding(3);
-            this.pessoasTab.Size = new System.Drawing.Size(1198, 590);
+            this.pessoasTab.Size = new System.Drawing.Size(1198, 581);
             this.pessoasTab.TabIndex = 0;
             this.pessoasTab.Text = "Pessoas";
             this.pessoasTab.UseVisualStyleBackColor = true;
@@ -134,6 +142,7 @@
             this.fimContratoTxt.Size = new System.Drawing.Size(141, 30);
             this.fimContratoTxt.TabIndex = 34;
             this.fimContratoTxt.Visible = false;
+            this.fimContratoTxt.TextChanged += new System.EventHandler(this.fimContratoTxt_TextChanged);
             // 
             // inicioContratoTxt
             // 
@@ -437,10 +446,11 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.adicionarToolStripMenuItem});
+            this.adicionarToolStripMenuItem,
+            this.filtrarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(3, 3);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1192, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1192, 36);
             this.menuStrip1.TabIndex = 30;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -450,8 +460,9 @@
             this.funcionárioEfetivoToolStripMenuItem,
             this.funcionárioPartTimeToolStripMenuItem,
             this.diretorToolStripMenuItem});
+            this.adicionarToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adicionarToolStripMenuItem.Name = "adicionarToolStripMenuItem";
-            this.adicionarToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
+            this.adicionarToolStripMenuItem.Size = new System.Drawing.Size(110, 32);
             this.adicionarToolStripMenuItem.Text = "Adicionar";
             this.adicionarToolStripMenuItem.Click += new System.EventHandler(this.AddToolStripPessoa_Click);
             // 
@@ -477,13 +488,62 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1198, 590);
+            this.tabPage2.Size = new System.Drawing.Size(1198, 581);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Lojas";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // filtrarToolStripMenuItem
+            // 
+            this.filtrarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.diretorToolStripMenuItem1,
+            this.funcionarioToolStripMenuItem,
+            this.removerFiltroToolStripMenuItem});
+            this.filtrarToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filtrarToolStripMenuItem.Name = "filtrarToolStripMenuItem";
+            this.filtrarToolStripMenuItem.Size = new System.Drawing.Size(77, 32);
+            this.filtrarToolStripMenuItem.Text = "Filtrar";
+            // 
+            // diretorToolStripMenuItem1
+            // 
+            this.diretorToolStripMenuItem1.Name = "diretorToolStripMenuItem1";
+            this.diretorToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.diretorToolStripMenuItem1.Text = "Diretor";
+            this.diretorToolStripMenuItem1.Click += new System.EventHandler(this.PessoaFilterByDiretor_Click);
+            // 
+            // funcionarioToolStripMenuItem
+            // 
+            this.funcionarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.efetivoToolStripMenuItem,
+            this.partTimeToolStripMenuItem});
+            this.funcionarioToolStripMenuItem.Name = "funcionarioToolStripMenuItem";
+            this.funcionarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.funcionarioToolStripMenuItem.Text = "Funcionario";
+            // 
+            // efetivoToolStripMenuItem
+            // 
+            this.efetivoToolStripMenuItem.Name = "efetivoToolStripMenuItem";
+            this.efetivoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.efetivoToolStripMenuItem.Text = "Efetivo";
+            this.efetivoToolStripMenuItem.Click += new System.EventHandler(this.PessoaFilterByEfetivo_Click);
+            // 
+            // partTimeToolStripMenuItem
+            // 
+            this.partTimeToolStripMenuItem.Name = "partTimeToolStripMenuItem";
+            this.partTimeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.partTimeToolStripMenuItem.Text = "Part-Time";
+            this.partTimeToolStripMenuItem.Click += new System.EventHandler(this.PessoaFilterByPartTime_Click);
+            // 
+            // removerFiltroToolStripMenuItem
+            // 
+            this.removerFiltroToolStripMenuItem.Name = "removerFiltroToolStripMenuItem";
+            this.removerFiltroToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.removerFiltroToolStripMenuItem.Text = "Remover Filtro";
+            this.removerFiltroToolStripMenuItem.Click += new System.EventHandler(this.PessoaRemoveFilter_Click);
             // 
             // Form1
             // 
@@ -546,6 +606,12 @@
         private System.Windows.Forms.TextBox inicioContratoTxt;
         private System.Windows.Forms.Label fimContratoLabel;
         private System.Windows.Forms.Label inicioContratoLabel;
+        private System.Windows.Forms.ToolStripMenuItem filtrarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem diretorToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem funcionarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem efetivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem partTimeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removerFiltroToolStripMenuItem;
     }
 }
 

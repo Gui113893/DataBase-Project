@@ -135,10 +135,6 @@ BEGIN
         DELETE FROM Diretor
         WHERE nif = @Nif;
 
-        -- Deleta o Diretor da tabela Pessoa
-        DELETE FROM Pessoa
-        WHERE nif = @Nif;
-
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH
@@ -178,10 +174,6 @@ BEGIN
         DELETE FROM Funcionario
         WHERE nif = @Nif;
 
-        -- Finalmente, deleta a Pessoa da tabela Pessoa
-        DELETE FROM Pessoa
-        WHERE nif = @Nif;
-
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH
@@ -212,10 +204,6 @@ BEGIN
         DELETE FROM Funcionario
         WHERE nif = @Nif;
 
-        -- Finalmente, deleta a Pessoa da tabela Pessoa
-        DELETE FROM Pessoa
-        WHERE nif = @Nif;
-
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH
@@ -225,35 +213,6 @@ BEGIN
 END;
 GO
 
--- Procedure para deletar uma pessoa
-CREATE PROCEDURE DeletePerson
-    @Nif NUMERIC(9,0)
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    DECLARE @tipo VARCHAR(20);
-
-    -- Captura o tipo da pessoa a ser deletada
-    SELECT @tipo = tipo
-    FROM Pessoa
-    WHERE nif = @Nif;
-
-    -- Chama a procedure correspondente com base no tipo da pessoa
-    IF @tipo = 'Diretor'
-    BEGIN
-        EXEC DeleteDirector @Nif = @Nif;
-    END
-    ELSE IF @tipo = 'Efetivo'
-    BEGIN
-        EXEC DeleteEfetivo @Nif = @Nif;
-    END
-    ELSE IF @tipo = 'Part-Time'
-    BEGIN
-        EXEC DeletePartTime @Nif = @Nif;
-    END
-END;
-GO
 
 
 

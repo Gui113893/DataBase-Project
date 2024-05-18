@@ -93,7 +93,7 @@ GO
 -- Tabela Diretor
 CREATE TABLE Diretor (
     nif NUMERIC(9,0) PRIMARY KEY,
-    FOREIGN KEY (nif) REFERENCES Pessoa(nif)
+    FOREIGN KEY (nif) REFERENCES Pessoa(nif) ON UPDATE CASCADE
 );
 GO
 
@@ -103,7 +103,7 @@ CREATE TABLE SubEmpresa (
     id INT IDENTITY(1,1) PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     diretor NUMERIC(9,0),
-    FOREIGN KEY (diretor) REFERENCES Diretor(nif)
+    FOREIGN KEY (diretor) REFERENCES Diretor(nif) ON UPDATE CASCADE
 );
 GO
 
@@ -127,7 +127,7 @@ GO
 CREATE TABLE Funcionario (
     nif NUMERIC(9,0) PRIMARY KEY,
     loja INT,
-    FOREIGN KEY (nif) REFERENCES Pessoa(nif),
+    FOREIGN KEY (nif) REFERENCES Pessoa(nif) ON UPDATE CASCADE,
     FOREIGN KEY (loja) REFERENCES Loja(id_loja),
 );
 GO
@@ -146,8 +146,8 @@ GO
 CREATE TABLE Efetivo (
     nif NUMERIC(9,0) PRIMARY KEY,
     contrato INT UNIQUE,
-    FOREIGN KEY (nif) REFERENCES Funcionario(nif),
-    FOREIGN KEY (contrato) REFERENCES Contrato(id_contrato)
+    FOREIGN KEY (nif) REFERENCES Funcionario(nif) ON UPDATE CASCADE,
+    FOREIGN KEY (contrato) REFERENCES Contrato(id_contrato) ON UPDATE CASCADE
 );
 GO
 
@@ -156,7 +156,7 @@ GO
 CREATE TABLE Part_Time (
     nif NUMERIC(9,0) PRIMARY KEY,
     horas_semanais INT NOT NULL CHECK (horas_semanais >= 0 AND horas_semanais <= 40),
-    FOREIGN KEY (nif) REFERENCES Funcionario(nif),
+    FOREIGN KEY (nif) REFERENCES Funcionario(nif) ON UPDATE CASCADE,
 );
 GO
 
@@ -175,5 +175,4 @@ GO
 -- FK para Loja
 ALTER TABLE Loja
 ADD FOREIGN KEY (gerente)
-REFERENCES Funcionario(nif) 
-ON DELETE SET NULL;
+REFERENCES Funcionario(nif);

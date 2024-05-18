@@ -22,32 +22,7 @@ namespace CompanyBrandManager
         {
             InitializeComponent();
             cn = getSqlConnection();
-            if (!verifyConnection())
-                return;
-
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Pessoa", cn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            PessoasList.Items.Clear();
-
-            while (reader.Read())
-            {
-                Pessoa pessoa = new Pessoa();
-                pessoa.Nif = reader["nif"].ToString();
-                pessoa.Nome = reader["nome"].ToString();
-                pessoa.Email = reader["email"].ToString();
-                pessoa.Sexo = reader["sexo"].ToString();
-                pessoa.Telefone = reader["telefone"].ToString();
-                pessoa.Rua = reader["rua"].ToString();
-                pessoa.Codigo_Postal = reader["codigo_postal"].ToString();
-                pessoa.Localidade = reader["localidade"].ToString();
-                pessoa.Salario = reader["salario"].ToString();
-                pessoa.Tipo = reader["tipo"].ToString();
-                PessoasList.Items.Add(pessoa);
-            }
-            cn.Close();
-            currentPessoaIndex = 0;
-            currentPessoa = (Pessoa)PessoasList.Items[currentPessoaIndex];
-            ShowPessoa();
+            loadPessoas("");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -92,7 +67,7 @@ namespace CompanyBrandManager
             } 
             adding = false;
             PessoasList.Enabled = false;
-            SavePessoa(adding, currentPessoa, "");
+            SavePessoa(adding, currentPessoa, currentPessoa.Tipo);
             PessoasList.Enabled = true;
         }
 
@@ -162,6 +137,26 @@ namespace CompanyBrandManager
         private void AddEfetivo_Click(object sender, EventArgs e)
         {
             showEfetivoSpecifics();
+        }
+
+        private void PessoaFilterByDiretor_Click(object sender, EventArgs e)
+        {
+            loadPessoas("Diretor");
+        }
+
+        private void PessoaFilterByPartTime_Click(object sender, EventArgs e)
+        {
+            loadPessoas("Part-Time");
+        }
+
+        private void PessoaFilterByEfetivo_Click(object sender, EventArgs e)
+        {
+            loadPessoas("Efetivo");
+        }
+
+        private void PessoaRemoveFilter_Click(object sender, EventArgs e)
+        {
+            loadPessoas("");
         }
 
         // Aux Funcs
@@ -394,14 +389,12 @@ namespace CompanyBrandManager
             return true;
         }
 
-        private void UpdatePessoa(Pessoa pessoa, Pessoa anteriorPessoa)
+        private bool UpdatePessoa(Pessoa pessoa, Pessoa anteriorPessoa)
         {
             if (!verifyConnection())
-                return;
-            
-            int rows = 0;
-
-            SqlCommand cmd = new SqlCommand("UPDATE Pessoa SET nif = @nif, nome = @nome, email = @email, sexo = @sexo, telefone = @telefone, rua = @rua, codigo_postal = @codigo_postal, localidade = @localidade, salario = @salario WHERE nif = @nif", cn);
+                return false;
+        
+            SqlCommand cmd = new SqlCommand("UPDATE Pessoa SET nif = @nif, nome = @nome, email = @email, sexo = @sexo, telefone = @telefone, rua = @rua, codigo_postal = @codigo_postal, localidade = @localidade, salario = @salario WHERE nif = @nifAnterior", cn);
             cmd.Parameters.Clear();
             cmd.Parameters.Add(new SqlParameter("@nif", SqlDbType.Decimal) { Precision = 9, Scale = 0, Value = pessoa.Nif });
             cmd.Parameters.Add(new SqlParameter("@nome", SqlDbType.VarChar, 100) { Value = pessoa.Nome });
@@ -412,24 +405,65 @@ namespace CompanyBrandManager
             cmd.Parameters.Add(new SqlParameter("@codigo_postal", SqlDbType.VarChar, 10) { Value = (object)pessoa.Codigo_Postal ?? DBNull.Value });
             cmd.Parameters.Add(new SqlParameter("@localidade", SqlDbType.VarChar, 100) { Value = (object)pessoa.Localidade ?? DBNull.Value });
             cmd.Parameters.Add(new SqlParameter("@salario", SqlDbType.Decimal) { Precision = 10, Scale = 2, Value = pessoa.Salario });
+            cmd.Parameters.Add(new SqlParameter("@nifAnterior", SqlDbType.Decimal) { Precision = 9, Scale = 0, Value = anteriorPessoa.Nif });
             cmd.Connection = cn;
 
             try
             {
-                rows = cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception exc)
             {
-                throw new Exception("Erro ao atualizar pessoa na base de dados: " + exc.Message);
-            }
-            finally
-            {
-                if (rows == 1)
-                    MessageBox.Show("Pessoa atualizada com sucesso");
-                else
-                    MessageBox.Show("Erro ao atualizar pessoa");
+                MessageBox.Show("Erro ao atualizar pessoa na base de dados: " + exc.Message);
                 cn.Close();
+                return false;
             }
+            if (anteriorPessoa.Tipo == "Part-Time")
+            {
+                cmd.CommandText = "UPDATE Part_Time SET horas_semanais = @horas_semanais, loja = @loja WHERE nif = @nif";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@horas_semanais", SqlDbType.Int) { Value = horasTxtPessoa.Text });
+                cmd.Parameters.Add(new SqlParameter("@loja", SqlDbType.Int) { Value = lojaTxtPessoa.Text });
+                cmd.Parameters.Add(new SqlParameter("@nif", SqlDbType.Decimal) { Precision = 9, Scale = 0, Value = pessoa.Nif });
+            }
+            else if (anteriorPessoa.Tipo == "Efetivo")
+            {
+                cmd.CommandText = "UPDATE Contrato SET data_inicio = @data_inicio, data_fim = @data_fim WHERE id_contrato = (SELECT contrato FROM Efetivo WHERE nif = @nif)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@data_inicio", SqlDbType.Date) { Value = inicioContratoTxt.Text });
+                cmd.Parameters.Add(new SqlParameter("@data_fim", SqlDbType.Date) { Value = fimContratoTxt.Text });
+                cmd.Parameters.Add(new SqlParameter("@nif", SqlDbType.Decimal) { Precision = 9, Scale = 0, Value = pessoa.Nif });
+            }
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Erro ao atualizar pessoa na base de dados: " + exc.Message);
+                cn.Close();
+                return false;
+            }
+            if (anteriorPessoa.Tipo == "Part-Time" || anteriorPessoa.Tipo == "Efetivo")
+            {
+                cmd.CommandText = "UPDATE Funcionario SET loja = @loja WHERE nif = @nif";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@loja", SqlDbType.Int) { Value = lojaTxtPessoa.Text });
+                cmd.Parameters.Add(new SqlParameter("@nif", SqlDbType.Decimal) { Precision = 9, Scale = 0, Value = pessoa.Nif });
+            }
+            try 
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Erro ao atualizar pessoa na base de dados: " + exc.Message);
+                cn.Close();
+                return false;
+            }
+            MessageBox.Show("Pessoa atualizada com sucesso");
+            cn.Close();
+            return true;
         }
 
         private bool RemovePessoa(Pessoa currentPessoa)
@@ -437,11 +471,10 @@ namespace CompanyBrandManager
             if (!verifyConnection())
                 return false;
 
-            using (SqlCommand cmd = new SqlCommand("DeletePerson", cn))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Pessoa WHERE nif = @Nif", cn))
             {
                 try
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@Nif", SqlDbType.Decimal) { Value = currentPessoa.Nif });
                     cmd.ExecuteNonQuery();
                 }
@@ -485,6 +518,53 @@ namespace CompanyBrandManager
             fimContratoLabel.Enabled = true;
             fimContratoTxt.Visible = true;
             fimContratoTxt.Enabled = true;
+
+        }
+
+        private void loadPessoas(String filtro)
+        {
+            if (!verifyConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Pessoa", cn);
+            if (filtro == "Diretor")
+            {
+                cmd = new SqlCommand("SELECT * FROM Pessoa JOIN Diretor ON pessoa.nif = diretor.nif", cn);
+            }
+            else if (filtro == "Part-Time")
+            {
+                cmd = new SqlCommand("SELECT * FROM Pessoa JOIN Part_Time ON pessoa.nif = part_time.nif", cn);
+            }
+            else if (filtro == "Efetivo")
+            {
+                cmd = new SqlCommand("SELECT * FROM Pessoa JOIN Efetivo ON pessoa.nif = efetivo.nif", cn);
+            }
+            SqlDataReader reader = cmd.ExecuteReader();
+            PessoasList.Items.Clear();
+
+            while (reader.Read())
+            {
+                Pessoa pessoa = new Pessoa();
+                pessoa.Nif = reader["nif"].ToString();
+                pessoa.Nome = reader["nome"].ToString();
+                pessoa.Email = reader["email"].ToString();
+                pessoa.Sexo = reader["sexo"].ToString();
+                pessoa.Telefone = reader["telefone"].ToString();
+                pessoa.Rua = reader["rua"].ToString();
+                pessoa.Codigo_Postal = reader["codigo_postal"].ToString();
+                pessoa.Localidade = reader["localidade"].ToString();
+                pessoa.Salario = reader["salario"].ToString();
+                pessoa.Tipo = reader["tipo"].ToString();
+                PessoasList.Items.Add(pessoa);
+            }
+            cn.Close();
+            currentPessoaIndex = 0;
+            currentPessoa = (Pessoa)PessoasList.Items[currentPessoaIndex];
+            ShowPessoa();
+        }
+
+        private void fimContratoTxt_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
