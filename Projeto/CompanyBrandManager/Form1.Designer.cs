@@ -75,6 +75,8 @@
             this.removerFiltroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lojasTab = new System.Windows.Forms.TabPage();
             this.gerenteTxtLoja = new System.Windows.Forms.TextBox();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.adicionarLojaToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteButtonLoja = new System.Windows.Forms.Button();
             this.editButtonLoja = new System.Windows.Forms.Button();
             this.addButtonLoja = new System.Windows.Forms.Button();
@@ -91,30 +93,33 @@
             this.telefoneLabelLoja = new System.Windows.Forms.Label();
             this.LojasList = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.ProdutosList = new System.Windows.Forms.ListBox();
-            this.NomeLabelProduto = new System.Windows.Forms.Label();
-            this.nomeTxtProduto = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.precoTxtProduto = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.marcaTxtProduto = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.stockProdutoLabel = new System.Windows.Forms.Label();
-            this.addButtonProduto = new System.Windows.Forms.Button();
-            this.editButtonProduto = new System.Windows.Forms.Button();
-            this.deleteButtonProduto = new System.Windows.Forms.Button();
-            this.distributeButtonProduto = new System.Windows.Forms.Button();
-            this.adicionarLojaToolStrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.menuStrip3 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.distributeButtonProduto = new System.Windows.Forms.Button();
+            this.deleteButtonProduto = new System.Windows.Forms.Button();
+            this.editButtonProduto = new System.Windows.Forms.Button();
+            this.addButtonProduto = new System.Windows.Forms.Button();
+            this.stockProdutoLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.marcaTxtProduto = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.precoTxtProduto = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nomeTxtProduto = new System.Windows.Forms.TextBox();
+            this.NomeLabelProduto = new System.Windows.Forms.Label();
+            this.ProdutosList = new System.Windows.Forms.ListBox();
+            this.searchProdutoByLoja = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.searchProduto = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.searchByMarcaProduto = new System.Windows.Forms.TextBox();
             this.tabControlLojasPessoas.SuspendLayout();
             this.pessoasTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.lojasTab.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.menuStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -611,6 +616,25 @@
             this.gerenteTxtLoja.Size = new System.Drawing.Size(190, 30);
             this.gerenteTxtLoja.TabIndex = 42;
             // 
+            // menuStrip2
+            // 
+            this.menuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adicionarLojaToolStrip});
+            this.menuStrip2.Location = new System.Drawing.Point(3, 3);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(1192, 36);
+            this.menuStrip2.TabIndex = 41;
+            this.menuStrip2.Text = "menuStrip2";
+            // 
+            // adicionarLojaToolStrip
+            // 
+            this.adicionarLojaToolStrip.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.adicionarLojaToolStrip.Name = "adicionarLojaToolStrip";
+            this.adicionarLojaToolStrip.Size = new System.Drawing.Size(110, 32);
+            this.adicionarLojaToolStrip.Text = "Adicionar";
+            this.adicionarLojaToolStrip.Click += new System.EventHandler(this.AddToolStripLoja_Click);
+            // 
             // deleteButtonLoja
             // 
             this.deleteButtonLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -756,6 +780,11 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.searchByMarcaProduto);
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.searchProduto);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.searchProdutoByLoja);
             this.tabPage1.Controls.Add(this.menuStrip3);
             this.tabPage1.Controls.Add(this.distributeButtonProduto);
             this.tabPage1.Controls.Add(this.deleteButtonProduto);
@@ -778,163 +807,6 @@
             this.tabPage1.Text = "Produtos";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // ProdutosList
-            // 
-            this.ProdutosList.FormattingEnabled = true;
-            this.ProdutosList.ItemHeight = 25;
-            this.ProdutosList.Location = new System.Drawing.Point(659, 38);
-            this.ProdutosList.Name = "ProdutosList";
-            this.ProdutosList.Size = new System.Drawing.Size(517, 504);
-            this.ProdutosList.TabIndex = 0;
-            this.ProdutosList.SelectedIndexChanged += new System.EventHandler(this.ProdutosList_SelectedIndexChanged);
-            // 
-            // NomeLabelProduto
-            // 
-            this.NomeLabelProduto.AutoSize = true;
-            this.NomeLabelProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NomeLabelProduto.Location = new System.Drawing.Point(33, 119);
-            this.NomeLabelProduto.Name = "NomeLabelProduto";
-            this.NomeLabelProduto.Size = new System.Drawing.Size(70, 25);
-            this.NomeLabelProduto.TabIndex = 35;
-            this.NomeLabelProduto.Text = "Nome:";
-            this.NomeLabelProduto.Click += new System.EventHandler(this.NomeLabelProduto_Click);
-            // 
-            // nomeTxtProduto
-            // 
-            this.nomeTxtProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nomeTxtProduto.Location = new System.Drawing.Point(109, 114);
-            this.nomeTxtProduto.Name = "nomeTxtProduto";
-            this.nomeTxtProduto.Size = new System.Drawing.Size(297, 30);
-            this.nomeTxtProduto.TabIndex = 35;
-            this.nomeTxtProduto.TextChanged += new System.EventHandler(this.nomeTxtProduto_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(33, 189);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 25);
-            this.label1.TabIndex = 36;
-            this.label1.Text = "Preço:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // precoTxtProduto
-            // 
-            this.precoTxtProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.precoTxtProduto.Location = new System.Drawing.Point(109, 189);
-            this.precoTxtProduto.Name = "precoTxtProduto";
-            this.precoTxtProduto.Size = new System.Drawing.Size(130, 30);
-            this.precoTxtProduto.TabIndex = 37;
-            this.precoTxtProduto.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(245, 194);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(23, 25);
-            this.label2.TabIndex = 35;
-            this.label2.Text = "€";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(33, 253);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 25);
-            this.label3.TabIndex = 38;
-            this.label3.Text = "Marca:";
-            // 
-            // marcaTxtProduto
-            // 
-            this.marcaTxtProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.marcaTxtProduto.Location = new System.Drawing.Point(109, 253);
-            this.marcaTxtProduto.Name = "marcaTxtProduto";
-            this.marcaTxtProduto.Size = new System.Drawing.Size(51, 30);
-            this.marcaTxtProduto.TabIndex = 39;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(33, 337);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 25);
-            this.label4.TabIndex = 40;
-            this.label4.Text = "Stock:";
-            // 
-            // stockProdutoLabel
-            // 
-            this.stockProdutoLabel.AutoSize = true;
-            this.stockProdutoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stockProdutoLabel.Location = new System.Drawing.Point(107, 337);
-            this.stockProdutoLabel.Name = "stockProdutoLabel";
-            this.stockProdutoLabel.Size = new System.Drawing.Size(223, 25);
-            this.stockProdutoLabel.TabIndex = 41;
-            this.stockProdutoLabel.Text = "Circulação/Armazenado";
-            // 
-            // addButtonProduto
-            // 
-            this.addButtonProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addButtonProduto.Location = new System.Drawing.Point(38, 497);
-            this.addButtonProduto.Name = "addButtonProduto";
-            this.addButtonProduto.Size = new System.Drawing.Size(120, 45);
-            this.addButtonProduto.TabIndex = 43;
-            this.addButtonProduto.Text = "Add";
-            this.addButtonProduto.UseVisualStyleBackColor = true;
-            // 
-            // editButtonProduto
-            // 
-            this.editButtonProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editButtonProduto.Location = new System.Drawing.Point(210, 497);
-            this.editButtonProduto.Name = "editButtonProduto";
-            this.editButtonProduto.Size = new System.Drawing.Size(120, 45);
-            this.editButtonProduto.TabIndex = 44;
-            this.editButtonProduto.Text = "Edit";
-            this.editButtonProduto.UseVisualStyleBackColor = true;
-            // 
-            // deleteButtonProduto
-            // 
-            this.deleteButtonProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteButtonProduto.Location = new System.Drawing.Point(371, 497);
-            this.deleteButtonProduto.Name = "deleteButtonProduto";
-            this.deleteButtonProduto.Size = new System.Drawing.Size(120, 45);
-            this.deleteButtonProduto.TabIndex = 45;
-            this.deleteButtonProduto.Text = "Delete";
-            this.deleteButtonProduto.UseVisualStyleBackColor = true;
-            // 
-            // distributeButtonProduto
-            // 
-            this.distributeButtonProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.distributeButtonProduto.Location = new System.Drawing.Point(533, 497);
-            this.distributeButtonProduto.Name = "distributeButtonProduto";
-            this.distributeButtonProduto.Size = new System.Drawing.Size(120, 45);
-            this.distributeButtonProduto.TabIndex = 46;
-            this.distributeButtonProduto.Text = "Distribute";
-            this.distributeButtonProduto.UseVisualStyleBackColor = true;
-            // 
-            // adicionarLojaToolStrip
-            // 
-            this.adicionarLojaToolStrip.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.adicionarLojaToolStrip.Name = "adicionarLojaToolStrip";
-            this.adicionarLojaToolStrip.Size = new System.Drawing.Size(110, 32);
-            this.adicionarLojaToolStrip.Text = "Adicionar";
-            this.adicionarLojaToolStrip.Click += new System.EventHandler(this.AddToolStripLoja_Click);
-            // 
-            // menuStrip2
-            // 
-            this.menuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.adicionarLojaToolStrip});
-            this.menuStrip2.Location = new System.Drawing.Point(3, 3);
-            this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(1192, 36);
-            this.menuStrip2.TabIndex = 41;
-            this.menuStrip2.Text = "menuStrip2";
-            // 
             // menuStrip3
             // 
             this.menuStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -953,6 +825,190 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(110, 32);
             this.toolStripMenuItem1.Text = "Adicionar";
             // 
+            // distributeButtonProduto
+            // 
+            this.distributeButtonProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.distributeButtonProduto.Location = new System.Drawing.Point(533, 497);
+            this.distributeButtonProduto.Name = "distributeButtonProduto";
+            this.distributeButtonProduto.Size = new System.Drawing.Size(120, 45);
+            this.distributeButtonProduto.TabIndex = 46;
+            this.distributeButtonProduto.Text = "Distribute";
+            this.distributeButtonProduto.UseVisualStyleBackColor = true;
+            // 
+            // deleteButtonProduto
+            // 
+            this.deleteButtonProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteButtonProduto.Location = new System.Drawing.Point(371, 497);
+            this.deleteButtonProduto.Name = "deleteButtonProduto";
+            this.deleteButtonProduto.Size = new System.Drawing.Size(120, 45);
+            this.deleteButtonProduto.TabIndex = 45;
+            this.deleteButtonProduto.Text = "Delete";
+            this.deleteButtonProduto.UseVisualStyleBackColor = true;
+            // 
+            // editButtonProduto
+            // 
+            this.editButtonProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editButtonProduto.Location = new System.Drawing.Point(210, 497);
+            this.editButtonProduto.Name = "editButtonProduto";
+            this.editButtonProduto.Size = new System.Drawing.Size(120, 45);
+            this.editButtonProduto.TabIndex = 44;
+            this.editButtonProduto.Text = "Edit";
+            this.editButtonProduto.UseVisualStyleBackColor = true;
+            // 
+            // addButtonProduto
+            // 
+            this.addButtonProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addButtonProduto.Location = new System.Drawing.Point(38, 497);
+            this.addButtonProduto.Name = "addButtonProduto";
+            this.addButtonProduto.Size = new System.Drawing.Size(120, 45);
+            this.addButtonProduto.TabIndex = 43;
+            this.addButtonProduto.Text = "Add";
+            this.addButtonProduto.UseVisualStyleBackColor = true;
+            // 
+            // stockProdutoLabel
+            // 
+            this.stockProdutoLabel.AutoSize = true;
+            this.stockProdutoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockProdutoLabel.Location = new System.Drawing.Point(107, 337);
+            this.stockProdutoLabel.Name = "stockProdutoLabel";
+            this.stockProdutoLabel.Size = new System.Drawing.Size(198, 25);
+            this.stockProdutoLabel.TabIndex = 41;
+            this.stockProdutoLabel.Text = "Circulação/Fornecido";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(33, 337);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(68, 25);
+            this.label4.TabIndex = 40;
+            this.label4.Text = "Stock:";
+            // 
+            // marcaTxtProduto
+            // 
+            this.marcaTxtProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.marcaTxtProduto.Location = new System.Drawing.Point(109, 253);
+            this.marcaTxtProduto.Name = "marcaTxtProduto";
+            this.marcaTxtProduto.Size = new System.Drawing.Size(51, 30);
+            this.marcaTxtProduto.TabIndex = 39;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(33, 253);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(73, 25);
+            this.label3.TabIndex = 38;
+            this.label3.Text = "Marca:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(245, 194);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(23, 25);
+            this.label2.TabIndex = 35;
+            this.label2.Text = "€";
+            // 
+            // precoTxtProduto
+            // 
+            this.precoTxtProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.precoTxtProduto.Location = new System.Drawing.Point(109, 189);
+            this.precoTxtProduto.Name = "precoTxtProduto";
+            this.precoTxtProduto.Size = new System.Drawing.Size(130, 30);
+            this.precoTxtProduto.TabIndex = 37;
+            this.precoTxtProduto.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(33, 189);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 25);
+            this.label1.TabIndex = 36;
+            this.label1.Text = "Preço:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // nomeTxtProduto
+            // 
+            this.nomeTxtProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nomeTxtProduto.Location = new System.Drawing.Point(109, 114);
+            this.nomeTxtProduto.Name = "nomeTxtProduto";
+            this.nomeTxtProduto.Size = new System.Drawing.Size(297, 30);
+            this.nomeTxtProduto.TabIndex = 35;
+            this.nomeTxtProduto.TextChanged += new System.EventHandler(this.nomeTxtProduto_TextChanged);
+            // 
+            // NomeLabelProduto
+            // 
+            this.NomeLabelProduto.AutoSize = true;
+            this.NomeLabelProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NomeLabelProduto.Location = new System.Drawing.Point(33, 119);
+            this.NomeLabelProduto.Name = "NomeLabelProduto";
+            this.NomeLabelProduto.Size = new System.Drawing.Size(70, 25);
+            this.NomeLabelProduto.TabIndex = 35;
+            this.NomeLabelProduto.Text = "Nome:";
+            this.NomeLabelProduto.Click += new System.EventHandler(this.NomeLabelProduto_Click);
+            // 
+            // ProdutosList
+            // 
+            this.ProdutosList.FormattingEnabled = true;
+            this.ProdutosList.ItemHeight = 25;
+            this.ProdutosList.Location = new System.Drawing.Point(659, 88);
+            this.ProdutosList.Name = "ProdutosList";
+            this.ProdutosList.Size = new System.Drawing.Size(517, 454);
+            this.ProdutosList.TabIndex = 0;
+            this.ProdutosList.SelectedIndexChanged += new System.EventHandler(this.ProdutosList_SelectedIndexChanged);
+            // 
+            // searchProdutoByLoja
+            // 
+            this.searchProdutoByLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchProdutoByLoja.Location = new System.Drawing.Point(715, 41);
+            this.searchProdutoByLoja.Name = "searchProdutoByLoja";
+            this.searchProdutoByLoja.Size = new System.Drawing.Size(51, 30);
+            this.searchProdutoByLoja.TabIndex = 48;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(654, 44);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 25);
+            this.label5.TabIndex = 49;
+            this.label5.Text = "Loja:";
+            // 
+            // searchProduto
+            // 
+            this.searchProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchProduto.Location = new System.Drawing.Point(1056, 34);
+            this.searchProduto.Name = "searchProduto";
+            this.searchProduto.Size = new System.Drawing.Size(120, 45);
+            this.searchProduto.TabIndex = 50;
+            this.searchProduto.Text = "Pesquisa";
+            this.searchProduto.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(787, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(73, 25);
+            this.label6.TabIndex = 51;
+            this.label6.Text = "Marca:";
+            // 
+            // searchByMarcaProduto
+            // 
+            this.searchByMarcaProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchByMarcaProduto.Location = new System.Drawing.Point(866, 41);
+            this.searchByMarcaProduto.Name = "searchByMarcaProduto";
+            this.searchByMarcaProduto.Size = new System.Drawing.Size(167, 30);
+            this.searchByMarcaProduto.TabIndex = 52;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -970,10 +1026,10 @@
             this.menuStrip1.PerformLayout();
             this.lojasTab.ResumeLayout(false);
             this.lojasTab.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.menuStrip3.ResumeLayout(false);
             this.menuStrip3.PerformLayout();
             this.ResumeLayout(false);
@@ -1063,6 +1119,11 @@
         private System.Windows.Forms.Button deleteButtonProduto;
         private System.Windows.Forms.Button editButtonProduto;
         private System.Windows.Forms.Button addButtonProduto;
+        private System.Windows.Forms.Button searchProduto;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox searchProdutoByLoja;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox searchByMarcaProduto;
     }
 }
 

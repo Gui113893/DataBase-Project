@@ -24,6 +24,9 @@ namespace CompanyBrandManager
         private bool adding_pessoa;
         private bool adding_loja;
         private bool adding_produto;
+
+        private int filterByLoja;
+
         public Form1()
         {
             InitializeComponent();
@@ -337,6 +340,33 @@ namespace CompanyBrandManager
             precoTxtProduto.Text = produto.Preco;
             nomeTxtProduto.Text = produto.Nome;
             marcaTxtProduto.Text = produto.MarcaId;
+
+            if (!verifyConnection())
+            {
+                return;
+            }
+            // Obter stock em circulação
+            SqlCommand cmd = new SqlCommand("SELECT dbo.fn_QuantidadeProdutoLojas(@id_produto) AS QuantidadeTotal;", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.Add(new SqlParameter("@id_produto", SqlDbType.Int) { Value = produto.ID });
+            cmd.Connection = cn;
+            SqlDataReader reader = cmd.ExecuteReader();
+            String stock_circulação = "0";
+            if (reader.Read())
+            {
+                stock_circulação = reader["QuantidadeTotal"].ToString();
+            } 
+
+            if (filterByLoja > 0)
+            {
+                // Se o filtro por loja está ativo mostra stock_em_loja/stock_em_circulação
+                stockProdutoLabel.Text = produto.QuantidadeLoja.ToString() + "/" + stock_circulação;
+            }
+            else
+            {
+                stockProdutoLabel.Text = stock_circulação + "/" + produto.QuantidadeTotal.ToString();
+            }
+            cn.Close();
         }
 
         public void ClearPessoaFields()
@@ -880,7 +910,9 @@ namespace CompanyBrandManager
             if (!verifyConnection())
                 return;
 
+            
             SqlCommand cmd = new SqlCommand("SELECT * FROM Produto JOIN Marca ON Marca.patente = Produto.marca JOIN Stock_Fornecido ON Stock_Fornecido.produto = Produto.id_produto", cn);
+            filterByLoja = lojaId;
             if (lojaId > 0)
             {
                 cmd = new SqlCommand("SELECT * FROM Produto JOIN Stock_Loja ON Stock_Loja.produto = Produto.id_produto WHERE Stock_Loja.loja = @lojaId", cn);
