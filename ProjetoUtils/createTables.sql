@@ -115,9 +115,9 @@ CREATE TABLE Loja (
     rua VARCHAR(100) NOT NULL,
     codigo_postal VARCHAR(10) NOT NULL,
     localidade VARCHAR(100) NOT NULL,
-    subempresa INT,
+    subempresa INT NOT NULL,
     gerente NUMERIC(9,0),
-    FOREIGN KEY (subempresa) REFERENCES SubEmpresa(id) ON DELETE CASCADE,
+    FOREIGN KEY (subempresa) REFERENCES SubEmpresa(id),
     -- Como o gerente depende da tabela Funcionario, a FK é adicionada mais em baixo (CTRL-F -> FK para Loja)
 );
 GO

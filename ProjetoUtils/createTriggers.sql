@@ -84,3 +84,29 @@ BEGIN
     END
 END;
 GO
+
+CREATE TRIGGER trg_after_update_funcionario
+ON Funcionario
+AFTER UPDATE
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+    DECLARE @oldLoja INT;
+    DECLARE @newLoja INT;
+    DECLARE @nif NUMERIC(9,0);
+
+    SELECT @oldLoja = deleted.loja, @newLoja = inserted.loja, @nif = inserted.nif
+    FROM deleted
+    INNER JOIN inserted ON deleted.nif = inserted.nif;
+
+    -- Se o funcionário a ser updated está a mudar de loja e é gerente da loja da qual se está a mudar
+    IF EXISTS (SELECT 1 FROM Loja WHERE gerente = @nif) AND @oldLoja <> @newLoja
+    BEGIN
+        -- Atualiza o gerente da loja antiga para NULL
+        UPDATE Loja
+        SET gerente = NULL
+        WHERE id_loja = @oldLoja;
+    END;
+END;
+GO

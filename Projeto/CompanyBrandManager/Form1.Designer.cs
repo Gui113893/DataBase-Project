@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.TextBox gerenteTxtLoja;
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pessoasTab = new System.Windows.Forms.TabPage();
             this.fimContratoTxt = new System.Windows.Forms.TextBox();
@@ -74,9 +75,30 @@
             this.efetivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.partTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removerFiltroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LojasList = new System.Windows.Forms.ListBox();
+            this.telefoneLabelLoja = new System.Windows.Forms.Label();
+            this.telefoneTxtLoja = new System.Windows.Forms.TextBox();
+            this.ruaLabelLoja = new System.Windows.Forms.Label();
+            this.ruaTxtLoja = new System.Windows.Forms.TextBox();
+            this.localidadeLabelLoja = new System.Windows.Forms.Label();
+            this.localidadeTxtLoja = new System.Windows.Forms.TextBox();
+            this.codpostalLabelLoja = new System.Windows.Forms.Label();
+            this.codpostalTxtLoja = new System.Windows.Forms.TextBox();
+            this.subempresaLabelLoja = new System.Windows.Forms.Label();
+            this.subempresaTxtLoja = new System.Windows.Forms.TextBox();
+            this.gerenteLabelLoja = new System.Windows.Forms.Label();
+            this.addButtonLoja = new System.Windows.Forms.Button();
+            this.editButtonLoja = new System.Windows.Forms.Button();
+            this.deleteButtonLoja = new System.Windows.Forms.Button();
+            this.detailsButtonLoja = new System.Windows.Forms.Button();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.adicionarLojaToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            gerenteTxtLoja = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.pessoasTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -469,25 +491,43 @@
             // funcionárioEfetivoToolStripMenuItem
             // 
             this.funcionárioEfetivoToolStripMenuItem.Name = "funcionárioEfetivoToolStripMenuItem";
-            this.funcionárioEfetivoToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
+            this.funcionárioEfetivoToolStripMenuItem.Size = new System.Drawing.Size(290, 32);
             this.funcionárioEfetivoToolStripMenuItem.Text = "Funcionário Efetivo";
             this.funcionárioEfetivoToolStripMenuItem.Click += new System.EventHandler(this.AddEfetivo_Click);
             // 
             // funcionárioPartTimeToolStripMenuItem
             // 
             this.funcionárioPartTimeToolStripMenuItem.Name = "funcionárioPartTimeToolStripMenuItem";
-            this.funcionárioPartTimeToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
+            this.funcionárioPartTimeToolStripMenuItem.Size = new System.Drawing.Size(290, 32);
             this.funcionárioPartTimeToolStripMenuItem.Text = "Funcionário Part-Time";
             this.funcionárioPartTimeToolStripMenuItem.Click += new System.EventHandler(this.AddPartTime_Click);
             // 
             // diretorToolStripMenuItem
             // 
             this.diretorToolStripMenuItem.Name = "diretorToolStripMenuItem";
-            this.diretorToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
+            this.diretorToolStripMenuItem.Size = new System.Drawing.Size(290, 32);
             this.diretorToolStripMenuItem.Text = "Diretor";
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.menuStrip2);
+            this.tabPage2.Controls.Add(this.detailsButtonLoja);
+            this.tabPage2.Controls.Add(this.deleteButtonLoja);
+            this.tabPage2.Controls.Add(this.editButtonLoja);
+            this.tabPage2.Controls.Add(this.addButtonLoja);
+            this.tabPage2.Controls.Add(gerenteTxtLoja);
+            this.tabPage2.Controls.Add(this.gerenteLabelLoja);
+            this.tabPage2.Controls.Add(this.subempresaTxtLoja);
+            this.tabPage2.Controls.Add(this.subempresaLabelLoja);
+            this.tabPage2.Controls.Add(this.codpostalTxtLoja);
+            this.tabPage2.Controls.Add(this.codpostalLabelLoja);
+            this.tabPage2.Controls.Add(this.localidadeTxtLoja);
+            this.tabPage2.Controls.Add(this.localidadeLabelLoja);
+            this.tabPage2.Controls.Add(this.ruaTxtLoja);
+            this.tabPage2.Controls.Add(this.ruaLabelLoja);
+            this.tabPage2.Controls.Add(this.telefoneTxtLoja);
+            this.tabPage2.Controls.Add(this.telefoneLabelLoja);
+            this.tabPage2.Controls.Add(this.LojasList);
             this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
@@ -511,7 +551,7 @@
             // diretorToolStripMenuItem1
             // 
             this.diretorToolStripMenuItem1.Name = "diretorToolStripMenuItem1";
-            this.diretorToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.diretorToolStripMenuItem1.Size = new System.Drawing.Size(226, 32);
             this.diretorToolStripMenuItem1.Text = "Diretor";
             this.diretorToolStripMenuItem1.Click += new System.EventHandler(this.PessoaFilterByDiretor_Click);
             // 
@@ -521,29 +561,206 @@
             this.efetivoToolStripMenuItem,
             this.partTimeToolStripMenuItem});
             this.funcionarioToolStripMenuItem.Name = "funcionarioToolStripMenuItem";
-            this.funcionarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.funcionarioToolStripMenuItem.Size = new System.Drawing.Size(226, 32);
             this.funcionarioToolStripMenuItem.Text = "Funcionario";
             // 
             // efetivoToolStripMenuItem
             // 
             this.efetivoToolStripMenuItem.Name = "efetivoToolStripMenuItem";
-            this.efetivoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.efetivoToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
             this.efetivoToolStripMenuItem.Text = "Efetivo";
             this.efetivoToolStripMenuItem.Click += new System.EventHandler(this.PessoaFilterByEfetivo_Click);
             // 
             // partTimeToolStripMenuItem
             // 
             this.partTimeToolStripMenuItem.Name = "partTimeToolStripMenuItem";
-            this.partTimeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.partTimeToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
             this.partTimeToolStripMenuItem.Text = "Part-Time";
             this.partTimeToolStripMenuItem.Click += new System.EventHandler(this.PessoaFilterByPartTime_Click);
             // 
             // removerFiltroToolStripMenuItem
             // 
             this.removerFiltroToolStripMenuItem.Name = "removerFiltroToolStripMenuItem";
-            this.removerFiltroToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.removerFiltroToolStripMenuItem.Size = new System.Drawing.Size(226, 32);
             this.removerFiltroToolStripMenuItem.Text = "Remover Filtro";
             this.removerFiltroToolStripMenuItem.Click += new System.EventHandler(this.PessoaRemoveFilter_Click);
+            // 
+            // LojasList
+            // 
+            this.LojasList.FormattingEnabled = true;
+            this.LojasList.ItemHeight = 25;
+            this.LojasList.Location = new System.Drawing.Point(664, 48);
+            this.LojasList.Name = "LojasList";
+            this.LojasList.Size = new System.Drawing.Size(510, 504);
+            this.LojasList.TabIndex = 0;
+            // 
+            // telefoneLabelLoja
+            // 
+            this.telefoneLabelLoja.AutoSize = true;
+            this.telefoneLabelLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.telefoneLabelLoja.Location = new System.Drawing.Point(21, 108);
+            this.telefoneLabelLoja.Name = "telefoneLabelLoja";
+            this.telefoneLabelLoja.Size = new System.Drawing.Size(95, 25);
+            this.telefoneLabelLoja.TabIndex = 35;
+            this.telefoneLabelLoja.Text = "Telefone:";
+            // 
+            // telefoneTxtLoja
+            // 
+            this.telefoneTxtLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.telefoneTxtLoja.Location = new System.Drawing.Point(122, 108);
+            this.telefoneTxtLoja.Name = "telefoneTxtLoja";
+            this.telefoneTxtLoja.Size = new System.Drawing.Size(127, 30);
+            this.telefoneTxtLoja.TabIndex = 35;
+            // 
+            // ruaLabelLoja
+            // 
+            this.ruaLabelLoja.AutoSize = true;
+            this.ruaLabelLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ruaLabelLoja.Location = new System.Drawing.Point(283, 108);
+            this.ruaLabelLoja.Name = "ruaLabelLoja";
+            this.ruaLabelLoja.Size = new System.Drawing.Size(53, 25);
+            this.ruaLabelLoja.TabIndex = 36;
+            this.ruaLabelLoja.Text = "Rua:";
+            // 
+            // ruaTxtLoja
+            // 
+            this.ruaTxtLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ruaTxtLoja.Location = new System.Drawing.Point(342, 108);
+            this.ruaTxtLoja.Name = "ruaTxtLoja";
+            this.ruaTxtLoja.Size = new System.Drawing.Size(297, 30);
+            this.ruaTxtLoja.TabIndex = 35;
+            // 
+            // localidadeLabelLoja
+            // 
+            this.localidadeLabelLoja.AutoSize = true;
+            this.localidadeLabelLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.localidadeLabelLoja.Location = new System.Drawing.Point(21, 192);
+            this.localidadeLabelLoja.Name = "localidadeLabelLoja";
+            this.localidadeLabelLoja.Size = new System.Drawing.Size(113, 25);
+            this.localidadeLabelLoja.TabIndex = 35;
+            this.localidadeLabelLoja.Text = "Localidade:";
+            // 
+            // localidadeTxtLoja
+            // 
+            this.localidadeTxtLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.localidadeTxtLoja.Location = new System.Drawing.Point(140, 189);
+            this.localidadeTxtLoja.Name = "localidadeTxtLoja";
+            this.localidadeTxtLoja.Size = new System.Drawing.Size(194, 30);
+            this.localidadeTxtLoja.TabIndex = 35;
+            // 
+            // codpostalLabelLoja
+            // 
+            this.codpostalLabelLoja.AutoSize = true;
+            this.codpostalLabelLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.codpostalLabelLoja.Location = new System.Drawing.Point(355, 192);
+            this.codpostalLabelLoja.Name = "codpostalLabelLoja";
+            this.codpostalLabelLoja.Size = new System.Drawing.Size(109, 25);
+            this.codpostalLabelLoja.TabIndex = 35;
+            this.codpostalLabelLoja.Text = "CodPostal:";
+            // 
+            // codpostalTxtLoja
+            // 
+            this.codpostalTxtLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.codpostalTxtLoja.Location = new System.Drawing.Point(470, 189);
+            this.codpostalTxtLoja.Name = "codpostalTxtLoja";
+            this.codpostalTxtLoja.Size = new System.Drawing.Size(124, 30);
+            this.codpostalTxtLoja.TabIndex = 35;
+            // 
+            // subempresaLabelLoja
+            // 
+            this.subempresaLabelLoja.AutoSize = true;
+            this.subempresaLabelLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subempresaLabelLoja.Location = new System.Drawing.Point(21, 263);
+            this.subempresaLabelLoja.Name = "subempresaLabelLoja";
+            this.subempresaLabelLoja.Size = new System.Drawing.Size(132, 25);
+            this.subempresaLabelLoja.TabIndex = 37;
+            this.subempresaLabelLoja.Text = "SubEmpresa:";
+            // 
+            // subempresaTxtLoja
+            // 
+            this.subempresaTxtLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subempresaTxtLoja.Location = new System.Drawing.Point(159, 260);
+            this.subempresaTxtLoja.Name = "subempresaTxtLoja";
+            this.subempresaTxtLoja.Size = new System.Drawing.Size(69, 30);
+            this.subempresaTxtLoja.TabIndex = 35;
+            this.subempresaTxtLoja.Visible = false;
+            // 
+            // gerenteLabelLoja
+            // 
+            this.gerenteLabelLoja.AutoSize = true;
+            this.gerenteLabelLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gerenteLabelLoja.Location = new System.Drawing.Point(355, 263);
+            this.gerenteLabelLoja.Name = "gerenteLabelLoja";
+            this.gerenteLabelLoja.Size = new System.Drawing.Size(88, 25);
+            this.gerenteLabelLoja.TabIndex = 38;
+            this.gerenteLabelLoja.Text = "Gerente:";
+            // 
+            // gerenteTxtLoja
+            // 
+            gerenteTxtLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            gerenteTxtLoja.Location = new System.Drawing.Point(449, 260);
+            gerenteTxtLoja.Name = "gerenteTxtLoja";
+            gerenteTxtLoja.Size = new System.Drawing.Size(69, 30);
+            gerenteTxtLoja.TabIndex = 39;
+            gerenteTxtLoja.Visible = false;
+            // 
+            // addButtonLoja
+            // 
+            this.addButtonLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addButtonLoja.Location = new System.Drawing.Point(33, 457);
+            this.addButtonLoja.Name = "addButtonLoja";
+            this.addButtonLoja.Size = new System.Drawing.Size(120, 45);
+            this.addButtonLoja.TabIndex = 35;
+            this.addButtonLoja.Text = "Add";
+            this.addButtonLoja.UseVisualStyleBackColor = true;
+            // 
+            // editButtonLoja
+            // 
+            this.editButtonLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editButtonLoja.Location = new System.Drawing.Point(187, 457);
+            this.editButtonLoja.Name = "editButtonLoja";
+            this.editButtonLoja.Size = new System.Drawing.Size(120, 45);
+            this.editButtonLoja.TabIndex = 35;
+            this.editButtonLoja.Text = "Edit";
+            this.editButtonLoja.UseVisualStyleBackColor = true;
+            // 
+            // deleteButtonLoja
+            // 
+            this.deleteButtonLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteButtonLoja.Location = new System.Drawing.Point(342, 457);
+            this.deleteButtonLoja.Name = "deleteButtonLoja";
+            this.deleteButtonLoja.Size = new System.Drawing.Size(120, 45);
+            this.deleteButtonLoja.TabIndex = 35;
+            this.deleteButtonLoja.Text = "Delete";
+            this.deleteButtonLoja.UseVisualStyleBackColor = true;
+            // 
+            // detailsButtonLoja
+            // 
+            this.detailsButtonLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.detailsButtonLoja.Location = new System.Drawing.Point(493, 457);
+            this.detailsButtonLoja.Name = "detailsButtonLoja";
+            this.detailsButtonLoja.Size = new System.Drawing.Size(120, 45);
+            this.detailsButtonLoja.TabIndex = 40;
+            this.detailsButtonLoja.Text = "Details";
+            this.detailsButtonLoja.UseVisualStyleBackColor = true;
+            // 
+            // menuStrip2
+            // 
+            this.menuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adicionarLojaToolStrip});
+            this.menuStrip2.Location = new System.Drawing.Point(3, 3);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(1192, 36);
+            this.menuStrip2.TabIndex = 41;
+            this.menuStrip2.Text = "menuStrip2";
+            // 
+            // adicionarLojaToolStrip
+            // 
+            this.adicionarLojaToolStrip.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.adicionarLojaToolStrip.Name = "adicionarLojaToolStrip";
+            this.adicionarLojaToolStrip.Size = new System.Drawing.Size(110, 32);
+            this.adicionarLojaToolStrip.Text = "Adicionar";
             // 
             // Form1
             // 
@@ -560,6 +777,10 @@
             this.pessoasTab.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -612,6 +833,24 @@
         private System.Windows.Forms.ToolStripMenuItem efetivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem partTimeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removerFiltroToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem adicionarLojaToolStrip;
+        private System.Windows.Forms.Button detailsButtonLoja;
+        private System.Windows.Forms.Button deleteButtonLoja;
+        private System.Windows.Forms.Button editButtonLoja;
+        private System.Windows.Forms.Button addButtonLoja;
+        private System.Windows.Forms.Label gerenteLabelLoja;
+        private System.Windows.Forms.TextBox subempresaTxtLoja;
+        private System.Windows.Forms.Label subempresaLabelLoja;
+        private System.Windows.Forms.TextBox codpostalTxtLoja;
+        private System.Windows.Forms.Label codpostalLabelLoja;
+        private System.Windows.Forms.TextBox localidadeTxtLoja;
+        private System.Windows.Forms.Label localidadeLabelLoja;
+        private System.Windows.Forms.TextBox ruaTxtLoja;
+        private System.Windows.Forms.Label ruaLabelLoja;
+        private System.Windows.Forms.TextBox telefoneTxtLoja;
+        private System.Windows.Forms.Label telefoneLabelLoja;
+        private System.Windows.Forms.ListBox LojasList;
     }
 }
 

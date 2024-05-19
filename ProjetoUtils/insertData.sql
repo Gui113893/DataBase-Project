@@ -15,8 +15,8 @@ INSERT INTO Diretor (nif) VALUES
 (234567890);
 
 INSERT INTO SubEmpresa (nome, diretor) VALUES
-('SubEmpresa 1', 123456789),
-('SubEmpresa 2', 234567890);
+('Continente', 123456789),
+('Sportzone', 234567890);
 
 
 INSERT INTO Loja (telefone, rua, codigo_postal, localidade, subempresa, gerente) VALUES

@@ -277,8 +277,10 @@ namespace CompanyBrandManager
             }
             if (!adding)
             {
-                UpdatePessoa(pessoa, currentPessoa);
-                PessoasList.Items[currentPessoaIndex] = pessoa;
+                if (UpdatePessoa(pessoa, currentPessoa))
+                    PessoasList.Items[currentPessoaIndex] = pessoa;
+                else
+                    return false;
             }
             else
             {
@@ -420,10 +422,9 @@ namespace CompanyBrandManager
             }
             if (anteriorPessoa.Tipo == "Part-Time")
             {
-                cmd.CommandText = "UPDATE Part_Time SET horas_semanais = @horas_semanais, loja = @loja WHERE nif = @nif";
+                cmd.CommandText = "UPDATE Part_Time SET horas_semanais = @horas_semanais WHERE nif = @nif";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@horas_semanais", SqlDbType.Int) { Value = horasTxtPessoa.Text });
-                cmd.Parameters.Add(new SqlParameter("@loja", SqlDbType.Int) { Value = lojaTxtPessoa.Text });
                 cmd.Parameters.Add(new SqlParameter("@nif", SqlDbType.Decimal) { Precision = 9, Scale = 0, Value = pessoa.Nif });
             }
             else if (anteriorPessoa.Tipo == "Efetivo")
