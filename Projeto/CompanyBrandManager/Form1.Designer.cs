@@ -74,6 +74,7 @@
             this.partTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removerFiltroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lojasTab = new System.Windows.Forms.TabPage();
+            this.gerenteTxtLoja = new System.Windows.Forms.TextBox();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.adicionarLojaToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.detailsButtonLoja = new System.Windows.Forms.Button();
@@ -92,7 +93,6 @@
             this.telefoneTxtLoja = new System.Windows.Forms.TextBox();
             this.telefoneLabelLoja = new System.Windows.Forms.Label();
             this.LojasList = new System.Windows.Forms.ListBox();
-            this.gerenteTxtLoja = new System.Windows.Forms.TextBox();
             this.tabControlLojasPessoas.SuspendLayout();
             this.pessoasTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -585,6 +585,14 @@
             this.lojasTab.Text = "Lojas";
             this.lojasTab.UseVisualStyleBackColor = true;
             // 
+            // gerenteTxtLoja
+            // 
+            this.gerenteTxtLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gerenteTxtLoja.Location = new System.Drawing.Point(449, 260);
+            this.gerenteTxtLoja.Name = "gerenteTxtLoja";
+            this.gerenteTxtLoja.Size = new System.Drawing.Size(190, 30);
+            this.gerenteTxtLoja.TabIndex = 42;
+            // 
             // menuStrip2
             // 
             this.menuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -602,6 +610,7 @@
             this.adicionarLojaToolStrip.Name = "adicionarLojaToolStrip";
             this.adicionarLojaToolStrip.Size = new System.Drawing.Size(110, 32);
             this.adicionarLojaToolStrip.Text = "Adicionar";
+            this.adicionarLojaToolStrip.Click += new System.EventHandler(this.AddToolStripLoja_Click);
             // 
             // detailsButtonLoja
             // 
@@ -643,6 +652,7 @@
             this.addButtonLoja.TabIndex = 35;
             this.addButtonLoja.Text = "Add";
             this.addButtonLoja.UseVisualStyleBackColor = true;
+            this.addButtonLoja.Click += new System.EventHandler(this.AddButtonLoja_Click);
             // 
             // gerenteLabelLoja
             // 
@@ -753,14 +763,6 @@
             this.LojasList.Size = new System.Drawing.Size(510, 504);
             this.LojasList.TabIndex = 0;
             this.LojasList.SelectedIndexChanged += new System.EventHandler(this.LojasList_SelectedIndexChanged);
-            // 
-            // gerenteTxtLoja
-            // 
-            this.gerenteTxtLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gerenteTxtLoja.Location = new System.Drawing.Point(449, 260);
-            this.gerenteTxtLoja.Name = "gerenteTxtLoja";
-            this.gerenteTxtLoja.Size = new System.Drawing.Size(190, 30);
-            this.gerenteTxtLoja.TabIndex = 42;
             // 
             // Form1
             // 

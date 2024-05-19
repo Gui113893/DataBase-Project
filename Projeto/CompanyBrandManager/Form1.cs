@@ -19,7 +19,8 @@ namespace CompanyBrandManager
 
         private Pessoa currentPessoa;
         private Loja currentLoja;
-        private bool adding;
+        private bool adding_pessoa;
+        private bool adding_loja;
         public Form1()
         {
             InitializeComponent();
@@ -84,9 +85,9 @@ namespace CompanyBrandManager
                 MessageBox.Show("Seleciona uma pessoa para editar");
                 return;
             } 
-            adding = false;
+            adding_pessoa = false;
             PessoasList.Enabled = false;
-            SavePessoa(adding, currentPessoa, currentPessoa.Tipo);
+            SavePessoa(adding_pessoa, currentPessoa, currentPessoa.Tipo);
             PessoasList.Enabled = true;
         }
 
@@ -152,7 +153,7 @@ namespace CompanyBrandManager
 
         private void AddButtonPessoa_Click(object sender, EventArgs e)
         {
-            adding = true;
+            adding_pessoa = true;
             String tipo = "";
             if (horasTxtPessoa.Visible) // se estou a adicionar um Part-Time
             {
@@ -167,15 +168,28 @@ namespace CompanyBrandManager
                 tipo = "Efetivo";
             }
             PessoasList.Enabled = false;
-            SavePessoa(adding, currentPessoa, tipo);
+            SavePessoa(adding_pessoa, currentPessoa, tipo);
             PessoasList.Enabled = true;
 
+        }
+
+        private void AddButtonLoja_Click(object sender, EventArgs e)
+        {
+            adding_loja = true;
+            LojasList.Enabled = false;
+            SaveLoja(adding_loja, currentLoja);
+            LojasList.Enabled = true;
         }
 
         private void AddToolStripPessoa_Click(object sender, EventArgs e)
         {
             ClearPessoaFields();
             HideSpecifics();
+        }
+
+        private void AddToolStripLoja_Click(object sender, EventArgs e)
+        {
+            ClearLojaFields();
         }
 
         private void AddPartTime_Click(object sender, EventArgs e)
@@ -326,7 +340,7 @@ namespace CompanyBrandManager
             fimContratoTxt.Visible = false;
         }
 
-        private bool SavePessoa(bool adding, Pessoa currentPessoa, String tipo)
+        private bool SavePessoa(bool adding_pessoa, Pessoa currentPessoa, String tipo)
         {
             // currentPessoa serve só para o caso de estar a editar para guardar informação antiga
             Pessoa pessoa = new Pessoa();
@@ -348,7 +362,7 @@ namespace CompanyBrandManager
                 MessageBox.Show(exc.Message);
                 return false;
             }
-            if (!adding)
+            if (!adding_pessoa)
             {
                 if (UpdatePessoa(pessoa, currentPessoa))
                     PessoasList.Items[currentPessoaIndex] = pessoa;
@@ -359,6 +373,48 @@ namespace CompanyBrandManager
             {
                 if (AddPessoa(pessoa, tipo))
                     PessoasList.Items.Add(pessoa);
+                else
+                    return false;
+            }
+            return true;
+        }
+
+        private bool SaveLoja(bool adding_loja, Loja currentLoja)
+        {
+            // currentLoja serve só para o caso de estar a editar para guardar informação antiga
+            Loja loja = new Loja();
+            try
+            {
+                loja.Telefone = telefoneTxtLoja.Text;
+                loja.Rua = ruaTxtLoja.Text;
+                loja.Codigo_postal = codpostalTxtLoja.Text;
+                loja.Localidade = localidadeTxtLoja.Text;
+                loja.SubempresaID = subempresaTxtLoja.Text;
+
+                if (gerenteTxtLoja.Text == "")
+                    loja.Gerente = null;
+                else
+                    loja.Gerente = gerenteTxtLoja.Text;
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+                return false;
+            }
+            if (!adding_loja)
+            {
+                // if (UpdateLoja(loja, currentLoja))
+                //     LojasList.Items[currentLojaIndex] = loja;
+                // else
+                return false;
+            }
+            else
+            {
+                if (AddLoja(loja))
+                {
+                    LojasList.Items.Add(loja);
+                    loadLojas(0);
+                }
                 else
                     return false;
             }
@@ -460,6 +516,57 @@ namespace CompanyBrandManager
                 }
             }
             MessageBox.Show("Pessoa adicionada com sucesso");
+            cn.Close();
+            return true;
+        }
+
+        private bool AddLoja(Loja loja)
+        {
+            if (!verifyConnection())
+                return false;
+
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Loja(telefone, rua, codigo_postal, localidade, subempresa, gerente) VALUES (@Telefone, @Rua, @CodigoPostal, @Localidade, @Subempresa, @Gerente)", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@Telefone", SqlDbType.VarChar, 20) { Value = loja.Telefone });
+                    cmd.Parameters.Add(new SqlParameter("@Rua", SqlDbType.VarChar, 100) { Value = loja.Rua });
+                    cmd.Parameters.Add(new SqlParameter("@CodigoPostal", SqlDbType.VarChar, 10) { Value = loja.Codigo_postal });
+                    cmd.Parameters.Add(new SqlParameter("@Localidade", SqlDbType.VarChar, 100) { Value = loja.Localidade });
+                    cmd.Parameters.Add(new SqlParameter("@Subempresa", SqlDbType.Int) { Value = loja.SubempresaID });
+
+                    if (loja.Gerente == null)
+                        cmd.Parameters.Add(new SqlParameter("@Gerente", SqlDbType.Decimal) { Value = DBNull.Value });
+                    else
+                        cmd.Parameters.Add(new SqlParameter("@Gerente", SqlDbType.Decimal) { Value = loja.Gerente });
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao adicionar esta loja| " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+            String subempresaNome = "";
+            using (SqlCommand cmd = new SqlCommand("SELECT nome FROM SubEmpresa WHERE id = @subempresaId", cn))
+            {
+                cmd.Parameters.Add(new SqlParameter("@subempresaId", SqlDbType.Int) { Value = loja.SubempresaID });
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    subempresaNome = reader["nome"].ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Subempresa não existe");
+                    cn.Close();
+                    return false;
+                }
+            }
+            loja.SubempresaNome = subempresaNome;
+            MessageBox.Show("Loja adicionada com sucesso");
             cn.Close();
             return true;
         }
