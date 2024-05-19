@@ -110,3 +110,53 @@ BEGIN
     END;
 END;
 GO
+
+CREATE TRIGGER trg_delete_loja
+ON Loja
+INSTEAD OF DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @deleted_id INT;
+    DECLARE @deleted_gerente NUMERIC(9,0);
+    DECLARE @nifs_todelete TABLE (nif INT);
+
+    -- Captura o ID da loja a ser deletada
+    SELECT @deleted_id = id_loja, @deleted_gerente = gerente FROM deleted;
+
+    -- Se a loja a ser deletada tem um gerente, atualiza o gerente para NULL
+    IF @deleted_gerente IS NOT NULL
+    BEGIN
+        UPDATE Loja
+        SET gerente = NULL
+        WHERE id_loja = @deleted_id;
+    END
+
+    -- Encontrar os funcionário da loja para depois os eliminar
+    INSERT INTO @nifs_todelete 
+    SELECT nif
+    FROM Funcionario
+    WHERE loja = @deleted_id;
+
+    -- Cursor para percorrer a tabela de funcionario para eliminar
+    DECLARE @nif INT;
+    DECLARE funcionario_cursor CURSOR FOR
+    SELECT nif FROM @nifs_todelete;
+
+    OPEN funcionario_cursor;
+
+    FETCH NEXT FROM funcionario_cursor INTO @nif;
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        DELETE FROM Pessoa WHERE nif = @nif;
+        FETCH NEXT FROM funcionario_cursor INTO @nif;
+    END
+    CLOSE funcionario_cursor;
+    DEALLOCATE funcionario_cursor;
+
+    -- Finalmente dar delete a loja
+    DELETE FROM Loja
+    WHERE id_loja = @deleted_id;
+END;
+GO

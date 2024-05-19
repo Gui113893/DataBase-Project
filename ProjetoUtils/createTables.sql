@@ -128,7 +128,7 @@ CREATE TABLE Funcionario (
     nif NUMERIC(9,0) PRIMARY KEY,
     loja INT,
     FOREIGN KEY (nif) REFERENCES Pessoa(nif) ON UPDATE CASCADE,
-    FOREIGN KEY (loja) REFERENCES Loja(id_loja),
+    FOREIGN KEY (loja) REFERENCES Loja(id_loja) ON UPDATE CASCADE,
 );
 GO
 

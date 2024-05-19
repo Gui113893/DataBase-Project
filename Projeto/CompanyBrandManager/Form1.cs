@@ -15,14 +15,17 @@ namespace CompanyBrandManager
     {
         private SqlConnection cn;
         private int currentPessoaIndex;
+        private int currentLojaIndex;
 
         private Pessoa currentPessoa;
+        private Loja currentLoja;
         private bool adding;
         public Form1()
         {
             InitializeComponent();
             cn = getSqlConnection();
             loadPessoas("");
+            loadLojas(0);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,7 +49,13 @@ namespace CompanyBrandManager
             return cn.State == ConnectionState.Open;
         }
 
-        // Event Funcs
+        // Event-Funcs
+        private void TabControlPessoasLojas_Click(object sender, EventArgs e)
+        {
+            loadPessoas("");
+            loadLojas(0);   
+        }
+
         private void PessoasList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (PessoasList.SelectedIndex >= 0)
@@ -54,6 +63,16 @@ namespace CompanyBrandManager
                 currentPessoaIndex = PessoasList.SelectedIndex;
                 currentPessoa = (Pessoa)PessoasList.Items[currentPessoaIndex];
                 ShowPessoa();
+            }
+        }
+
+        private void LojasList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LojasList.SelectedIndex >= 0)
+            {
+                currentLojaIndex = LojasList.SelectedIndex;
+                currentLoja = (Loja)LojasList.Items[currentLojaIndex];
+                ShowLoja();
             }
         }
 
@@ -96,6 +115,36 @@ namespace CompanyBrandManager
                 else
                 {
                     ShowPessoa();
+                }
+
+            }
+        }
+
+        private void DeleteButtonLoja_Click(object sender, EventArgs e)
+        {
+            if (currentLojaIndex < 0)
+            {
+                MessageBox.Show("Seleciona uma loja para eliminar ");
+                return;
+            }
+
+            if (RemoveLoja(currentLoja))
+            {
+                LojasList.Items.RemoveAt(LojasList.SelectedIndex);
+                if (currentLojaIndex == LojasList.Items.Count)
+                {
+                    currentLojaIndex = LojasList.Items.Count - 1;
+                    currentLoja = (Loja)LojasList.Items[currentLojaIndex];
+                }
+
+                if (currentLojaIndex == -1)
+                {
+                    ClearLojaFields();
+                    MessageBox.Show("Não há mais lojas na base de dados");
+                }
+                else
+                {
+                    ShowLoja();
                 }
 
             }
@@ -222,6 +271,20 @@ namespace CompanyBrandManager
             cn.Close();
         }
 
+        public void ShowLoja()
+        {
+            if (LojasList.Items.Count == 0 | currentLojaIndex < 0)
+                return;
+            Loja loja = new Loja();
+            loja = (Loja)LojasList.Items[currentLojaIndex];
+            telefoneTxtLoja.Text = loja.Telefone;
+            ruaTxtLoja.Text = loja.Rua;
+            codpostalTxtLoja.Text = loja.Codigo_postal;
+            localidadeTxtLoja.Text = loja.Localidade;
+            gerenteTxtLoja.Text = loja.Gerente;
+            subempresaTxtLoja.Text = loja.SubempresaID;
+        }
+
         public void ClearPessoaFields()
         {
             nifTxtPessoa.Text = "";
@@ -238,6 +301,16 @@ namespace CompanyBrandManager
             DateTime now = DateTime.Now;
             inicioContratoTxt.Text = now.ToString("yyyy-MM-dd");
             fimContratoTxt.Text = "";
+        }
+
+        public void ClearLojaFields()
+        {
+            telefoneTxtLoja.Text = "";
+            ruaTxtLoja.Text = "";
+            codpostalTxtLoja.Text = "";
+            localidadeTxtLoja.Text = "";
+            gerenteTxtLoja.Text = "";
+            subempresaTxtLoja.Text = "";
         }
 
         public void HideSpecifics()
@@ -491,6 +564,30 @@ namespace CompanyBrandManager
             return true;
         }
 
+        private bool RemoveLoja(Loja currentLoja)
+        {
+            if (!verifyConnection())
+                return false;
+            
+            using (SqlCommand cmd =  new SqlCommand("DELETE FROM Loja WHERE id_loja = @loja_id", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@loja_id", SqlDbType.Int) { Value = currentLoja.ID });
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao eliminar esta loja| " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+            MessageBox.Show("Loja eliminada com sucesso");
+            cn.Close();
+            return true;
+        }
+
         private void showPartTimeSpecifics()
         {
             horasTxtPessoa.Enabled = true;
@@ -562,6 +659,39 @@ namespace CompanyBrandManager
             currentPessoaIndex = 0;
             currentPessoa = (Pessoa)PessoasList.Items[currentPessoaIndex];
             ShowPessoa();
+        }
+
+        private void loadLojas(int subempresaId)
+        {
+            if (!verifyConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Loja JOIN SubEmpresa ON Loja.subempresa = Subempresa.id", cn);
+
+            if (subempresaId > 0)
+                cmd = new SqlCommand("SELECT * FROM Loja JOIN SubEmpresa ON Loja.subempresa = Subempresa.id WHERE subempresa = @subempresaId", cn);
+                cmd.Parameters.Add(new SqlParameter("@subempresaId", SqlDbType.Int) { Value = subempresaId });
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            LojasList.Items.Clear();
+
+            while (reader.Read())
+            {
+                Loja loja = new Loja();
+                loja.ID = reader["id_loja"].ToString();
+                loja.SubempresaNome = reader["nome"].ToString();
+                loja.Telefone = reader["telefone"].ToString();
+                loja.Rua = reader["rua"].ToString();
+                loja.Codigo_postal = reader["codigo_postal"].ToString();
+                loja.Localidade = reader["localidade"].ToString();
+                loja.Gerente = reader["gerente"].ToString();
+                loja.SubempresaID = reader["subempresa"].ToString();
+                LojasList.Items.Add(loja);
+            }
+            cn.Close();
+            currentLojaIndex = 0;
+            currentLoja = (Loja)LojasList.Items[currentLojaIndex];
+            ShowLoja();
         }
 
         private void fimContratoTxt_TextChanged(object sender, EventArgs e)
