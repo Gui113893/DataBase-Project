@@ -16,17 +16,21 @@ namespace CompanyBrandManager
         private SqlConnection cn;
         private int currentPessoaIndex;
         private int currentLojaIndex;
+        private int currentProdutoIndex;
 
         private Pessoa currentPessoa;
         private Loja currentLoja;
+        private Produto currentProduto;
         private bool adding_pessoa;
         private bool adding_loja;
+        private bool adding_produto;
         public Form1()
         {
             InitializeComponent();
             cn = getSqlConnection();
             loadPessoas("");
             loadLojas(0);
+            loadProdutos(0);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -54,7 +58,8 @@ namespace CompanyBrandManager
         private void TabControlPessoasLojas_Click(object sender, EventArgs e)
         {
             loadPessoas("");
-            loadLojas(0);   
+            loadLojas(0); 
+            loadProdutos(0);  
         }
 
         private void PessoasList_SelectedIndexChanged(object sender, EventArgs e)
@@ -74,6 +79,16 @@ namespace CompanyBrandManager
                 currentLojaIndex = LojasList.SelectedIndex;
                 currentLoja = (Loja)LojasList.Items[currentLojaIndex];
                 ShowLoja();
+            }
+        }
+
+        private void ProdutosList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ProdutosList.SelectedIndex >= 0)
+            {
+                currentProdutoIndex = ProdutosList.SelectedIndex;
+                currentProduto = (Produto)ProdutosList.Items[currentProdutoIndex];
+                ShowProduto();
             }
         }
 
@@ -311,6 +326,17 @@ namespace CompanyBrandManager
             localidadeTxtLoja.Text = loja.Localidade;
             gerenteTxtLoja.Text = loja.Gerente;
             subempresaTxtLoja.Text = loja.SubempresaID;
+        }
+
+        public void ShowProduto()
+        {
+            if (ProdutosList.Items.Count == 0 | currentProdutoIndex < 0)
+                return;
+            Produto produto = new Produto();
+            produto = (Produto)ProdutosList.Items[currentProdutoIndex];
+            precoTxtProduto.Text = produto.Preco;
+            nomeTxtProduto.Text = produto.Nome;
+            marcaTxtProduto.Text = produto.MarcaId;
         }
 
         public void ClearPessoaFields()
@@ -849,7 +875,63 @@ namespace CompanyBrandManager
             ShowLoja();
         }
 
+        private void loadProdutos(int lojaId)
+        {
+            if (!verifyConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Produto JOIN Marca ON Marca.patente = Produto.marca JOIN Stock_Fornecido ON Stock_Fornecido.produto = Produto.id_produto", cn);
+            if (lojaId > 0)
+            {
+                cmd = new SqlCommand("SELECT * FROM Produto JOIN Stock_Loja ON Stock_Loja.produto = Produto.id_produto WHERE Stock_Loja.loja = @lojaId", cn);
+                cmd.Parameters.Add(new SqlParameter("@lojaId", SqlDbType.Int) { Value = lojaId });
+            }
+            
+            SqlDataReader reader = cmd.ExecuteReader();
+            ProdutosList.Items.Clear();
+
+            while (reader.Read())
+            {
+                Produto produto = new Produto();
+                produto.ID = reader["id_produto"].ToString();
+                produto.Nome = reader["nome"].ToString();
+                produto.Preco = reader["preco"].ToString();
+                produto.MarcaNome = reader["marcaNome"].ToString();
+                produto.MarcaId = reader["marca"].ToString();   
+                if (lojaId > 0)
+                    produto.QuantidadeLoja = (int)reader["quantidade"];
+                else
+                    produto.QuantidadeTotal = (int)reader["quantidade"];
+
+                ProdutosList.Items.Add(produto);
+            }
+            cn.Close();
+            currentProdutoIndex = 0;
+            currentProduto = (Produto)ProdutosList.Items[currentProdutoIndex];
+            ShowProduto();
+        }
+
         private void fimContratoTxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nomeTxtProduto_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NomeLabelProduto_Click(object sender, EventArgs e)
         {
 
         }

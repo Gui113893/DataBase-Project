@@ -24,8 +24,9 @@ GO
 
 -- Tabela Pat_Locs
 CREATE TABLE Pat_Locs (
-    patente INT PRIMARY KEY,
+    patente INT,
     Ploc VARCHAR(100) NOT NULL,
+    PRIMARY KEY (patente, Ploc),
     FOREIGN KEY (patente) REFERENCES Patente(id_patente) ON DELETE CASCADE
 );
 GO
@@ -34,7 +35,7 @@ GO
 -- Tabela Marca
 CREATE TABLE Marca (
     patente INT PRIMARY KEY,
-    nome VARCHAR(100) UNIQUE,
+    marcaNome VARCHAR(100) UNIQUE,
     FOREIGN KEY (patente) REFERENCES Patente(id_patente) ON DELETE CASCADE
 );
 GO
