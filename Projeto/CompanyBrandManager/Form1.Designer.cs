@@ -642,6 +642,7 @@
             this.editButtonLoja.TabIndex = 35;
             this.editButtonLoja.Text = "Edit";
             this.editButtonLoja.UseVisualStyleBackColor = true;
+            this.editButtonLoja.Click += new System.EventHandler(this.EditButtonLoja_Click);
             // 
             // addButtonLoja
             // 

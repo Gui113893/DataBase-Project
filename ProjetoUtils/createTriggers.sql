@@ -160,3 +160,32 @@ BEGIN
     WHERE id_loja = @deleted_id;
 END;
 GO
+
+CREATE TRIGGER trg_update_loja
+ON Loja
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @oldGerente NUMERIC(9,0);
+    DECLARE @newGerente NUMERIC(9,0);
+    DECLARE @loja INT;
+
+    SELECT @oldGerente = deleted.gerente, @newGerente = inserted.gerente, @loja = inserted.id_loja
+    FROM deleted
+    INNER JOIN inserted ON deleted.id_loja = inserted.id_loja;
+
+    -- Se o gerente da loja foi alterado
+    IF @oldGerente <> @newGerente
+    BEGIN
+        -- Garante que o novo gerente pertence á loja alterada
+        IF NOT EXISTS (SELECT 1 FROM Funcionario WHERE nif = @newGerente AND loja = @loja)
+        BEGIN
+        RAISERROR ('O novo gerente não pertence á loja', 16, 1);
+        ROLLBACK TRANSACTION;
+        END;
+    END;
+
+END;
+GO

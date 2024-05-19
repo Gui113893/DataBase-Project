@@ -91,6 +91,20 @@ namespace CompanyBrandManager
             PessoasList.Enabled = true;
         }
 
+        private void EditButtonLoja_Click(object sender, EventArgs e)
+        {
+            currentLojaIndex = LojasList.SelectedIndex;
+            if (currentLojaIndex < 0)
+            {
+                MessageBox.Show("Seleciona uma loja para editar");
+                return;
+            }
+            adding_loja = false;
+            LojasList.Enabled = false;
+            SaveLoja(adding_loja, currentLoja);
+            LojasList.Enabled = true;
+        }
+
         private void DeleteButtonPessoa_Click(object sender, EventArgs e)
         {
             if  (currentPessoaIndex < 0)
@@ -403,9 +417,12 @@ namespace CompanyBrandManager
             }
             if (!adding_loja)
             {
-                // if (UpdateLoja(loja, currentLoja))
-                //     LojasList.Items[currentLojaIndex] = loja;
-                // else
+                if (UpdateLoja(loja, currentLoja))
+                {
+                    LojasList.Items[currentLojaIndex] = loja;
+                    loadLojas(0);
+                }
+                else
                 return false;
             }
             else
@@ -643,6 +660,37 @@ namespace CompanyBrandManager
                 return false;
             }
             MessageBox.Show("Pessoa atualizada com sucesso");
+            cn.Close();
+            return true;
+        }
+
+        private bool UpdateLoja(Loja loja, Loja currentLoja)
+        {
+            if (!verifyConnection())
+                return false;
+
+            using (SqlCommand cmd = new SqlCommand("UPDATE Loja SET telefone = @telefone, rua = @rua, codigo_postal = @codigo_postal, localidade = @localidade, subempresa = @subempresa, gerente = @gerente WHERE id_loja = @id_loja", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@telefone", SqlDbType.VarChar, 20) { Value = loja.Telefone });
+                    cmd.Parameters.Add(new SqlParameter("@rua", SqlDbType.VarChar, 100) { Value = loja.Rua });
+                    cmd.Parameters.Add(new SqlParameter("@codigo_postal", SqlDbType.VarChar, 10) { Value = loja.Codigo_postal });
+                    cmd.Parameters.Add(new SqlParameter("@localidade", SqlDbType.VarChar, 100) { Value = loja.Localidade });
+                    cmd.Parameters.Add(new SqlParameter("@subempresa", SqlDbType.Int) { Value = loja.SubempresaID });
+                    cmd.Parameters.Add(new SqlParameter("@gerente", SqlDbType.Decimal) { Value = loja.Gerente });
+                    cmd.Parameters.Add(new SqlParameter("@id_loja", SqlDbType.Int) { Value = currentLoja.ID });
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao atualizar loja na base de dados: " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+            MessageBox.Show("Loja atualizada com sucesso");
             cn.Close();
             return true;
         }
