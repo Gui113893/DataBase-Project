@@ -25,7 +25,7 @@ namespace CompanyBrandManager
         private bool adding_loja;
         private bool adding_produto;
 
-        private int filterByLoja;
+        private int filterProdutoByLoja;
 
         public Form1()
         {
@@ -62,7 +62,7 @@ namespace CompanyBrandManager
         {
             loadPessoas("");
             loadLojas(0); 
-            loadProdutos(0);  
+            loadProdutos(filterProdutoByLoja);  
         }
 
         private void PessoasList_SelectedIndexChanged(object sender, EventArgs e)
@@ -92,6 +92,19 @@ namespace CompanyBrandManager
                 currentProdutoIndex = ProdutosList.SelectedIndex;
                 currentProduto = (Produto)ProdutosList.Items[currentProdutoIndex];
                 ShowProduto();
+            }
+        }
+
+        private void SearchProduto_Click(object sender, EventArgs e)
+        {
+            if (searchProdutoByLoja.Text != "")
+            {
+                filterProdutoByLoja = Int32.Parse(searchProdutoByLoja.Text);
+                loadProdutos(filterProdutoByLoja);
+            }
+            else
+            {
+                loadProdutos(0);
             }
         }
 
@@ -357,7 +370,7 @@ namespace CompanyBrandManager
                 stock_circulação = reader["QuantidadeTotal"].ToString();
             } 
 
-            if (filterByLoja > 0)
+            if (filterProdutoByLoja > 0)
             {
                 // Se o filtro por loja está ativo mostra stock_em_loja/stock_em_circulação
                 stockProdutoLabel.Text = produto.QuantidadeLoja.ToString() + "/" + stock_circulação;
@@ -912,10 +925,10 @@ namespace CompanyBrandManager
 
             
             SqlCommand cmd = new SqlCommand("SELECT * FROM Produto JOIN Marca ON Marca.patente = Produto.marca JOIN Stock_Fornecido ON Stock_Fornecido.produto = Produto.id_produto", cn);
-            filterByLoja = lojaId;
+            filterProdutoByLoja = lojaId;
             if (lojaId > 0)
             {
-                cmd = new SqlCommand("SELECT * FROM Produto JOIN Stock_Loja ON Stock_Loja.produto = Produto.id_produto WHERE Stock_Loja.loja = @lojaId", cn);
+                cmd = new SqlCommand("SELECT * FROM Produto JOIN Stock_Loja ON Stock_Loja.produto = Produto.id_produto JOIN Marca ON Produto.id_produto = Marca.patente WHERE Stock_Loja.loja = @lojaId", cn);
                 cmd.Parameters.Add(new SqlParameter("@lojaId", SqlDbType.Int) { Value = lojaId });
             }
             

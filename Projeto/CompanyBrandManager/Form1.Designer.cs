@@ -990,6 +990,7 @@
             this.searchProduto.TabIndex = 50;
             this.searchProduto.Text = "Pesquisa";
             this.searchProduto.UseVisualStyleBackColor = true;
+            this.searchProduto.Click += new System.EventHandler(this.SearchProduto_Click);
             // 
             // label6
             // 
