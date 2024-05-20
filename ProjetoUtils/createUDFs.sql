@@ -18,3 +18,23 @@ BEGIN
     RETURN @soma_quantidade;
 END;
 GO
+
+CREATE FUNCTION fn_TotalFornecidoPorProduto(@id_produto INT)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @total_fornecido INT;
+
+    SELECT @total_fornecido = SUM(quantidade)
+    FROM Stock_Fornecido
+    WHERE produto = @id_produto;
+
+    IF @total_fornecido IS NULL
+    BEGIN
+        SET @total_fornecido = 0;
+    END
+
+    RETURN @total_fornecido;
+END;
+GO
+

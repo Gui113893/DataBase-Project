@@ -93,6 +93,11 @@
             this.telefoneLabelLoja = new System.Windows.Forms.Label();
             this.LojasList = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.searchByMarcaProduto = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.searchProduto = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.searchProdutoByLoja = new System.Windows.Forms.TextBox();
             this.menuStrip3 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.distributeButtonProduto = new System.Windows.Forms.Button();
@@ -109,11 +114,6 @@
             this.nomeTxtProduto = new System.Windows.Forms.TextBox();
             this.NomeLabelProduto = new System.Windows.Forms.Label();
             this.ProdutosList = new System.Windows.Forms.ListBox();
-            this.searchProdutoByLoja = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.searchProduto = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.searchByMarcaProduto = new System.Windows.Forms.TextBox();
             this.tabControlLojasPessoas.SuspendLayout();
             this.pessoasTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -807,6 +807,53 @@
             this.tabPage1.Text = "Produtos";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // searchByMarcaProduto
+            // 
+            this.searchByMarcaProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchByMarcaProduto.Location = new System.Drawing.Point(866, 41);
+            this.searchByMarcaProduto.Name = "searchByMarcaProduto";
+            this.searchByMarcaProduto.Size = new System.Drawing.Size(167, 30);
+            this.searchByMarcaProduto.TabIndex = 52;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(787, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(73, 25);
+            this.label6.TabIndex = 51;
+            this.label6.Text = "Marca:";
+            // 
+            // searchProduto
+            // 
+            this.searchProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchProduto.Location = new System.Drawing.Point(1056, 34);
+            this.searchProduto.Name = "searchProduto";
+            this.searchProduto.Size = new System.Drawing.Size(120, 45);
+            this.searchProduto.TabIndex = 50;
+            this.searchProduto.Text = "Pesquisa";
+            this.searchProduto.UseVisualStyleBackColor = true;
+            this.searchProduto.Click += new System.EventHandler(this.SearchProduto_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(654, 44);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 25);
+            this.label5.TabIndex = 49;
+            this.label5.Text = "Loja:";
+            // 
+            // searchProdutoByLoja
+            // 
+            this.searchProdutoByLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchProdutoByLoja.Location = new System.Drawing.Point(715, 41);
+            this.searchProdutoByLoja.Name = "searchProdutoByLoja";
+            this.searchProdutoByLoja.Size = new System.Drawing.Size(51, 30);
+            this.searchProdutoByLoja.TabIndex = 48;
+            // 
             // menuStrip3
             // 
             this.menuStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -834,6 +881,7 @@
             this.distributeButtonProduto.TabIndex = 46;
             this.distributeButtonProduto.Text = "Distribute";
             this.distributeButtonProduto.UseVisualStyleBackColor = true;
+            this.distributeButtonProduto.Click += new System.EventHandler(this.DistributeProduto_Click);
             // 
             // deleteButtonProduto
             // 
@@ -962,53 +1010,6 @@
             this.ProdutosList.Size = new System.Drawing.Size(517, 454);
             this.ProdutosList.TabIndex = 0;
             this.ProdutosList.SelectedIndexChanged += new System.EventHandler(this.ProdutosList_SelectedIndexChanged);
-            // 
-            // searchProdutoByLoja
-            // 
-            this.searchProdutoByLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchProdutoByLoja.Location = new System.Drawing.Point(715, 41);
-            this.searchProdutoByLoja.Name = "searchProdutoByLoja";
-            this.searchProdutoByLoja.Size = new System.Drawing.Size(51, 30);
-            this.searchProdutoByLoja.TabIndex = 48;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(654, 44);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 25);
-            this.label5.TabIndex = 49;
-            this.label5.Text = "Loja:";
-            // 
-            // searchProduto
-            // 
-            this.searchProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchProduto.Location = new System.Drawing.Point(1056, 34);
-            this.searchProduto.Name = "searchProduto";
-            this.searchProduto.Size = new System.Drawing.Size(120, 45);
-            this.searchProduto.TabIndex = 50;
-            this.searchProduto.Text = "Pesquisa";
-            this.searchProduto.UseVisualStyleBackColor = true;
-            this.searchProduto.Click += new System.EventHandler(this.SearchProduto_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(787, 44);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(73, 25);
-            this.label6.TabIndex = 51;
-            this.label6.Text = "Marca:";
-            // 
-            // searchByMarcaProduto
-            // 
-            this.searchByMarcaProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchByMarcaProduto.Location = new System.Drawing.Point(866, 41);
-            this.searchByMarcaProduto.Name = "searchByMarcaProduto";
-            this.searchByMarcaProduto.Size = new System.Drawing.Size(167, 30);
-            this.searchByMarcaProduto.TabIndex = 52;
             // 
             // Form1
             // 

@@ -189,3 +189,72 @@ BEGIN
 
 END;
 GO
+
+CREATE TRIGGER trg_ValidarQuantidadeProduto
+ON Stock_Loja
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    DECLARE @id_produto INT;
+    DECLARE @quantidade_nova INT;
+    DECLARE @quantidade_total_lojas INT;
+    DECLARE @quantidade_fornecida INT;
+    DECLARE @marca INT;
+    DECLARE @loja INT;
+    DECLARE @localidade_loja VARCHAR(100);
+
+    -- Cursor para iterar por todas as linhas afetadas
+    DECLARE cur CURSOR FOR
+    SELECT produto, quantidade, loja
+    FROM inserted;
+
+    OPEN cur;
+    FETCH NEXT FROM cur INTO @id_produto, @quantidade_nova, @loja;
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        -- Obter a quantidade total em todas as lojas após o update
+        SELECT @quantidade_total_lojas = dbo.fn_QuantidadeProdutoLojas(@id_produto);
+
+        -- Obter a quantidade total fornecida
+        SELECT @quantidade_fornecida = dbo.fn_TotalFornecidoPorProduto(@id_produto);
+
+        -- Obter a marca do produto
+        SELECT @marca = marca
+        FROM Produto
+        WHERE id_produto = @id_produto;
+
+        -- Obter a localidade da loja
+        SELECT @localidade_loja = localidade
+        FROM Loja
+        WHERE id_loja = @loja;
+
+        -- Verificar se a quantidade total em circulação após o update ultrapassa a quantidade fornecida
+        IF @quantidade_total_lojas > @quantidade_fornecida
+        BEGIN
+            -- Levantar um erro se ultrapassar
+            RAISERROR('A quantidade total em circulação do produto %d ultrapassa a quantidade fornecida.', 16, 1, @id_produto);
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
+
+        -- Verificar se a localidade da loja está nas Pat_Locs da marca do produto
+        IF NOT EXISTS (
+            SELECT 1
+            FROM Pat_Locs
+            WHERE patente = @marca AND Ploc = @localidade_loja
+        )
+        BEGIN
+            -- Levantar um erro se a localidade da loja não estiver nas Pat_Locs da marca
+            RAISERROR('Não é possível adicionar quantidade do produto %d na loja %d, pois a localidade %s não está permitida para a marca.', 16, 1, @id_produto, @loja, @localidade_loja);
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
+
+        FETCH NEXT FROM cur INTO @id_produto, @quantidade_nova, @loja;
+    END
+
+    CLOSE cur;
+    DEALLOCATE cur;
+END;
+GO

@@ -43,7 +43,7 @@ namespace CompanyBrandManager
 
         private SqlConnection getSqlConnection()
         {
-            return new SqlConnection("Data Source = localhost; Initial Catalog = CompanyBrandManager; uid=sa; password=sql123");
+            return new SqlConnection("Data Source = localhost; Initial Catalog = CompanyBrandManager; integrated security=true");
         }
 
         private bool verifyConnection()
@@ -100,9 +100,27 @@ namespace CompanyBrandManager
             if (searchProdutoByLoja.Text != "")
             {
                 filterProdutoByLoja = Int32.Parse(searchProdutoByLoja.Text);
+                if (!doesLojaExist(filterProdutoByLoja))
+                    filterProdutoByLoja = 0;
                 loadProdutos(filterProdutoByLoja);
             }
             else
+            {
+                loadProdutos(0);
+            }
+        }
+
+        private void DistributeProduto_Click(object sender, EventArgs e)
+        {
+            if (currentProdutoIndex < 0)
+            {
+                MessageBox.Show("Seleciona um produto para distribuir");
+                return;
+            }
+            cn.Close();            
+            DistributeForm distributeForm = new DistributeForm(currentProduto);
+            distributeForm.Show();
+            if (!distributeForm.Enabled)
             {
                 loadProdutos(0);
             }
@@ -843,6 +861,23 @@ namespace CompanyBrandManager
 
         }
 
+        private bool doesLojaExist(int lojaid)
+        {
+            if (!verifyConnection())
+                return false;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Loja WHERE id_loja = @lojaId", cn);
+            cmd.Parameters.Add(new SqlParameter("@lojaId", SqlDbType.Int) { Value = lojaid });
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (!reader.Read())
+            {
+                MessageBox.Show("Loja não existe");
+                cn.Close();
+                return false;
+            }
+            cn.Close();
+            return true;
+        }
+
         private void loadPessoas(String filtro)
         {
             if (!verifyConnection())
@@ -918,13 +953,13 @@ namespace CompanyBrandManager
             ShowLoja();
         }
 
-        private void loadProdutos(int lojaId)
+        public void loadProdutos(int lojaId)
         {
             if (!verifyConnection())
                 return;
 
             
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Produto JOIN Marca ON Marca.patente = Produto.marca JOIN Stock_Fornecido ON Stock_Fornecido.produto = Produto.id_produto", cn);
+            SqlCommand cmd = new SqlCommand("SELECT id_produto, nome, preco, marca, marcaNome, dbo.fn_TotalFornecidoPorProduto(p.id_produto) AS quantidade FROM Produto p JOIN Marca m ON m.patente = p.marca;", cn);
             filterProdutoByLoja = lojaId;
             if (lojaId > 0)
             {
@@ -951,6 +986,12 @@ namespace CompanyBrandManager
                 ProdutosList.Items.Add(produto);
             }
             cn.Close();
+            // Se nao houverem items na lista
+            if (ProdutosList.Items.Count == 0)
+            {
+                MessageBox.Show("Não há produtos na base de dados ou neste loja");
+                return;
+            }
             currentProdutoIndex = 0;
             currentProduto = (Produto)ProdutosList.Items[currentProdutoIndex];
             ShowProduto();
