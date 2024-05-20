@@ -93,8 +93,6 @@
             this.telefoneLabelLoja = new System.Windows.Forms.Label();
             this.LojasList = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.searchByMarcaProduto = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.searchProduto = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.searchProdutoByLoja = new System.Windows.Forms.TextBox();
@@ -780,8 +778,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.searchByMarcaProduto);
-            this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.searchProduto);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.searchProdutoByLoja);
@@ -807,28 +803,10 @@
             this.tabPage1.Text = "Produtos";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // searchByMarcaProduto
-            // 
-            this.searchByMarcaProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchByMarcaProduto.Location = new System.Drawing.Point(866, 41);
-            this.searchByMarcaProduto.Name = "searchByMarcaProduto";
-            this.searchByMarcaProduto.Size = new System.Drawing.Size(167, 30);
-            this.searchByMarcaProduto.TabIndex = 52;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(787, 44);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(73, 25);
-            this.label6.TabIndex = 51;
-            this.label6.Text = "Marca:";
-            // 
             // searchProduto
             // 
             this.searchProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchProduto.Location = new System.Drawing.Point(1056, 34);
+            this.searchProduto.Location = new System.Drawing.Point(785, 34);
             this.searchProduto.Name = "searchProduto";
             this.searchProduto.Size = new System.Drawing.Size(120, 45);
             this.searchProduto.TabIndex = 50;
@@ -871,6 +849,7 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(110, 32);
             this.toolStripMenuItem1.Text = "Adicionar";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.AddToolStrioProduto_Click);
             // 
             // distributeButtonProduto
             // 
@@ -892,6 +871,7 @@
             this.deleteButtonProduto.TabIndex = 45;
             this.deleteButtonProduto.Text = "Delete";
             this.deleteButtonProduto.UseVisualStyleBackColor = true;
+            this.deleteButtonProduto.Click += new System.EventHandler(this.DeleteButtonProduto_Click);
             // 
             // editButtonProduto
             // 
@@ -902,6 +882,7 @@
             this.editButtonProduto.TabIndex = 44;
             this.editButtonProduto.Text = "Edit";
             this.editButtonProduto.UseVisualStyleBackColor = true;
+            this.editButtonProduto.Click += new System.EventHandler(this.EditButtonProduto_Click);
             // 
             // addButtonProduto
             // 
@@ -912,6 +893,7 @@
             this.addButtonProduto.TabIndex = 43;
             this.addButtonProduto.Text = "Add";
             this.addButtonProduto.UseVisualStyleBackColor = true;
+            this.addButtonProduto.Click += new System.EventHandler(this.AddButtonProduto_Click);
             // 
             // stockProdutoLabel
             // 
@@ -1124,8 +1106,6 @@
         private System.Windows.Forms.Button searchProduto;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox searchProdutoByLoja;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox searchByMarcaProduto;
     }
 }
 

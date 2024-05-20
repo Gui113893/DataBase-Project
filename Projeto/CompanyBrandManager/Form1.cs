@@ -120,10 +120,6 @@ namespace CompanyBrandManager
             cn.Close();            
             DistributeForm distributeForm = new DistributeForm(currentProduto);
             distributeForm.Show();
-            if (!distributeForm.Enabled)
-            {
-                loadProdutos(0);
-            }
         }
 
         private void EditButtonPessoa_Click(object sender, EventArgs e)
@@ -152,6 +148,20 @@ namespace CompanyBrandManager
             LojasList.Enabled = false;
             SaveLoja(adding_loja, currentLoja);
             LojasList.Enabled = true;
+        }
+
+        private void EditButtonProduto_Click(object sender, EventArgs e)
+        {
+            currentProdutoIndex = ProdutosList.SelectedIndex;
+            if (currentProdutoIndex < 0)
+            {
+                MessageBox.Show("Seleciona um produto para editar");
+                return;
+            }
+            adding_produto = false;
+            ProdutosList.Enabled = false;
+            SaveProduto(adding_produto, currentProduto);
+            ProdutosList.Enabled = true;
         }
 
         private void DeleteButtonPessoa_Click(object sender, EventArgs e)
@@ -214,6 +224,36 @@ namespace CompanyBrandManager
             }
         }
 
+        private void DeleteButtonProduto_Click(object sender, EventArgs e)
+        {
+            if (currentProdutoIndex < 0)
+            {
+                MessageBox.Show("Seleciona um produto para eliminar ");
+                return;
+            }
+
+            if (RemoveProduto(currentProduto))
+            {
+                ProdutosList.Items.RemoveAt(ProdutosList.SelectedIndex);
+                if (currentProdutoIndex == ProdutosList.Items.Count)
+                {
+                    currentProdutoIndex = ProdutosList.Items.Count - 1;
+                    currentProduto = (Produto)ProdutosList.Items[currentProdutoIndex];
+                }
+
+                if (currentProdutoIndex == -1)
+                {
+                    ClearProdutoFields();
+                    MessageBox.Show("Não há mais produtos na base de dados");
+                }
+                else
+                {
+                    ShowProduto();
+                }
+
+            }
+        }
+
         private void AddButtonPessoa_Click(object sender, EventArgs e)
         {
             adding_pessoa = true;
@@ -244,6 +284,14 @@ namespace CompanyBrandManager
             LojasList.Enabled = true;
         }
 
+        private void AddButtonProduto_Click(object sender, EventArgs e)
+        {
+            adding_produto = true;
+            ProdutosList.Enabled = false;
+            SaveProduto(adding_produto, currentProduto);
+            ProdutosList.Enabled = true;
+        }
+
         private void AddToolStripPessoa_Click(object sender, EventArgs e)
         {
             ClearPessoaFields();
@@ -253,6 +301,11 @@ namespace CompanyBrandManager
         private void AddToolStripLoja_Click(object sender, EventArgs e)
         {
             ClearLojaFields();
+        }
+
+        private void AddToolStrioProduto_Click(object sender, EventArgs e)
+        {
+            ClearProdutoFields();
         }
 
         private void AddPartTime_Click(object sender, EventArgs e)
@@ -428,6 +481,14 @@ namespace CompanyBrandManager
             subempresaTxtLoja.Text = "";
         }
 
+        public void ClearProdutoFields()
+        {
+            precoTxtProduto.Text = "";
+            nomeTxtProduto.Text = "";
+            marcaTxtProduto.Text = "";
+            stockProdutoLabel.Text = "";
+        }
+
         public void HideSpecifics()
         {
             horasLabelPessoa.Visible = false;
@@ -491,6 +552,7 @@ namespace CompanyBrandManager
                 loja.Codigo_postal = codpostalTxtLoja.Text;
                 loja.Localidade = localidadeTxtLoja.Text;
                 loja.SubempresaID = subempresaTxtLoja.Text;
+                loja.ID = currentLoja.ID;
 
                 if (gerenteTxtLoja.Text == "")
                     loja.Gerente = null;
@@ -518,6 +580,45 @@ namespace CompanyBrandManager
                 {
                     LojasList.Items.Add(loja);
                     loadLojas(0);
+                }
+                else
+                    return false;
+            }
+            return true;
+        }
+
+        private bool SaveProduto(bool adding_produto, Produto currentProduto)
+        {
+            // currentProduto serve só para o caso de estar a editar para guardar informação antiga
+            Produto produto = new Produto();
+            try
+            {
+                produto.Preco = precoTxtProduto.Text;
+                produto.Nome = nomeTxtProduto.Text;
+                produto.MarcaId = marcaTxtProduto.Text;
+                produto.ID = currentProduto.ID;
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+                return false;
+            }
+            if (!adding_produto)
+            {
+                if (UpdateProduto(produto, currentProduto))
+                {
+                    ProdutosList.Items[currentProdutoIndex] = produto;
+                    loadProdutos(filterProdutoByLoja);
+                }
+                else
+                    return false;
+            }
+            else
+            {
+                if (AddProduto(produto))
+                {
+                    ProdutosList.Items.Add(produto);
+                    loadProdutos(filterProdutoByLoja);
                 }
                 else
                     return false;
@@ -675,6 +776,33 @@ namespace CompanyBrandManager
             return true;
         }
 
+        private bool AddProduto(Produto produto)
+        {
+            if (!verifyConnection())
+                return false;
+
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Produto(preco, nome, marca) VALUES (@Preco, @Nome, @Marca)", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@Preco", SqlDbType.Decimal) { Value = produto.Preco });
+                    cmd.Parameters.Add(new SqlParameter("@Nome", SqlDbType.VarChar, 100) { Value = produto.Nome });
+                    cmd.Parameters.Add(new SqlParameter("@Marca", SqlDbType.Int) { Value = produto.MarcaId });
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao adicionar este produto| " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+            MessageBox.Show("Produto adicionado com sucesso");
+            cn.Close();
+            return true;
+        }
+
         private bool UpdatePessoa(Pessoa pessoa, Pessoa anteriorPessoa)
         {
             if (!verifyConnection())
@@ -765,7 +893,7 @@ namespace CompanyBrandManager
                     cmd.Parameters.Add(new SqlParameter("@codigo_postal", SqlDbType.VarChar, 10) { Value = loja.Codigo_postal });
                     cmd.Parameters.Add(new SqlParameter("@localidade", SqlDbType.VarChar, 100) { Value = loja.Localidade });
                     cmd.Parameters.Add(new SqlParameter("@subempresa", SqlDbType.Int) { Value = loja.SubempresaID });
-                    cmd.Parameters.Add(new SqlParameter("@gerente", SqlDbType.Decimal) { Value = loja.Gerente });
+                    cmd.Parameters.Add(new SqlParameter("@gerente", SqlDbType.Decimal) { Value = (object)loja.Gerente ?? DBNull.Value  });
                     cmd.Parameters.Add(new SqlParameter("@id_loja", SqlDbType.Int) { Value = currentLoja.ID });
 
                     cmd.ExecuteNonQuery();
@@ -778,6 +906,34 @@ namespace CompanyBrandManager
                 }
             }
             MessageBox.Show("Loja atualizada com sucesso");
+            cn.Close();
+            return true;
+        }
+
+        private bool UpdateProduto(Produto produto, Produto currentProduto)
+        {
+            if (!verifyConnection())
+                return false;
+
+            using (SqlCommand cmd = new SqlCommand("UPDATE Produto SET preco = @preco, nome = @nome, marca = @marca WHERE id_produto = @id_produto", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@preco", SqlDbType.Decimal) { Value = produto.Preco });
+                    cmd.Parameters.Add(new SqlParameter("@nome", SqlDbType.VarChar, 100) { Value = produto.Nome });
+                    cmd.Parameters.Add(new SqlParameter("@marca", SqlDbType.Int) { Value = produto.MarcaId });
+                    cmd.Parameters.Add(new SqlParameter("@id_produto", SqlDbType.Int) { Value = currentProduto.ID });
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao atualizar produto na base de dados: " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+            MessageBox.Show("Produto atualizado com sucesso");
             cn.Close();
             return true;
         }
@@ -826,6 +982,30 @@ namespace CompanyBrandManager
                 }
             }
             MessageBox.Show("Loja eliminada com sucesso");
+            cn.Close();
+            return true;
+        }
+
+        private bool RemoveProduto(Produto currentProduto)
+        {
+            if (!verifyConnection())
+                return false;
+
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Produto WHERE id_produto = @id_produto", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@id_produto", SqlDbType.Int) { Value = currentProduto.ID });
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao eliminar este produto| " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+            MessageBox.Show("Produto eliminado com sucesso");
             cn.Close();
             return true;
         }

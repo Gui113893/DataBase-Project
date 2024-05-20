@@ -20,13 +20,11 @@ namespace CompanyBrandManager
             InitializeComponent();
             cn = getSqlConnection();
             this.currentProduto = currentProduto;
-            this.Enabled = true;
         }
 
         private void DistributeForm_Load(object sender, EventArgs e)
         {
             cn = getSqlConnection();
-            this.Enabled = true;
         }
 
         private SqlConnection getSqlConnection()
@@ -125,7 +123,6 @@ namespace CompanyBrandManager
             MessageBox.Show("Distribuição feita com sucesso");
             cn.Close();
             this.Hide();
-            this.Enabled = false;
         }
 
         private bool doesLojaExist(int lojaid)

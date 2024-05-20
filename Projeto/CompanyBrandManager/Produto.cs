@@ -89,7 +89,7 @@ namespace CompanyBrandManager
         
         public override string ToString()
         {
-            return ID + " - " + Nome + " - " + MarcaNome + " - " + Preco + "€";
+            return ID + " - " + Nome + " - " + MarcaNome + "(" + MarcaId + ") - " + Preco + "€";
         }
     }
 }
