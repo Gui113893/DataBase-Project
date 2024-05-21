@@ -118,6 +118,36 @@ BEGIN
 END;
 GO 
 
+-- Procedure para adicionar uma marca
+CREATE PROCEDURE AddMarca
+    @Nome VARCHAR(100),
+    @Data_registo DATE,
+    @Data_vencimento DATE
+AS
+BEGIN
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        -- Inserir na tabela Patente
+        INSERT INTO Patente (data_registo, data_vencimento, logo)
+        VALUES (@Data_registo, @Data_vencimento, 'logo');
+
+        DECLARE @PatenteId INT;
+        SET @PatenteId = SCOPE_IDENTITY();    
+
+        -- Inserir na tabela Marca
+        INSERT INTO Marca (patente, marcaNome)
+        VALUES (@PatenteId, @Nome);
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+GO
+
 -- Procedure para deletar um diretor
 CREATE PROCEDURE DeleteDirector
     @Nif NUMERIC(9,0)

@@ -17,13 +17,19 @@ namespace CompanyBrandManager
         private int currentPessoaIndex;
         private int currentLojaIndex;
         private int currentProdutoIndex;
+        private int currentMarcaIndex;
+        private int currentLocalidadeIndex;
 
         private Pessoa currentPessoa;
         private Loja currentLoja;
         private Produto currentProduto;
+
+        private Marca currentMarca;
         private bool adding_pessoa;
         private bool adding_loja;
         private bool adding_produto;
+
+        private bool adding_marca;
 
         private int filterProdutoByLoja;
 
@@ -34,6 +40,7 @@ namespace CompanyBrandManager
             loadPessoas("");
             loadLojas(0);
             loadProdutos(0);
+            loadMarcas();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -62,7 +69,8 @@ namespace CompanyBrandManager
         {
             loadPessoas("");
             loadLojas(0); 
-            loadProdutos(filterProdutoByLoja);  
+            loadProdutos(filterProdutoByLoja); 
+            loadMarcas(); 
         }
 
         private void PessoasList_SelectedIndexChanged(object sender, EventArgs e)
@@ -92,6 +100,25 @@ namespace CompanyBrandManager
                 currentProdutoIndex = ProdutosList.SelectedIndex;
                 currentProduto = (Produto)ProdutosList.Items[currentProdutoIndex];
                 ShowProduto();
+            }
+        }
+
+        private void MarcasList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (MarcasList.SelectedIndex >= 0)
+            {
+                currentMarcaIndex = MarcasList.SelectedIndex;
+                currentMarca = (Marca)MarcasList.Items[currentMarcaIndex];
+                ShowMarca();
+            }
+        }
+
+        private void LocalidadesListaMarca_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LocalidadesListMarca.SelectedIndex >= 0)
+            {
+                currentLocalidadeIndex = LocalidadesListMarca.SelectedIndex;
+                deleteLocalidadeButtonMarca.Visible = true;
             }
         }
 
@@ -162,6 +189,20 @@ namespace CompanyBrandManager
             ProdutosList.Enabled = false;
             SaveProduto(adding_produto, currentProduto);
             ProdutosList.Enabled = true;
+        }
+
+        private void EditButtonMarca_Click(object sender, EventArgs e)
+        {
+            currentMarcaIndex = MarcasList.SelectedIndex;
+            if (currentMarcaIndex < 0)
+            {
+                MessageBox.Show("Seleciona uma marca para editar");
+                return;
+            }
+            adding_marca = false;
+            MarcasList.Enabled = false;
+            SaveMarca(adding_marca, currentMarca);
+            MarcasList.Enabled = true;
         }
 
         private void DeleteButtonPessoa_Click(object sender, EventArgs e)
@@ -254,6 +295,48 @@ namespace CompanyBrandManager
             }
         }
 
+        private void DeleteButtonMarca_Click(object sender, EventArgs e)
+        {
+            if (currentMarcaIndex < 0)
+            {
+                MessageBox.Show("Seleciona uma marca para eliminar ");
+                return;
+            }
+
+            if (RemoveMarca(currentMarca))
+            {
+                MarcasList.Items.RemoveAt(MarcasList.SelectedIndex);
+                if (currentMarcaIndex == MarcasList.Items.Count)
+                {
+                    currentMarcaIndex = MarcasList.Items.Count - 1;
+                    currentMarca = (Marca)MarcasList.Items[currentMarcaIndex];
+                }
+
+                if (currentMarcaIndex == -1)
+                {
+                    ClearMarcaFields();
+                    MessageBox.Show("Não há mais marcas na base de dados");
+                }
+                else
+                {
+                    ShowMarca();
+                }
+
+            }
+        }
+
+        private void DeleteLocalidadeButtonMarca_Click(object sender, EventArgs e)
+        {
+            if (currentLocalidadeIndex < 0)
+            {
+                MessageBox.Show("Seleciona uma localidade para eliminar ");
+                return;
+            }
+
+            LocalidadesListMarca.Items.RemoveAt(currentLocalidadeIndex);
+            deleteLocalidadeButtonMarca.Visible = false;
+        }
+
         private void AddButtonPessoa_Click(object sender, EventArgs e)
         {
             adding_pessoa = true;
@@ -292,6 +375,30 @@ namespace CompanyBrandManager
             ProdutosList.Enabled = true;
         }
 
+        private void AddButtonMarca_Click(object sender, EventArgs e)
+        {
+            adding_marca = true;
+            MarcasList.Enabled = false;
+            SaveMarca(adding_marca, currentMarca);
+            MarcasList.Enabled = true;
+        }
+
+        private void AddButtonLocalidadeMarca_Click(object sender, EventArgs e)
+        {
+            if (currentMarcaIndex < 0)
+            {
+                MessageBox.Show("Seleciona uma marca para adicionar uma localidade");
+                return;
+            }
+            if (localidadeTxtMarca.Text == "")
+            {
+                MessageBox.Show("Insere uma localidade para adicionar");
+                return;
+            }
+            String localidade = localidadeTxtMarca.Text;
+            LocalidadesListMarca.Items.Add(localidade);
+        }
+
         private void AddToolStripPessoa_Click(object sender, EventArgs e)
         {
             ClearPessoaFields();
@@ -306,6 +413,11 @@ namespace CompanyBrandManager
         private void AddToolStrioProduto_Click(object sender, EventArgs e)
         {
             ClearProdutoFields();
+        }
+
+        private void AddToolStripMarca_Click(object sender, EventArgs e)
+        {
+            ClearMarcaFields();
         }
 
         private void AddPartTime_Click(object sender, EventArgs e)
@@ -453,6 +565,39 @@ namespace CompanyBrandManager
             cn.Close();
         }
 
+        public void ShowMarca()
+        {
+            deleteLocalidadeButtonMarca.Visible = false;
+            if (MarcasList.Items.Count == 0 | currentMarcaIndex < 0)
+                return;
+            Marca marca = new Marca();
+            marca = (Marca)MarcasList.Items[currentMarcaIndex];
+            nomeTxtMarca.Text = marca.Nome;
+            dataRegistoTxtMarca.Text = marca.Data_inicio;
+            dataVencimentoTxtMarca.Text = marca.Data_vencimento;
+
+            if (!verifyConnection())
+            {
+                return;
+            }
+
+            // Obter localidades da marca
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Pat_Locs WHERE patente = @marcaId", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.Add(new SqlParameter("@marcaId", SqlDbType.Int) { Value = marca.ID });
+            cmd.Connection = cn;
+            SqlDataReader reader = cmd.ExecuteReader();
+            String localidade = "";
+            LocalidadesListMarca.Items.Clear();
+            while (reader.Read())
+            {
+                localidade = reader["Ploc"].ToString();
+                LocalidadesListMarca.Items.Add(localidade);
+                
+            }
+            cn.Close();
+        }
+
         public void ClearPessoaFields()
         {
             nifTxtPessoa.Text = "";
@@ -487,6 +632,16 @@ namespace CompanyBrandManager
             nomeTxtProduto.Text = "";
             marcaTxtProduto.Text = "";
             stockProdutoLabel.Text = "";
+        }
+
+        public void ClearMarcaFields()
+        {
+            nomeTxtMarca.Text = "";
+            dataVencimentoTxtMarca.Text = "";
+            LocalidadesListMarca.Items.Clear();
+            DateTime now = DateTime.Now;
+            dataRegistoTxtMarca.Text = now.ToString("yyyy-MM-dd");
+            deleteLocalidadeButtonMarca.Visible = false;
         }
 
         public void HideSpecifics()
@@ -619,6 +774,45 @@ namespace CompanyBrandManager
                 {
                     ProdutosList.Items.Add(produto);
                     loadProdutos(filterProdutoByLoja);
+                }
+                else
+                    return false;
+            }
+            return true;
+        }
+
+        private bool SaveMarca(bool adding_marca, Marca currentMarca)
+        {
+            // currentMarca serve só para o caso de estar a editar para guardar informação antiga
+            Marca marca = new Marca();
+            try
+            {
+                marca.Nome = nomeTxtMarca.Text;
+                marca.Data_inicio = dataRegistoTxtMarca.Text;
+                marca.Data_vencimento = dataVencimentoTxtMarca.Text;
+                marca.ID = currentMarca.ID;
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+                return false;
+            }
+            if (!adding_marca)
+            {
+                if (UpdateMarca(marca, currentMarca))
+                {
+                    MarcasList.Items[currentMarcaIndex] = marca;
+                    loadMarcas();
+                }
+                else
+                    return false;
+            }
+            else
+            {
+                if (AddMarca(marca))
+                {
+                    MarcasList.Items.Add(marca);
+                    loadMarcas();
                 }
                 else
                     return false;
@@ -803,6 +997,56 @@ namespace CompanyBrandManager
             return true;
         }
 
+        private bool AddMarca(Marca marca)
+        {
+            if (!verifyConnection())
+                return false;
+
+            // Adicionar a marca na tabela
+            using (SqlCommand cmd = new SqlCommand("AddMarca", cn))
+            {
+                try
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@Nome", SqlDbType.VarChar, 100) { Value = marca.Nome });
+                    cmd.Parameters.Add(new SqlParameter("@Data_registo", SqlDbType.Date) { Value = marca.Data_inicio });
+                    cmd.Parameters.Add(new SqlParameter("@Data_vencimento", SqlDbType.Date) { Value = marca.Data_vencimento });
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao adicionar esta marca| " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+            // Caso a lista de localidades não esteja vazia, inserir cada localidade na tabela Pat_Locs
+            if (LocalidadesListMarca.Items.Count > 0)
+            {
+                foreach (String localidade in LocalidadesListMarca.Items)
+                {
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO Pat_Locs(patente, Ploc) VALUES ((SELECT MAX(patente) FROM Marca), @localidade)", cn))
+                    {
+                        try
+                        {
+                            cmd.Parameters.Add(new SqlParameter("@localidade", SqlDbType.VarChar, 100) { Value = localidade });
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (Exception exc)
+                        {
+                            MessageBox.Show("Erro ao adicionar esta localidade| " + exc.Message);
+                            cn.Close();
+                            return false;
+                        }
+                    }
+                }
+            }
+            MessageBox.Show("Marca adicionada com sucesso");
+            cn.Close();
+            return true;
+        }
+
         private bool UpdatePessoa(Pessoa pessoa, Pessoa anteriorPessoa)
         {
             if (!verifyConnection())
@@ -938,6 +1182,92 @@ namespace CompanyBrandManager
             return true;
         }
 
+        private bool UpdateMarca(Marca marca, Marca currentMarca)
+        {
+            if (!verifyConnection())
+                return false;
+            
+            // Primeiro dar update ás datas da patente
+            using (SqlCommand cmd = new SqlCommand("UPDATE Patente SET data_registo = @data_registo, data_vencimento = @data_vencimento WHERE id_patente = @id", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@data_registo", SqlDbType.Date) { Value = marca.Data_inicio });
+                    cmd.Parameters.Add(new SqlParameter("@data_vencimento", SqlDbType.Date) { Value = marca.Data_vencimento });
+                    cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int) { Value = currentMarca.ID });
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao atualizar marca na base de dados: " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+
+            // De seguida dar update ao nome da marca
+            using (SqlCommand cmd = new SqlCommand("UPDATE Marca SET marcaNome = @nome WHERE patente = @id", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@nome", SqlDbType.VarChar, 100) { Value = marca.Nome });
+                    cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int) { Value = currentMarca.ID });
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao atualizar marca na base de dados: " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+
+            // De seguida dar update às localidades da marca
+            // Primeiro apagar as localidades da marca
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Pat_Locs WHERE patente = @patente", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@patente", SqlDbType.Int) { Value = currentMarca.ID });
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao atualizar marca na base de dados: " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+
+            // De seguida adicionar as novas localidades
+            if (LocalidadesListMarca.Items.Count > 0)
+            {
+                foreach (String localidade in LocalidadesListMarca.Items)
+                {
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO Pat_Locs(patente, Ploc) VALUES (@patente, @localidade)", cn))
+                    {
+                        try
+                        {
+                            cmd.Parameters.Add(new SqlParameter("@patente", SqlDbType.Int) { Value = currentMarca.ID });
+                            cmd.Parameters.Add(new SqlParameter("@localidade", SqlDbType.VarChar, 100) { Value = localidade });
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (Exception exc)
+                        {
+                            MessageBox.Show("Erro ao adicionar esta localidade| " + exc.Message);
+                            cn.Close();
+                            return false;
+                        }
+                    }
+                }
+            }
+            MessageBox.Show("Marca atualizada com sucesso");
+            cn.Close();
+            return true;
+        }
+
         private bool RemovePessoa(Pessoa currentPessoa)
         {
             if (!verifyConnection())
@@ -1006,6 +1336,30 @@ namespace CompanyBrandManager
                 }
             }
             MessageBox.Show("Produto eliminado com sucesso");
+            cn.Close();
+            return true;
+        }
+
+        private bool RemoveMarca(Marca currentMarca)
+        {
+            if (!verifyConnection())
+                return false;
+
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Patente WHERE id_patente = @patente", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@patente", SqlDbType.Int) { Value = currentMarca.ID });
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao eliminar esta marca| " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+            MessageBox.Show("Marca eliminada com sucesso");
             cn.Close();
             return true;
         }
@@ -1177,6 +1531,38 @@ namespace CompanyBrandManager
             ShowProduto();
         }
 
+        public void loadMarcas()
+        {
+            if (!verifyConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM marca JOIN patente ON patente.id_patente = marca.patente", cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            MarcasList.Items.Clear();
+           
+
+            while (reader.Read())
+            {
+                Marca marca = new Marca();
+                marca.ID = reader["patente"].ToString();
+                marca.Nome = reader["marcaNome"].ToString();
+                marca.Data_inicio = reader.GetDateTime(reader.GetOrdinal("data_registo")).ToString();
+                marca.Data_vencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")).ToString();
+                MarcasList.Items.Add(marca);
+            }
+            cn.Close();
+            // Se nao houverem items na lista
+            if (MarcasList.Items.Count == 0)
+            {
+                MessageBox.Show("Não há marcas na base de dados");
+                return;
+            }
+            currentMarcaIndex = 0;
+            currentMarca = (Marca)MarcasList.Items[currentMarcaIndex];
+            ShowMarca();
+
+        }
+
         private void fimContratoTxt_TextChanged(object sender, EventArgs e)
         {
 
@@ -1198,6 +1584,41 @@ namespace CompanyBrandManager
         }
 
         private void NomeLabelProduto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void marcastTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataRegistoTxtMarca_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataVencimentoTxtMarca_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
         {
 
         }

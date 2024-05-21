@@ -53,6 +53,7 @@
       <DependentUpon>DistributeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Loja.cs" />
+    <Compile Include="Marca.cs" />
     <Compile Include="Pessoa.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

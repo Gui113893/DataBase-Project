@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ToolStripMenuItem addToolStripMarcas;
             this.tabControlLojasPessoas = new System.Windows.Forms.TabControl();
             this.pessoasTab = new System.Windows.Forms.TabPage();
             this.fimContratoTxt = new System.Windows.Forms.TextBox();
@@ -112,6 +113,25 @@
             this.nomeTxtProduto = new System.Windows.Forms.TextBox();
             this.NomeLabelProduto = new System.Windows.Forms.Label();
             this.ProdutosList = new System.Windows.Forms.ListBox();
+            this.marcastTab = new System.Windows.Forms.TabPage();
+            this.LocalidadesListMarca = new System.Windows.Forms.ListBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dataVencimentoTxtMarca = new System.Windows.Forms.TextBox();
+            this.dataRegistoTxtMarca = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.nomeTxtMarca = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.menuStrip4 = new System.Windows.Forms.MenuStrip();
+            this.MarcasList = new System.Windows.Forms.ListBox();
+            this.localidadeTxtMarca = new System.Windows.Forms.TextBox();
+            this.addLocalidadeButtonMarca = new System.Windows.Forms.Button();
+            this.deleteLocalidadeButtonMarca = new System.Windows.Forms.Button();
+            this.addButtonMarca = new System.Windows.Forms.Button();
+            this.editButtonMarca = new System.Windows.Forms.Button();
+            this.deleteButtonMarca = new System.Windows.Forms.Button();
+            addToolStripMarcas = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlLojasPessoas.SuspendLayout();
             this.pessoasTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -119,13 +139,24 @@
             this.menuStrip2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.menuStrip3.SuspendLayout();
+            this.marcastTab.SuspendLayout();
+            this.menuStrip4.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // addToolStripMarcas
+            // 
+            addToolStripMarcas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            addToolStripMarcas.Name = "addToolStripMarcas";
+            addToolStripMarcas.Size = new System.Drawing.Size(110, 32);
+            addToolStripMarcas.Text = "Adicionar";
+            addToolStripMarcas.Click += new System.EventHandler(this.AddToolStripMarca_Click);
             // 
             // tabControlLojasPessoas
             // 
             this.tabControlLojasPessoas.Controls.Add(this.pessoasTab);
             this.tabControlLojasPessoas.Controls.Add(this.lojasTab);
             this.tabControlLojasPessoas.Controls.Add(this.tabPage1);
+            this.tabControlLojasPessoas.Controls.Add(this.marcastTab);
             this.tabControlLojasPessoas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControlLojasPessoas.Location = new System.Drawing.Point(28, 25);
             this.tabControlLojasPessoas.Name = "tabControlLojasPessoas";
@@ -993,6 +1024,208 @@
             this.ProdutosList.TabIndex = 0;
             this.ProdutosList.SelectedIndexChanged += new System.EventHandler(this.ProdutosList_SelectedIndexChanged);
             // 
+            // marcastTab
+            // 
+            this.marcastTab.Controls.Add(this.deleteButtonMarca);
+            this.marcastTab.Controls.Add(this.editButtonMarca);
+            this.marcastTab.Controls.Add(this.addButtonMarca);
+            this.marcastTab.Controls.Add(this.deleteLocalidadeButtonMarca);
+            this.marcastTab.Controls.Add(this.addLocalidadeButtonMarca);
+            this.marcastTab.Controls.Add(this.localidadeTxtMarca);
+            this.marcastTab.Controls.Add(this.LocalidadesListMarca);
+            this.marcastTab.Controls.Add(this.label10);
+            this.marcastTab.Controls.Add(this.dataVencimentoTxtMarca);
+            this.marcastTab.Controls.Add(this.dataRegistoTxtMarca);
+            this.marcastTab.Controls.Add(this.label9);
+            this.marcastTab.Controls.Add(this.label8);
+            this.marcastTab.Controls.Add(this.label7);
+            this.marcastTab.Controls.Add(this.nomeTxtMarca);
+            this.marcastTab.Controls.Add(this.label6);
+            this.marcastTab.Controls.Add(this.menuStrip4);
+            this.marcastTab.Controls.Add(this.MarcasList);
+            this.marcastTab.Location = new System.Drawing.Point(4, 34);
+            this.marcastTab.Name = "marcastTab";
+            this.marcastTab.Size = new System.Drawing.Size(1198, 581);
+            this.marcastTab.TabIndex = 3;
+            this.marcastTab.Text = "Marcas";
+            this.marcastTab.UseVisualStyleBackColor = true;
+            this.marcastTab.Click += new System.EventHandler(this.marcastTab_Click);
+            // 
+            // LocalidadesListMarca
+            // 
+            this.LocalidadesListMarca.FormattingEnabled = true;
+            this.LocalidadesListMarca.ItemHeight = 25;
+            this.LocalidadesListMarca.Location = new System.Drawing.Point(42, 289);
+            this.LocalidadesListMarca.Name = "LocalidadesListMarca";
+            this.LocalidadesListMarca.Size = new System.Drawing.Size(556, 204);
+            this.LocalidadesListMarca.TabIndex = 61;
+            this.LocalidadesListMarca.SelectedIndexChanged += new System.EventHandler(this.LocalidadesListaMarca_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(37, 243);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(113, 25);
+            this.label10.TabIndex = 60;
+            this.label10.Text = "Localidade:";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // dataVencimentoTxtMarca
+            // 
+            this.dataVencimentoTxtMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataVencimentoTxtMarca.Location = new System.Drawing.Point(310, 178);
+            this.dataVencimentoTxtMarca.Name = "dataVencimentoTxtMarca";
+            this.dataVencimentoTxtMarca.Size = new System.Drawing.Size(116, 30);
+            this.dataVencimentoTxtMarca.TabIndex = 59;
+            this.dataVencimentoTxtMarca.TextChanged += new System.EventHandler(this.dataVencimentoTxtMarca_TextChanged);
+            // 
+            // dataRegistoTxtMarca
+            // 
+            this.dataRegistoTxtMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataRegistoTxtMarca.Location = new System.Drawing.Point(310, 126);
+            this.dataRegistoTxtMarca.Name = "dataRegistoTxtMarca";
+            this.dataRegistoTxtMarca.Size = new System.Drawing.Size(116, 30);
+            this.dataRegistoTxtMarca.TabIndex = 58;
+            this.dataRegistoTxtMarca.TextChanged += new System.EventHandler(this.dataRegistoTxtMarca_TextChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(108, 183);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(168, 25);
+            this.label9.TabIndex = 57;
+            this.label9.Text = "Data Vencimento:";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(108, 129);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(129, 25);
+            this.label8.TabIndex = 56;
+            this.label8.Text = "Data Registo:";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(37, 96);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 25);
+            this.label7.TabIndex = 55;
+            this.label7.Text = "Patente:";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // nomeTxtMarca
+            // 
+            this.nomeTxtMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nomeTxtMarca.Location = new System.Drawing.Point(113, 58);
+            this.nomeTxtMarca.Name = "nomeTxtMarca";
+            this.nomeTxtMarca.Size = new System.Drawing.Size(313, 30);
+            this.nomeTxtMarca.TabIndex = 54;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(37, 58);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(70, 25);
+            this.label6.TabIndex = 53;
+            this.label6.Text = "Nome:";
+            // 
+            // menuStrip4
+            // 
+            this.menuStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            addToolStripMarcas});
+            this.menuStrip4.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip4.Name = "menuStrip4";
+            this.menuStrip4.Size = new System.Drawing.Size(1198, 36);
+            this.menuStrip4.TabIndex = 52;
+            this.menuStrip4.Text = "menuStrip4";
+            // 
+            // MarcasList
+            // 
+            this.MarcasList.FormattingEnabled = true;
+            this.MarcasList.ItemHeight = 25;
+            this.MarcasList.Location = new System.Drawing.Point(659, 64);
+            this.MarcasList.Name = "MarcasList";
+            this.MarcasList.Size = new System.Drawing.Size(517, 429);
+            this.MarcasList.TabIndex = 51;
+            this.MarcasList.SelectedIndexChanged += new System.EventHandler(this.MarcasList_SelectedIndexChanged);
+            // 
+            // localidadeTxtMarca
+            // 
+            this.localidadeTxtMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.localidadeTxtMarca.Location = new System.Drawing.Point(156, 240);
+            this.localidadeTxtMarca.Name = "localidadeTxtMarca";
+            this.localidadeTxtMarca.Size = new System.Drawing.Size(189, 30);
+            this.localidadeTxtMarca.TabIndex = 62;
+            // 
+            // addLocalidadeButtonMarca
+            // 
+            this.addLocalidadeButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addLocalidadeButtonMarca.Location = new System.Drawing.Point(361, 236);
+            this.addLocalidadeButtonMarca.Name = "addLocalidadeButtonMarca";
+            this.addLocalidadeButtonMarca.Size = new System.Drawing.Size(65, 38);
+            this.addLocalidadeButtonMarca.TabIndex = 63;
+            this.addLocalidadeButtonMarca.Text = "+";
+            this.addLocalidadeButtonMarca.UseVisualStyleBackColor = true;
+            this.addLocalidadeButtonMarca.Click += new System.EventHandler(this.AddButtonLocalidadeMarca_Click);
+            // 
+            // deleteLocalidadeButtonMarca
+            // 
+            this.deleteLocalidadeButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteLocalidadeButtonMarca.Location = new System.Drawing.Point(42, 508);
+            this.deleteLocalidadeButtonMarca.Name = "deleteLocalidadeButtonMarca";
+            this.deleteLocalidadeButtonMarca.Size = new System.Drawing.Size(120, 45);
+            this.deleteLocalidadeButtonMarca.TabIndex = 64;
+            this.deleteLocalidadeButtonMarca.Text = "Delete";
+            this.deleteLocalidadeButtonMarca.UseVisualStyleBackColor = true;
+            this.deleteLocalidadeButtonMarca.Visible = false;
+            this.deleteLocalidadeButtonMarca.Click += new System.EventHandler(this.DeleteLocalidadeButtonMarca_Click);
+            // 
+            // addButtonMarca
+            // 
+            this.addButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addButtonMarca.Location = new System.Drawing.Point(659, 508);
+            this.addButtonMarca.Name = "addButtonMarca";
+            this.addButtonMarca.Size = new System.Drawing.Size(120, 45);
+            this.addButtonMarca.TabIndex = 65;
+            this.addButtonMarca.Text = "Add";
+            this.addButtonMarca.UseVisualStyleBackColor = true;
+            this.addButtonMarca.Click += new System.EventHandler(this.AddButtonMarca_Click);
+            // 
+            // editButtonMarca
+            // 
+            this.editButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editButtonMarca.Location = new System.Drawing.Point(871, 508);
+            this.editButtonMarca.Name = "editButtonMarca";
+            this.editButtonMarca.Size = new System.Drawing.Size(120, 45);
+            this.editButtonMarca.TabIndex = 66;
+            this.editButtonMarca.Text = "Edit";
+            this.editButtonMarca.UseVisualStyleBackColor = true;
+            this.editButtonMarca.Click += new System.EventHandler(this.EditButtonMarca_Click);
+            // 
+            // deleteButtonMarca
+            // 
+            this.deleteButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteButtonMarca.Location = new System.Drawing.Point(1056, 508);
+            this.deleteButtonMarca.Name = "deleteButtonMarca";
+            this.deleteButtonMarca.Size = new System.Drawing.Size(120, 45);
+            this.deleteButtonMarca.TabIndex = 67;
+            this.deleteButtonMarca.Text = "Delete";
+            this.deleteButtonMarca.UseVisualStyleBackColor = true;
+            this.deleteButtonMarca.Click += new System.EventHandler(this.DeleteButtonMarca_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1016,6 +1249,10 @@
             this.tabPage1.PerformLayout();
             this.menuStrip3.ResumeLayout(false);
             this.menuStrip3.PerformLayout();
+            this.marcastTab.ResumeLayout(false);
+            this.marcastTab.PerformLayout();
+            this.menuStrip4.ResumeLayout(false);
+            this.menuStrip4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1106,6 +1343,24 @@
         private System.Windows.Forms.Button searchProduto;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox searchProdutoByLoja;
+        private System.Windows.Forms.TabPage marcastTab;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox nomeTxtMarca;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.MenuStrip menuStrip4;
+        private System.Windows.Forms.ListBox MarcasList;
+        private System.Windows.Forms.ListBox LocalidadesListMarca;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox dataVencimentoTxtMarca;
+        private System.Windows.Forms.TextBox dataRegistoTxtMarca;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button deleteButtonMarca;
+        private System.Windows.Forms.Button editButtonMarca;
+        private System.Windows.Forms.Button addButtonMarca;
+        private System.Windows.Forms.Button deleteLocalidadeButtonMarca;
+        private System.Windows.Forms.Button addLocalidadeButtonMarca;
+        private System.Windows.Forms.TextBox localidadeTxtMarca;
     }
 }
 
