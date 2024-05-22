@@ -1,0 +1,12 @@
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\bin\Debug\CompanyBrandManager.exe.config
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\bin\Debug\CompanyBrandManager.exe
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\bin\Debug\CompanyBrandManager.pdb
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.csproj.AssemblyReference.cache
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.csproj.SuggestedBindingRedirects.cache
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.Form1.resources
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.Properties.Resources.resources
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.csproj.GenerateResource.cache
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.csproj.CoreCompileInputs.cache
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.exe
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.pdb
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.DistributeForm.resources
