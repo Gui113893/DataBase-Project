@@ -258,3 +258,60 @@ BEGIN
     DEALLOCATE cur;
 END;
 GO
+
+-- Trigger que garante que, depois de uma localidade de uma marca for eliminada, elimina todos os produtos dessa marca no stock das lojas que fazem parte da localidade eliminada
+CREATE TRIGGER trg_eliminar_produtos_localidade
+ON Pat_Locs
+AFTER DELETE
+AS
+BEGIN
+    DECLARE @marca INT;
+    DECLARE @localidade VARCHAR(100);
+    DECLARE @id_produto INT;
+    DECLARE @loja INT;
+
+    -- Cursor para iterar por todas as linhas afetadas
+    DECLARE cur CURSOR FOR
+    SELECT patente, Ploc
+    FROM deleted;
+
+    OPEN cur;
+    FETCH NEXT FROM cur INTO @marca, @localidade;
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        -- Obter todos os produtos da marca que estão na localidade eliminada
+        DECLARE produtos_cursor CURSOR FOR
+        SELECT produto, loja
+        FROM Stock_Loja
+        WHERE produto IN (
+            SELECT id_produto
+            FROM Produto
+            WHERE marca = @marca
+        ) AND loja IN (
+            SELECT id_loja
+            FROM Loja
+            WHERE localidade = @localidade
+        );
+
+        OPEN produtos_cursor;
+        FETCH NEXT FROM produtos_cursor INTO @id_produto, @loja;
+
+        WHILE @@FETCH_STATUS = 0
+        BEGIN
+            DELETE FROM Stock_Loja
+            WHERE produto = @id_produto AND loja = @loja;
+
+            FETCH NEXT FROM produtos_cursor INTO @id_produto, @loja;
+        END
+
+        CLOSE produtos_cursor;
+        DEALLOCATE produtos_cursor;
+
+        FETCH NEXT FROM cur INTO @marca, @localidade;
+    END
+
+    CLOSE cur;
+    DEALLOCATE cur;
+END;
+GO

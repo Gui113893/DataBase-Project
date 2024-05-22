@@ -19,6 +19,8 @@ namespace CompanyBrandManager
         private int currentProdutoIndex;
         private int currentMarcaIndex;
         private int currentLocalidadeIndex;
+        private List<String> deletedLocalidadesMarca;
+        private List<String> addedLocalidadesMarca;
 
         private Pessoa currentPessoa;
         private Loja currentLoja;
@@ -41,11 +43,15 @@ namespace CompanyBrandManager
             loadLojas(0);
             loadProdutos(0);
             loadMarcas();
+            deletedLocalidadesMarca = new List<String>();
+            addedLocalidadesMarca = new List<String>();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             cn = getSqlConnection();
+            deletedLocalidadesMarca = new List<String>();
+            addedLocalidadesMarca = new List<String>();
         }
 
         private SqlConnection getSqlConnection()
@@ -109,6 +115,8 @@ namespace CompanyBrandManager
             {
                 currentMarcaIndex = MarcasList.SelectedIndex;
                 currentMarca = (Marca)MarcasList.Items[currentMarcaIndex];
+                deletedLocalidadesMarca.Clear();
+                addedLocalidadesMarca.Clear();
                 ShowMarca();
             }
         }
@@ -332,7 +340,7 @@ namespace CompanyBrandManager
                 MessageBox.Show("Seleciona uma localidade para eliminar ");
                 return;
             }
-
+            deletedLocalidadesMarca.Add(LocalidadesListMarca.Items[currentLocalidadeIndex].ToString());
             LocalidadesListMarca.Items.RemoveAt(currentLocalidadeIndex);
             deleteLocalidadeButtonMarca.Visible = false;
         }
@@ -396,6 +404,7 @@ namespace CompanyBrandManager
                 return;
             }
             String localidade = localidadeTxtMarca.Text;
+            addedLocalidadesMarca.Add(localidade);
             LocalidadesListMarca.Items.Add(localidade);
         }
 
@@ -1224,27 +1233,10 @@ namespace CompanyBrandManager
                 }
             }
 
-            // De seguida dar update às localidades da marca
-            // Primeiro apagar as localidades da marca
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM Pat_Locs WHERE patente = @patente", cn))
+            // Adicionar as novas localidades
+            if (addedLocalidadesMarca.Count > 0)
             {
-                try
-                {
-                    cmd.Parameters.Add(new SqlParameter("@patente", SqlDbType.Int) { Value = currentMarca.ID });
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show("Erro ao atualizar marca na base de dados: " + exc.Message);
-                    cn.Close();
-                    return false;
-                }
-            }
-
-            // De seguida adicionar as novas localidades
-            if (LocalidadesListMarca.Items.Count > 0)
-            {
-                foreach (String localidade in LocalidadesListMarca.Items)
+                foreach (String localidade in addedLocalidadesMarca)
                 {
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO Pat_Locs(patente, Ploc) VALUES (@patente, @localidade)", cn))
                     {
@@ -1256,13 +1248,37 @@ namespace CompanyBrandManager
                         }
                         catch (Exception exc)
                         {
-                            MessageBox.Show("Erro ao adicionar esta localidade| " + exc.Message);
+                            MessageBox.Show("Erro ao atualizar marca na base de dados: " + exc.Message);
                             cn.Close();
                             return false;
                         }
                     }
                 }
             }
+
+            // De seguida remover as localidades que foram removidas
+            if (deletedLocalidadesMarca.Count > 0)
+            {
+                foreach (String localidade in deletedLocalidadesMarca)
+                {
+                    using (SqlCommand cmd = new SqlCommand("DELETE FROM Pat_Locs WHERE patente = @patente AND Ploc = @localidade", cn))
+                    {
+                        try
+                        {
+                            cmd.Parameters.Add(new SqlParameter("@patente", SqlDbType.Int) { Value = currentMarca.ID });
+                            cmd.Parameters.Add(new SqlParameter("@localidade", SqlDbType.VarChar, 100) { Value = localidade });
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (Exception exc)
+                        {
+                            MessageBox.Show("Erro ao atualizar marca na base de dados: " + exc.Message);
+                            cn.Close();
+                            return false;
+                        }
+                    }
+                }
+            }
+
             MessageBox.Show("Marca atualizada com sucesso");
             cn.Close();
             return true;
