@@ -32,6 +32,13 @@
             System.Windows.Forms.Label label4;
             this.tabControlLojasPessoas = new System.Windows.Forms.TabControl();
             this.pessoasTab = new System.Windows.Forms.TabPage();
+            this.searchSubempresaPessoaTxt = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.searchLojaPessoaTxt = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.searchNomePessoaTxt = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.searchButtonPessoa = new System.Windows.Forms.Button();
             this.fimContratoTxt = new System.Windows.Forms.TextBox();
             this.inicioContratoTxt = new System.Windows.Forms.TextBox();
             this.fimContratoLabel = new System.Windows.Forms.Label();
@@ -139,13 +146,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.menuStrip4 = new System.Windows.Forms.MenuStrip();
             this.MarcasList = new System.Windows.Forms.ListBox();
-            this.searchButtonPessoa = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.searchNomePessoaTxt = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.searchLojaPessoaTxt = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.searchSubempresaPessoaTxt = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.salariomedioPessoaLabel = new System.Windows.Forms.Label();
             addToolStripMarcas = new System.Windows.Forms.ToolStripMenuItem();
             label4 = new System.Windows.Forms.Label();
             this.tabControlLojasPessoas.SuspendLayout();
@@ -193,6 +195,8 @@
             // 
             // pessoasTab
             // 
+            this.pessoasTab.Controls.Add(this.salariomedioPessoaLabel);
+            this.pessoasTab.Controls.Add(this.label17);
             this.pessoasTab.Controls.Add(this.searchSubempresaPessoaTxt);
             this.pessoasTab.Controls.Add(this.label16);
             this.pessoasTab.Controls.Add(this.searchLojaPessoaTxt);
@@ -241,6 +245,71 @@
             this.pessoasTab.TabIndex = 0;
             this.pessoasTab.Text = "Pessoas";
             this.pessoasTab.UseVisualStyleBackColor = true;
+            // 
+            // searchSubempresaPessoaTxt
+            // 
+            this.searchSubempresaPessoaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchSubempresaPessoaTxt.Location = new System.Drawing.Point(807, 113);
+            this.searchSubempresaPessoaTxt.Name = "searchSubempresaPessoaTxt";
+            this.searchSubempresaPessoaTxt.Size = new System.Drawing.Size(173, 30);
+            this.searchSubempresaPessoaTxt.TabIndex = 57;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(669, 116);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(132, 25);
+            this.label16.TabIndex = 56;
+            this.label16.Text = "SubEmpresa:";
+            // 
+            // searchLojaPessoaTxt
+            // 
+            this.searchLojaPessoaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLojaPessoaTxt.Location = new System.Drawing.Point(1110, 110);
+            this.searchLojaPessoaTxt.Name = "searchLojaPessoaTxt";
+            this.searchLojaPessoaTxt.Size = new System.Drawing.Size(69, 30);
+            this.searchLojaPessoaTxt.TabIndex = 55;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(1050, 113);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(55, 25);
+            this.label15.TabIndex = 54;
+            this.label15.Text = "Loja:";
+            // 
+            // searchNomePessoaTxt
+            // 
+            this.searchNomePessoaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchNomePessoaTxt.Location = new System.Drawing.Point(874, 48);
+            this.searchNomePessoaTxt.Name = "searchNomePessoaTxt";
+            this.searchNomePessoaTxt.Size = new System.Drawing.Size(297, 30);
+            this.searchNomePessoaTxt.TabIndex = 53;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(798, 48);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(70, 25);
+            this.label14.TabIndex = 52;
+            this.label14.Text = "Nome:";
+            // 
+            // searchButtonPessoa
+            // 
+            this.searchButtonPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchButtonPessoa.Location = new System.Drawing.Point(674, 42);
+            this.searchButtonPessoa.Name = "searchButtonPessoa";
+            this.searchButtonPessoa.Size = new System.Drawing.Size(103, 45);
+            this.searchButtonPessoa.TabIndex = 51;
+            this.searchButtonPessoa.Text = "Search";
+            this.searchButtonPessoa.UseVisualStyleBackColor = true;
+            this.searchButtonPessoa.Click += new System.EventHandler(this.SearchPessoaButton_Click);
             // 
             // fimContratoTxt
             // 
@@ -508,9 +577,9 @@
             this.PessoasList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PessoasList.FormattingEnabled = true;
             this.PessoasList.ItemHeight = 25;
-            this.PessoasList.Location = new System.Drawing.Point(674, 173);
+            this.PessoasList.Location = new System.Drawing.Point(674, 198);
             this.PessoasList.Name = "PessoasList";
-            this.PessoasList.Size = new System.Drawing.Size(505, 379);
+            this.PessoasList.Size = new System.Drawing.Size(505, 354);
             this.PessoasList.TabIndex = 4;
             this.PessoasList.SelectedIndexChanged += new System.EventHandler(this.PessoasList_SelectedIndexChanged);
             // 
@@ -1331,70 +1400,25 @@
             this.MarcasList.TabIndex = 51;
             this.MarcasList.SelectedIndexChanged += new System.EventHandler(this.MarcasList_SelectedIndexChanged);
             // 
-            // searchButtonPessoa
+            // label17
             // 
-            this.searchButtonPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButtonPessoa.Location = new System.Drawing.Point(674, 42);
-            this.searchButtonPessoa.Name = "searchButtonPessoa";
-            this.searchButtonPessoa.Size = new System.Drawing.Size(103, 45);
-            this.searchButtonPessoa.TabIndex = 51;
-            this.searchButtonPessoa.Text = "Search";
-            this.searchButtonPessoa.UseVisualStyleBackColor = true;
-            this.searchButtonPessoa.Click += new System.EventHandler(this.SearchPessoaButton_Click);
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(669, 160);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(138, 25);
+            this.label17.TabIndex = 58;
+            this.label17.Text = "Salário Médio:";
             // 
-            // label14
+            // salariomedioPessoaLabel
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(798, 48);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(70, 25);
-            this.label14.TabIndex = 52;
-            this.label14.Text = "Nome:";
-            // 
-            // searchNomePessoaTxt
-            // 
-            this.searchNomePessoaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchNomePessoaTxt.Location = new System.Drawing.Point(874, 48);
-            this.searchNomePessoaTxt.Name = "searchNomePessoaTxt";
-            this.searchNomePessoaTxt.Size = new System.Drawing.Size(297, 30);
-            this.searchNomePessoaTxt.TabIndex = 53;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(1050, 113);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(55, 25);
-            this.label15.TabIndex = 54;
-            this.label15.Text = "Loja:";
-            // 
-            // searchLojaPessoaTxt
-            // 
-            this.searchLojaPessoaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchLojaPessoaTxt.Location = new System.Drawing.Point(1110, 110);
-            this.searchLojaPessoaTxt.Name = "searchLojaPessoaTxt";
-            this.searchLojaPessoaTxt.Size = new System.Drawing.Size(69, 30);
-            this.searchLojaPessoaTxt.TabIndex = 55;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(669, 116);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(132, 25);
-            this.label16.TabIndex = 56;
-            this.label16.Text = "SubEmpresa:";
-            // 
-            // searchSubempresaPessoaTxt
-            // 
-            this.searchSubempresaPessoaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchSubempresaPessoaTxt.Location = new System.Drawing.Point(807, 113);
-            this.searchSubempresaPessoaTxt.Name = "searchSubempresaPessoaTxt";
-            this.searchSubempresaPessoaTxt.Size = new System.Drawing.Size(173, 30);
-            this.searchSubempresaPessoaTxt.TabIndex = 57;
+            this.salariomedioPessoaLabel.AutoSize = true;
+            this.salariomedioPessoaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.salariomedioPessoaLabel.Location = new System.Drawing.Point(813, 160);
+            this.salariomedioPessoaLabel.Name = "salariomedioPessoaLabel";
+            this.salariomedioPessoaLabel.Size = new System.Drawing.Size(23, 25);
+            this.salariomedioPessoaLabel.TabIndex = 59;
+            this.salariomedioPessoaLabel.Text = "0";
             // 
             // Form1
             // 
@@ -1546,6 +1570,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button searchButtonPessoa;
         private System.Windows.Forms.ToolStripMenuItem gerenteToolStripMenuItem;
+        public System.Windows.Forms.Label salariomedioPessoaLabel;
+        private System.Windows.Forms.Label label17;
     }
 }
 

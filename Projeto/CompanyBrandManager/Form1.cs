@@ -1464,7 +1464,7 @@ namespace CompanyBrandManager
             if (!verifyConnection())
                 return;
 
-            SqlCommand cmd = new SqlCommand("SELECT DISTINCT P.* FROM Pessoa P LEFT JOIN Funcionario F ON P.nif = F.nif LEFT JOIN Loja L ON F.loja = L.id_loja LEFT JOIN SubEmpresa SE ON L.subempresa = SE.id LEFT JOIN Diretor D ON SE.diretor = D.nif WHERE (P.nome LIKE '%' + @nome_pessoa + '%' OR @nome_pessoa IS NULL) AND (SE.nome LIKE '%' + @nome_subempresa + '%' OR @nome_subempresa IS NULL) AND (L.id_loja = @id_loja OR @id_loja IS NULL OR SE.id IS NULL) AND (P.tipo = @tipo OR @tipo IS NULL) OR (P.nif IN (SELECT diretor FROM SubEmpresa JOIN Loja ON SubEmpresa.id = Loja.subempresa WHERE nome LIKE '%' + @nome_subempresa + '%' AND @id_loja = Loja.id_loja) AND (P.tipo = @tipo OR @tipo IS NULL)) OR ((@id_loja IS NULL AND P.nif IN (SELECT diretor FROM SubEmpresa WHERE nome LIKE '%' + @nome_subempresa + '%' )) AND (P.tipo = @tipo OR @tipo IS NULL))", cn);
+            SqlCommand cmd = new SqlCommand("WITH PessoaFiltrada AS (SELECT DISTINCT P.* FROM Pessoa P LEFT JOIN Funcionario F ON P.nif = F.nif LEFT JOIN Loja L ON F.loja = L.id_loja LEFT JOIN SubEmpresa SE ON L.subempresa = SE.id LEFT JOIN Diretor D ON SE.diretor = D.nif WHERE (P.nome LIKE '%' + @nome_pessoa + '%' OR @nome_pessoa IS NULL) AND (SE.nome LIKE '%' + @nome_subempresa + '%' OR @nome_subempresa IS NULL) AND (L.id_loja = @id_loja OR @id_loja IS NULL OR SE.id IS NULL) AND (P.tipo = @tipo OR @tipo IS NULL) OR (P.nif IN (SELECT diretor FROM SubEmpresa JOIN Loja ON SubEmpresa.id = Loja.subempresa WHERE nome LIKE '%' + @nome_subempresa + '%' AND @id_loja = Loja.id_loja) AND (P.tipo = @tipo OR @tipo IS NULL)) OR ((@id_loja IS NULL AND P.nif IN (SELECT diretor FROM SubEmpresa WHERE nome LIKE '%' + @nome_subempresa + '%')) AND (P.tipo = @tipo OR @tipo IS NULL))) SELECT P.*, ( SELECT AVG(salario) FROM PessoaFiltrada) AS Salario_Medio FROM PessoaFiltrada P;", cn);
             // Adiciona os parametros das caixas de texto da pesquisa
             cmd.Parameters.Add(new SqlParameter("@nome_pessoa", SqlDbType.VarChar, 100) { Value = searchNomePessoaTxt.Text == "" ? DBNull.Value : (object)searchNomePessoaTxt.Text });
             cmd.Parameters.Add(new SqlParameter("@id_loja", SqlDbType.Int) { Value = searchLojaPessoaTxt.Text == "" ? DBNull.Value : (object)searchLojaPessoaTxt.Text });
@@ -1500,6 +1500,11 @@ namespace CompanyBrandManager
                 pessoa.Salario = reader["salario"].ToString();
                 pessoa.Tipo = reader["tipo"].ToString();
                 PessoasList.Items.Add(pessoa);
+                double salarioMedio;
+                if (double.TryParse(reader["Salario_Medio"].ToString(), out salarioMedio))
+                {
+                    salariomedioPessoaLabel.Text = salarioMedio.ToString("0.00");
+                }
             }
             cn.Close();
             // Se nao houverem items na lista
