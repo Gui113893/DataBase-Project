@@ -34,6 +34,7 @@ namespace CompanyBrandManager
         private bool adding_marca;
 
         private int filterProdutoByLoja;
+        private String filterPessoa;
 
         public Form1()
         {
@@ -45,6 +46,7 @@ namespace CompanyBrandManager
             loadMarcas();
             deletedLocalidadesMarca = new List<String>();
             addedLocalidadesMarca = new List<String>();
+            filterPessoa = "";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -52,6 +54,7 @@ namespace CompanyBrandManager
             cn = getSqlConnection();
             deletedLocalidadesMarca = new List<String>();
             addedLocalidadesMarca = new List<String>();
+            filterPessoa = "";
         }
 
         private SqlConnection getSqlConnection()
@@ -73,7 +76,7 @@ namespace CompanyBrandManager
         // Event-Funcs
         private void TabControlPessoasLojas_Click(object sender, EventArgs e)
         {
-            loadPessoas("");
+            loadPessoas(filterPessoa);
             loadLojas(0); 
             loadProdutos(filterProdutoByLoja); 
             loadMarcas(); 
@@ -144,6 +147,11 @@ namespace CompanyBrandManager
                 filterProdutoByLoja = 0;
                 loadProdutos(0);
             }
+        }
+
+        private void SearchPessoaButton_Click(object sender, EventArgs e)
+        {
+            loadPessoas(filterPessoa);
         }
 
         private void DistributeProduto_Click(object sender, EventArgs e)
@@ -442,24 +450,28 @@ namespace CompanyBrandManager
 
         private void PessoaFilterByDiretor_Click(object sender, EventArgs e)
         {
-            loadPessoas("Diretor");
+            filterPessoa = "Diretor";
+            loadPessoas("Diretor");   
         }
 
         private void PessoaFilterByPartTime_Click(object sender, EventArgs e)
         {
+            filterPessoa = "Part-Time";
             loadPessoas("Part-Time");
         }
 
         private void PessoaFilterByEfetivo_Click(object sender, EventArgs e)
         {
+            filterPessoa = "Efetivo";
             loadPessoas("Efetivo");
         }
 
         private void PessoaRemoveFilter_Click(object sender, EventArgs e)
         {
+            filterPessoa = "";
             loadPessoas("");
         }
-
+        
         // Aux Funcs
         public void ShowPessoa()
         {
@@ -1452,19 +1464,25 @@ namespace CompanyBrandManager
             if (!verifyConnection())
                 return;
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Pessoa", cn);
-            if (filtro == "Diretor")
+            SqlCommand cmd = new SqlCommand("SELECT DISTINCT P.* FROM Pessoa P LEFT JOIN Funcionario F ON P.nif = F.nif LEFT JOIN Loja L ON F.loja = L.id_loja LEFT JOIN SubEmpresa SE ON L.subempresa = SE.id LEFT JOIN Diretor D ON SE.diretor = D.nif WHERE (P.nome LIKE '%' + @nome_pessoa + '%' OR @nome_pessoa IS NULL) AND (SE.nome LIKE '%' + @nome_subempresa + '%' OR @nome_subempresa IS NULL) AND (L.id_loja = @id_loja OR @id_loja IS NULL OR SE.id IS NULL) AND (P.tipo = @tipo OR @tipo IS NULL) OR (P.nif IN (SELECT diretor FROM SubEmpresa JOIN Loja ON SubEmpresa.id = Loja.subempresa WHERE nome LIKE '%' + @nome_subempresa + '%' AND @id_loja = Loja.id_loja) AND (P.tipo = @tipo OR @tipo IS NULL)) OR ((@id_loja IS NULL AND P.nif IN (SELECT diretor FROM SubEmpresa WHERE nome LIKE '%' + @nome_subempresa + '%' )) AND (P.tipo = @tipo OR @tipo IS NULL))", cn);
+            // Adiciona os parametros das caixas de texto da pesquisa
+            cmd.Parameters.Add(new SqlParameter("@nome_pessoa", SqlDbType.VarChar, 100) { Value = searchNomePessoaTxt.Text == "" ? DBNull.Value : (object)searchNomePessoaTxt.Text });
+            cmd.Parameters.Add(new SqlParameter("@id_loja", SqlDbType.Int) { Value = searchLojaPessoaTxt.Text == "" ? DBNull.Value : (object)searchLojaPessoaTxt.Text });
+            cmd.Parameters.Add(new SqlParameter("@tipo", SqlDbType.VarChar, 100) { Value = filtro == "" ? DBNull.Value : (object)filtro });
+
+            if (searchLojaPessoaTxt.Text == "")
             {
-                cmd = new SqlCommand("SELECT * FROM Pessoa JOIN Diretor ON pessoa.nif = diretor.nif", cn);
+                // Se não houver loja pode ser null
+                cmd.Parameters.Add(new SqlParameter("@nome_subempresa", SqlDbType.VarChar, 100) { Value = searchSubempresaPessoaTxt.Text == ""? DBNull.Value : (object)searchSubempresaPessoaTxt.Text });
+
             }
-            else if (filtro == "Part-Time")
+            else
             {
-                cmd = new SqlCommand("SELECT * FROM Pessoa JOIN Part_Time ON pessoa.nif = part_time.nif", cn);
+                // Se houver loja é obrigatório ter ''
+                cmd.Parameters.Add(new SqlParameter("@nome_subempresa", SqlDbType.VarChar, 100) { Value = (object)("")});
             }
-            else if (filtro == "Efetivo")
-            {
-                cmd = new SqlCommand("SELECT * FROM Pessoa JOIN Efetivo ON pessoa.nif = efetivo.nif", cn);
-            }
+        
+
             SqlDataReader reader = cmd.ExecuteReader();
             PessoasList.Items.Clear();
 
