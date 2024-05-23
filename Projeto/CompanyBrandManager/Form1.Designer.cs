@@ -30,8 +30,11 @@
         {
             System.Windows.Forms.ToolStripMenuItem addToolStripMarcas;
             System.Windows.Forms.Label label4;
+            System.Windows.Forms.ToolStripMenuItem addToolStripFornecedores;
             this.tabControlLojasPessoas = new System.Windows.Forms.TabControl();
             this.pessoasTab = new System.Windows.Forms.TabPage();
+            this.salariomedioPessoaLabel = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.searchSubempresaPessoaTxt = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.searchLojaPessoaTxt = new System.Windows.Forms.TextBox();
@@ -146,10 +149,24 @@
             this.label6 = new System.Windows.Forms.Label();
             this.menuStrip4 = new System.Windows.Forms.MenuStrip();
             this.MarcasList = new System.Windows.Forms.ListBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.salariomedioPessoaLabel = new System.Windows.Forms.Label();
+            this.fornecedoresPage = new System.Windows.Forms.TabPage();
+            this.menuStrip5 = new System.Windows.Forms.MenuStrip();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.FornecedoresList = new System.Windows.Forms.ListBox();
+            this.telefoneFornecedorTxt = new System.Windows.Forms.TextBox();
+            this.ruaFornecedorTxt = new System.Windows.Forms.TextBox();
+            this.localidadeFornecedorTxt = new System.Windows.Forms.TextBox();
+            this.codPostalFornecedorTxt = new System.Windows.Forms.TextBox();
+            this.addButtonFornecedor = new System.Windows.Forms.Button();
+            this.editButtonFornecedor = new System.Windows.Forms.Button();
+            this.deleteButtonFornecedor = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             addToolStripMarcas = new System.Windows.Forms.ToolStripMenuItem();
             label4 = new System.Windows.Forms.Label();
+            addToolStripFornecedores = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlLojasPessoas.SuspendLayout();
             this.pessoasTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -159,6 +176,8 @@
             this.menuStrip3.SuspendLayout();
             this.marcastTab.SuspendLayout();
             this.menuStrip4.SuspendLayout();
+            this.fornecedoresPage.SuspendLayout();
+            this.menuStrip5.SuspendLayout();
             this.SuspendLayout();
             // 
             // addToolStripMarcas
@@ -185,6 +204,7 @@
             this.tabControlLojasPessoas.Controls.Add(this.lojasTab);
             this.tabControlLojasPessoas.Controls.Add(this.tabPage1);
             this.tabControlLojasPessoas.Controls.Add(this.marcastTab);
+            this.tabControlLojasPessoas.Controls.Add(this.fornecedoresPage);
             this.tabControlLojasPessoas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControlLojasPessoas.Location = new System.Drawing.Point(28, 25);
             this.tabControlLojasPessoas.Name = "tabControlLojasPessoas";
@@ -245,6 +265,26 @@
             this.pessoasTab.TabIndex = 0;
             this.pessoasTab.Text = "Pessoas";
             this.pessoasTab.UseVisualStyleBackColor = true;
+            // 
+            // salariomedioPessoaLabel
+            // 
+            this.salariomedioPessoaLabel.AutoSize = true;
+            this.salariomedioPessoaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.salariomedioPessoaLabel.Location = new System.Drawing.Point(813, 160);
+            this.salariomedioPessoaLabel.Name = "salariomedioPessoaLabel";
+            this.salariomedioPessoaLabel.Size = new System.Drawing.Size(23, 25);
+            this.salariomedioPessoaLabel.TabIndex = 59;
+            this.salariomedioPessoaLabel.Text = "0";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(669, 160);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(138, 25);
+            this.label17.TabIndex = 58;
+            this.label17.Text = "Salário Médio:";
             // 
             // searchSubempresaPessoaTxt
             // 
@@ -1400,25 +1440,173 @@
             this.MarcasList.TabIndex = 51;
             this.MarcasList.SelectedIndexChanged += new System.EventHandler(this.MarcasList_SelectedIndexChanged);
             // 
-            // label17
+            // fornecedoresPage
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(669, 160);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(138, 25);
-            this.label17.TabIndex = 58;
-            this.label17.Text = "Salário Médio:";
+            this.fornecedoresPage.Controls.Add(this.button1);
+            this.fornecedoresPage.Controls.Add(this.deleteButtonFornecedor);
+            this.fornecedoresPage.Controls.Add(this.editButtonFornecedor);
+            this.fornecedoresPage.Controls.Add(this.addButtonFornecedor);
+            this.fornecedoresPage.Controls.Add(this.codPostalFornecedorTxt);
+            this.fornecedoresPage.Controls.Add(this.localidadeFornecedorTxt);
+            this.fornecedoresPage.Controls.Add(this.ruaFornecedorTxt);
+            this.fornecedoresPage.Controls.Add(this.telefoneFornecedorTxt);
+            this.fornecedoresPage.Controls.Add(this.FornecedoresList);
+            this.fornecedoresPage.Controls.Add(this.label21);
+            this.fornecedoresPage.Controls.Add(this.label20);
+            this.fornecedoresPage.Controls.Add(this.label19);
+            this.fornecedoresPage.Controls.Add(this.label18);
+            this.fornecedoresPage.Controls.Add(this.menuStrip5);
+            this.fornecedoresPage.Location = new System.Drawing.Point(4, 34);
+            this.fornecedoresPage.Name = "fornecedoresPage";
+            this.fornecedoresPage.Size = new System.Drawing.Size(1198, 581);
+            this.fornecedoresPage.TabIndex = 4;
+            this.fornecedoresPage.Text = "Fornecedores";
+            this.fornecedoresPage.UseVisualStyleBackColor = true;
             // 
-            // salariomedioPessoaLabel
+            // menuStrip5
             // 
-            this.salariomedioPessoaLabel.AutoSize = true;
-            this.salariomedioPessoaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.salariomedioPessoaLabel.Location = new System.Drawing.Point(813, 160);
-            this.salariomedioPessoaLabel.Name = "salariomedioPessoaLabel";
-            this.salariomedioPessoaLabel.Size = new System.Drawing.Size(23, 25);
-            this.salariomedioPessoaLabel.TabIndex = 59;
-            this.salariomedioPessoaLabel.Text = "0";
+            this.menuStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            addToolStripFornecedores});
+            this.menuStrip5.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip5.Name = "menuStrip5";
+            this.menuStrip5.Size = new System.Drawing.Size(1198, 36);
+            this.menuStrip5.TabIndex = 53;
+            this.menuStrip5.Text = "menuStrip5";
+            // 
+            // addToolStripFornecedores
+            // 
+            addToolStripFornecedores.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            addToolStripFornecedores.Name = "addToolStripFornecedores";
+            addToolStripFornecedores.Size = new System.Drawing.Size(110, 32);
+            addToolStripFornecedores.Text = "Adicionar";
+            addToolStripFornecedores.Click += new System.EventHandler(this.AddToolStripFornecedor_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(23, 177);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(95, 25);
+            this.label18.TabIndex = 54;
+            this.label18.Text = "Telefone:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(292, 175);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(53, 25);
+            this.label19.TabIndex = 55;
+            this.label19.Text = "Rua:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(23, 267);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(113, 25);
+            this.label20.TabIndex = 56;
+            this.label20.Text = "Localidade:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(376, 267);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(109, 25);
+            this.label21.TabIndex = 57;
+            this.label21.Text = "CodPostal:";
+            // 
+            // FornecedoresList
+            // 
+            this.FornecedoresList.FormattingEnabled = true;
+            this.FornecedoresList.ItemHeight = 25;
+            this.FornecedoresList.Location = new System.Drawing.Point(663, 48);
+            this.FornecedoresList.Name = "FornecedoresList";
+            this.FornecedoresList.Size = new System.Drawing.Size(510, 504);
+            this.FornecedoresList.TabIndex = 58;
+            this.FornecedoresList.SelectedIndexChanged += new System.EventHandler(this.FornecedoresList_SelectedIndexChanged);
+            // 
+            // telefoneFornecedorTxt
+            // 
+            this.telefoneFornecedorTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.telefoneFornecedorTxt.Location = new System.Drawing.Point(124, 174);
+            this.telefoneFornecedorTxt.Name = "telefoneFornecedorTxt";
+            this.telefoneFornecedorTxt.Size = new System.Drawing.Size(127, 30);
+            this.telefoneFornecedorTxt.TabIndex = 59;
+            // 
+            // ruaFornecedorTxt
+            // 
+            this.ruaFornecedorTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ruaFornecedorTxt.Location = new System.Drawing.Point(351, 174);
+            this.ruaFornecedorTxt.Name = "ruaFornecedorTxt";
+            this.ruaFornecedorTxt.Size = new System.Drawing.Size(297, 30);
+            this.ruaFornecedorTxt.TabIndex = 60;
+            // 
+            // localidadeFornecedorTxt
+            // 
+            this.localidadeFornecedorTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.localidadeFornecedorTxt.Location = new System.Drawing.Point(142, 264);
+            this.localidadeFornecedorTxt.Name = "localidadeFornecedorTxt";
+            this.localidadeFornecedorTxt.Size = new System.Drawing.Size(194, 30);
+            this.localidadeFornecedorTxt.TabIndex = 61;
+            // 
+            // codPostalFornecedorTxt
+            // 
+            this.codPostalFornecedorTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.codPostalFornecedorTxt.Location = new System.Drawing.Point(491, 264);
+            this.codPostalFornecedorTxt.Name = "codPostalFornecedorTxt";
+            this.codPostalFornecedorTxt.Size = new System.Drawing.Size(124, 30);
+            this.codPostalFornecedorTxt.TabIndex = 62;
+            // 
+            // addButtonFornecedor
+            // 
+            this.addButtonFornecedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addButtonFornecedor.Location = new System.Drawing.Point(28, 507);
+            this.addButtonFornecedor.Name = "addButtonFornecedor";
+            this.addButtonFornecedor.Size = new System.Drawing.Size(120, 45);
+            this.addButtonFornecedor.TabIndex = 63;
+            this.addButtonFornecedor.Text = "Add";
+            this.addButtonFornecedor.UseVisualStyleBackColor = true;
+            this.addButtonFornecedor.Click += new System.EventHandler(this.AddButtonFornecedor_Click);
+            // 
+            // editButtonFornecedor
+            // 
+            this.editButtonFornecedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editButtonFornecedor.Location = new System.Drawing.Point(197, 507);
+            this.editButtonFornecedor.Name = "editButtonFornecedor";
+            this.editButtonFornecedor.Size = new System.Drawing.Size(120, 45);
+            this.editButtonFornecedor.TabIndex = 64;
+            this.editButtonFornecedor.Text = "Edit";
+            this.editButtonFornecedor.UseVisualStyleBackColor = true;
+            this.editButtonFornecedor.Click += new System.EventHandler(this.EditButtonFornecedor_Click);
+            // 
+            // deleteButtonFornecedor
+            // 
+            this.deleteButtonFornecedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteButtonFornecedor.Location = new System.Drawing.Point(365, 507);
+            this.deleteButtonFornecedor.Name = "deleteButtonFornecedor";
+            this.deleteButtonFornecedor.Size = new System.Drawing.Size(120, 45);
+            this.deleteButtonFornecedor.TabIndex = 65;
+            this.deleteButtonFornecedor.Text = "Delete";
+            this.deleteButtonFornecedor.UseVisualStyleBackColor = true;
+            this.deleteButtonFornecedor.Click += new System.EventHandler(this.DeleteButtonFornecedor_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(528, 507);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(120, 45);
+            this.button1.TabIndex = 66;
+            this.button1.Text = "Fornecer";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.FornecerProduto_Click);
             // 
             // Form1
             // 
@@ -1447,6 +1635,10 @@
             this.marcastTab.PerformLayout();
             this.menuStrip4.ResumeLayout(false);
             this.menuStrip4.PerformLayout();
+            this.fornecedoresPage.ResumeLayout(false);
+            this.fornecedoresPage.PerformLayout();
+            this.menuStrip5.ResumeLayout(false);
+            this.menuStrip5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1572,6 +1764,21 @@
         private System.Windows.Forms.ToolStripMenuItem gerenteToolStripMenuItem;
         public System.Windows.Forms.Label salariomedioPessoaLabel;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TabPage fornecedoresPage;
+        private System.Windows.Forms.Button deleteButtonFornecedor;
+        private System.Windows.Forms.Button editButtonFornecedor;
+        private System.Windows.Forms.Button addButtonFornecedor;
+        private System.Windows.Forms.TextBox codPostalFornecedorTxt;
+        private System.Windows.Forms.TextBox localidadeFornecedorTxt;
+        private System.Windows.Forms.TextBox ruaFornecedorTxt;
+        private System.Windows.Forms.TextBox telefoneFornecedorTxt;
+        private System.Windows.Forms.ListBox FornecedoresList;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.MenuStrip menuStrip5;
+        private System.Windows.Forms.Button button1;
     }
 }
 

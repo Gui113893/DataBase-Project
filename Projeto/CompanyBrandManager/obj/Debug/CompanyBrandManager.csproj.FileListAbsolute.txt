@@ -10,3 +10,4 @@ C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\C
 C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.exe
 C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.pdb
 C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.DistributeForm.resources
+C:\Users\gui28\OneDrive\Ambiente de Trabalho\LEI\2ºAno\2ºSemestre\BD\Projeto\CompanyBrandManager\obj\Debug\CompanyBrandManager.FornecerForm.resources

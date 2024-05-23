@@ -19,17 +19,19 @@ namespace CompanyBrandManager
         private int currentProdutoIndex;
         private int currentMarcaIndex;
         private int currentLocalidadeIndex;
+        private int currentFornecedorIndex;
         private List<String> deletedLocalidadesMarca;
         private List<String> addedLocalidadesMarca;
 
         private Pessoa currentPessoa;
         private Loja currentLoja;
         private Produto currentProduto;
-
+        private Fornecedor currentFornecedor;
         private Marca currentMarca;
         private bool adding_pessoa;
         private bool adding_loja;
         private bool adding_produto;
+        private bool adding_fornecedor;
 
         private bool adding_marca;
 
@@ -44,6 +46,7 @@ namespace CompanyBrandManager
             loadLojas(0);
             loadProdutos(0);
             loadMarcas();
+            loadFornecedores();
             deletedLocalidadesMarca = new List<String>();
             addedLocalidadesMarca = new List<String>();
             filterPessoa = "";
@@ -80,6 +83,7 @@ namespace CompanyBrandManager
             loadLojas(0); 
             loadProdutos(filterProdutoByLoja); 
             loadMarcas(); 
+            loadFornecedores();
         }
 
         private void PessoasList_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,6 +128,8 @@ namespace CompanyBrandManager
             }
         }
 
+        
+
         private void LocalidadesListaMarca_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (LocalidadesListMarca.SelectedIndex >= 0)
@@ -132,7 +138,15 @@ namespace CompanyBrandManager
                 deleteLocalidadeButtonMarca.Visible = true;
             }
         }
-
+        private void FornecedoresList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (FornecedoresList.SelectedIndex >= 0)
+            {
+                currentFornecedorIndex = FornecedoresList.SelectedIndex;
+                currentFornecedor = (Fornecedor)FornecedoresList.Items[currentFornecedorIndex];
+                ShowFornecedor();
+            }
+        }
         private void SearchProduto_Click(object sender, EventArgs e)
         {
             if (searchProdutoByLoja.Text != "")
@@ -164,6 +178,18 @@ namespace CompanyBrandManager
             cn.Close();            
             DistributeForm distributeForm = new DistributeForm(currentProduto);
             distributeForm.Show();
+        }
+
+        private void FornecerProduto_Click(object sender, EventArgs e)
+        {
+            if (currentFornecedorIndex < 0)
+            {
+                MessageBox.Show("Seleciona um produto para fornecer");
+                return;
+            }
+            cn.Close();
+            FornecerForm fornecerForm = new FornecerForm(currentFornecedor);
+            fornecerForm.Show();
         }
 
         private void EditButtonPessoa_Click(object sender, EventArgs e)
@@ -220,6 +246,20 @@ namespace CompanyBrandManager
             MarcasList.Enabled = false;
             SaveMarca(adding_marca, currentMarca);
             MarcasList.Enabled = true;
+        }
+
+        private void EditButtonFornecedor_Click(object sender, EventArgs e)
+        {
+            currentFornecedorIndex = FornecedoresList.SelectedIndex;
+            if (currentFornecedorIndex < 0)
+            {
+                MessageBox.Show("Seleciona um fornecedor para editar");
+                return;
+            }
+            adding_fornecedor = false;
+            FornecedoresList.Enabled = false;
+            SaveFornecedor(adding_fornecedor, currentFornecedor);
+            FornecedoresList.Enabled = true;
         }
 
         private void DeleteButtonPessoa_Click(object sender, EventArgs e)
@@ -342,6 +382,36 @@ namespace CompanyBrandManager
             }
         }
 
+        private void DeleteButtonFornecedor_Click(object sender, EventArgs e)
+        {
+            if (currentFornecedorIndex < 0)
+            {
+                MessageBox.Show("Seleciona um fornecedor para eliminar ");
+                return;
+            }
+
+            if (RemoveFornecedor(currentFornecedor))
+            {
+                FornecedoresList.Items.RemoveAt(FornecedoresList.SelectedIndex);
+                if (currentFornecedorIndex == FornecedoresList.Items.Count)
+                {
+                    currentFornecedorIndex = FornecedoresList.Items.Count - 1;
+                    currentFornecedor = (Fornecedor)FornecedoresList.Items[currentFornecedorIndex];
+                }
+
+                if (currentFornecedorIndex == -1)
+                {
+                    ClearFornecedorFields();
+                    MessageBox.Show("Não há mais fornecedores na base de dados");
+                }
+                else
+                {
+                    ShowFornecedor();
+                }
+
+            }
+        }
+
         private void DeleteLocalidadeButtonMarca_Click(object sender, EventArgs e)
         {
             if (currentLocalidadeIndex < 0)
@@ -417,6 +487,14 @@ namespace CompanyBrandManager
             LocalidadesListMarca.Items.Add(localidade);
         }
 
+        private void AddButtonFornecedor_Click(object sender, EventArgs e)
+        {
+            adding_fornecedor = true;
+            FornecedoresList.Enabled = false;
+            SaveFornecedor(adding_fornecedor, currentFornecedor);
+            FornecedoresList.Enabled = true;
+        }
+
         private void AddToolStripPessoa_Click(object sender, EventArgs e)
         {
             ClearPessoaFields();
@@ -436,6 +514,11 @@ namespace CompanyBrandManager
         private void AddToolStripMarca_Click(object sender, EventArgs e)
         {
             ClearMarcaFields();
+        }
+
+        private void AddToolStripFornecedor_Click(object sender, EventArgs e)
+        {
+            ClearFornecedorFields();
         }
 
         private void AddPartTime_Click(object sender, EventArgs e)
@@ -638,6 +721,18 @@ namespace CompanyBrandManager
             cn.Close();
         }
 
+        public void ShowFornecedor()
+        {
+            if (FornecedoresList.Items.Count == 0 | currentFornecedorIndex < 0)
+                return;
+            Fornecedor fornecedor = new Fornecedor();
+            fornecedor = (Fornecedor)FornecedoresList.Items[currentFornecedorIndex];
+            telefoneFornecedorTxt.Text = fornecedor.Telefone;
+            ruaFornecedorTxt.Text = fornecedor.Rua;
+            codPostalFornecedorTxt.Text = fornecedor.Codigo_Postal;
+            localidadeFornecedorTxt.Text = fornecedor.Localidade;
+        }
+
         public void ClearPessoaFields()
         {
             nifTxtPessoa.Text = "";
@@ -682,6 +777,14 @@ namespace CompanyBrandManager
             DateTime now = DateTime.Now;
             dataRegistoTxtMarca.Text = now.ToString("yyyy-MM-dd");
             deleteLocalidadeButtonMarca.Visible = false;
+        }
+
+        public void ClearFornecedorFields()
+        {
+            telefoneFornecedorTxt.Text = "";
+            ruaFornecedorTxt.Text = "";
+            codPostalFornecedorTxt.Text = "";
+            localidadeFornecedorTxt.Text = "";
         }
 
         public void HideSpecifics()
@@ -853,6 +956,46 @@ namespace CompanyBrandManager
                 {
                     MarcasList.Items.Add(marca);
                     loadMarcas();
+                }
+                else
+                    return false;
+            }
+            return true;
+        }
+
+        private bool SaveFornecedor(bool adding_fornecedor, Fornecedor currentFornecedor)
+        {
+            // currentFornecedor serve só para o caso de estar a editar para guardar informação antiga
+            Fornecedor fornecedor = new Fornecedor();
+            try
+            {
+                fornecedor.Telefone = telefoneFornecedorTxt.Text;
+                fornecedor.Rua = ruaFornecedorTxt.Text;
+                fornecedor.Codigo_Postal = codPostalFornecedorTxt.Text;
+                fornecedor.Localidade = localidadeFornecedorTxt.Text;
+                fornecedor.ID = currentFornecedor.ID;
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+                return false;
+            }
+            if (!adding_fornecedor)
+            {
+                if (UpdateFornecedor(fornecedor, currentFornecedor))
+                {
+                    FornecedoresList.Items[currentFornecedorIndex] = fornecedor;
+                    loadFornecedores();
+                }
+                else
+                    return false;
+            }
+            else
+            {
+                if (AddFornecedor(fornecedor))
+                {
+                    FornecedoresList.Items.Add(fornecedor);
+                    loadFornecedores();
                 }
                 else
                     return false;
@@ -1087,6 +1230,34 @@ namespace CompanyBrandManager
             return true;
         }
 
+        private bool AddFornecedor(Fornecedor fornecedor)
+        {
+            if (!verifyConnection())
+                return false;
+
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Fornecedor(telefone, rua, codigo_postal, localidade) VALUES (@Telefone, @Rua, @CodigoPostal, @Localidade)", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@Telefone", SqlDbType.VarChar, 20) { Value = fornecedor.Telefone });
+                    cmd.Parameters.Add(new SqlParameter("@Rua", SqlDbType.VarChar, 100) { Value = fornecedor.Rua });
+                    cmd.Parameters.Add(new SqlParameter("@CodigoPostal", SqlDbType.VarChar, 10) { Value = fornecedor.Codigo_Postal });
+                    cmd.Parameters.Add(new SqlParameter("@Localidade", SqlDbType.VarChar, 100) { Value = fornecedor.Localidade });
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao adicionar este fornecedor| " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+            MessageBox.Show("Fornecedor adicionado com sucesso");
+            cn.Close();
+            return true;
+        }
+
         private bool UpdatePessoa(Pessoa pessoa, Pessoa anteriorPessoa)
         {
             if (!verifyConnection())
@@ -1315,6 +1486,35 @@ namespace CompanyBrandManager
             return true;
         }
 
+        private bool UpdateFornecedor(Fornecedor fornecedor, Fornecedor currentFornecedor)
+        {
+            if (!verifyConnection())
+                return false;
+
+            using (SqlCommand cmd = new SqlCommand("UPDATE Fornecedor SET telefone = @telefone, rua = @rua, codigo_postal = @codigo_postal, localidade = @localidade WHERE id_fornecedor = @id_fornecedor", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@telefone", SqlDbType.VarChar, 20) { Value = fornecedor.Telefone });
+                    cmd.Parameters.Add(new SqlParameter("@rua", SqlDbType.VarChar, 100) { Value = fornecedor.Rua });
+                    cmd.Parameters.Add(new SqlParameter("@codigo_postal", SqlDbType.VarChar, 10) { Value = fornecedor.Codigo_Postal });
+                    cmd.Parameters.Add(new SqlParameter("@localidade", SqlDbType.VarChar, 100) { Value = fornecedor.Localidade });
+                    cmd.Parameters.Add(new SqlParameter("@id_fornecedor", SqlDbType.Int) { Value = currentFornecedor.ID });
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao atualizar fornecedor na base de dados: " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+            MessageBox.Show("Fornecedor atualizado com sucesso");
+            cn.Close();
+            return true;
+        }
+
         private bool RemovePessoa(Pessoa currentPessoa)
         {
             if (!verifyConnection())
@@ -1407,6 +1607,30 @@ namespace CompanyBrandManager
                 }
             }
             MessageBox.Show("Marca eliminada com sucesso");
+            cn.Close();
+            return true;
+        }
+
+        private bool RemoveFornecedor(Fornecedor currentFornecedor)
+        {
+            if (!verifyConnection())
+                return false;
+
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Fornecedor WHERE id_fornecedor = @id_fornecedor", cn))
+            {
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@id_fornecedor", SqlDbType.Int) { Value = currentFornecedor.ID });
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Erro ao eliminar este fornecedor| " + exc.Message);
+                    cn.Close();
+                    return false;
+                }
+            }
+            MessageBox.Show("Fornecedor eliminado com sucesso");
             cn.Close();
             return true;
         }
@@ -1629,6 +1853,37 @@ namespace CompanyBrandManager
             currentMarca = (Marca)MarcasList.Items[currentMarcaIndex];
             ShowMarca();
 
+        }
+
+        public void loadFornecedores()
+        {
+            if (!verifyConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Fornecedor", cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            FornecedoresList.Items.Clear();
+
+            while (reader.Read())
+            {
+                Fornecedor fornecedor = new Fornecedor();
+                fornecedor.ID = reader["id_fornecedor"].ToString();
+                fornecedor.Telefone = reader["telefone"].ToString();
+                fornecedor.Rua = reader["rua"].ToString();
+                fornecedor.Codigo_Postal = reader["codigo_postal"].ToString();
+                fornecedor.Localidade = reader["localidade"].ToString();
+                FornecedoresList.Items.Add(fornecedor);
+            }
+            cn.Close();
+            // Se nao houverem items na lista
+            if (FornecedoresList.Items.Count == 0)
+            {
+                MessageBox.Show("Não há fornecedores na base de dados");
+                return;
+            }
+            currentFornecedorIndex = 0;
+            currentFornecedor = (Fornecedor)FornecedoresList.Items[currentFornecedorIndex];
+            ShowFornecedor();
         }
 
         private void fimContratoTxt_TextChanged(object sender, EventArgs e)
