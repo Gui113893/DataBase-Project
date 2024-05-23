@@ -1502,6 +1502,12 @@ namespace CompanyBrandManager
                 PessoasList.Items.Add(pessoa);
             }
             cn.Close();
+            // Se nao houverem items na lista
+            if (PessoasList.Items.Count == 0)
+            {
+                MessageBox.Show("Não há pessoas resultado desta pesquisa");
+                return;
+            }
             currentPessoaIndex = 0;
             currentPessoa = (Pessoa)PessoasList.Items[currentPessoaIndex];
             ShowPessoa();
