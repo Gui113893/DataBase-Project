@@ -141,6 +141,7 @@ namespace CompanyBrandManager
             }
             else
             {
+                filterProdutoByLoja = 0;
                 loadProdutos(0);
             }
         }
@@ -1527,37 +1528,41 @@ namespace CompanyBrandManager
                 return;
 
             
-            SqlCommand cmd = new SqlCommand("SELECT id_produto, nome, preco, marca, marcaNome, dbo.fn_TotalFornecidoPorProduto(p.id_produto) AS quantidade FROM Produto p JOIN Marca m ON m.patente = p.marca;", cn);
-            filterProdutoByLoja = lojaId;
-            if (lojaId > 0)
-            {
-                cmd = new SqlCommand("SELECT * FROM Produto JOIN Stock_Loja ON Stock_Loja.produto = Produto.id_produto JOIN Marca ON Produto.id_produto = Marca.patente WHERE Stock_Loja.loja = @lojaId", cn);
-                cmd.Parameters.Add(new SqlParameter("@lojaId", SqlDbType.Int) { Value = lojaId });
+            SqlCommand cmd = new SqlCommand("SELECT p.id_produto, p.nome AS nome, p.preco, m.marcaNome, dbo.fn_TotalFornecidoPorProduto(p.id_produto) AS quantidade_total, p.marca FROM Produto p JOIN Marca m ON p.marca = m.patente WHERE (@marcaNome IS NULL OR m.marcaNome LIKE '%' + @marcaNome + '%') AND (@nomeProduto IS NULL OR p.nome LIKE '%' + @nomeProduto + '%') AND (@quantidadeMin IS NULL OR dbo.fn_QuantidadeProdutoLojas(p.id_produto) >= @quantidadeMin);", cn);
+            if (lojaId > 0){
+                cmd = new SqlCommand("SELECT p.id_produto, p.preco , p.nome AS nome, m.marcaNome, ISNULL(sl.quantidade, 0) AS quantidade, dbo.fn_TotalFornecidoPorProduto(p.id_produto) AS quantidade_total, p.marca FROM Produto p JOIN Marca m ON p.marca = m.patente JOIN Stock_Loja sl ON p.id_produto = sl.produto AND sl.loja = @id_loja WHERE (@marcaNome IS NULL OR m.marcaNome LIKE '%' + @marcaNome + '%') AND (@nomeProduto IS NULL OR p.nome LIKE '%' + @nomeProduto + '%') AND (@quantidadeMin IS NULL OR CASE WHEN @id_loja IS NOT NULL THEN (SELECT quantidade FROM Stock_Loja WHERE loja = @id_loja AND produto = p.id_produto) ELSE dbo.fn_QuantidadeProdutoLojas(p.id_produto) END >= @quantidadeMin);", cn);
+                cmd.Parameters.Add(new SqlParameter("@id_loja", SqlDbType.Int) { Value = lojaId });
             }
-            
+            cmd.Parameters.Add(new SqlParameter("@marcaNome", SqlDbType.VarChar, 100) { Value = marcaSearchTxtProduto.Text == "" ? DBNull.Value : (object)marcaSearchTxtProduto.Text });
+            cmd.Parameters.Add(new SqlParameter("@nomeProduto", SqlDbType.VarChar, 100) { Value = produtoNomeSearchTxt.Text == "" ? DBNull.Value :(object)produtoNomeSearchTxt.Text });
+            cmd.Parameters.Add(new SqlParameter("@quantidadeMin", SqlDbType.Int) { Value = minStockProdutoSearchTxt.Text == "" ? DBNull.Value : (object)minStockProdutoSearchTxt.Text});
+ 
             SqlDataReader reader = cmd.ExecuteReader();
             ProdutosList.Items.Clear();
 
+            // Ler os dados
             while (reader.Read())
             {
                 Produto produto = new Produto();
                 produto.ID = reader["id_produto"].ToString();
                 produto.Nome = reader["nome"].ToString();
-                produto.Preco = reader["preco"].ToString();
                 produto.MarcaNome = reader["marcaNome"].ToString();
-                produto.MarcaId = reader["marca"].ToString();   
-                if (lojaId > 0)
-                    produto.QuantidadeLoja = (int)reader["quantidade"];
-                else
-                    produto.QuantidadeTotal = (int)reader["quantidade"];
+                produto.Preco = reader["preco"].ToString();
 
+                if (lojaId > 0)
+                {
+                    produto.QuantidadeLoja = (int)reader["quantidade"];
+                }
+                produto.QuantidadeTotal = (int)reader["quantidade_total"];
+                produto.MarcaId = reader["marca"].ToString();
                 ProdutosList.Items.Add(produto);
             }
+           
             cn.Close();
             // Se nao houverem items na lista
             if (ProdutosList.Items.Count == 0)
             {
-                MessageBox.Show("Não há produtos na base de dados ou neste loja");
+                MessageBox.Show("Não há produtos resultado desta pesquisa");
                 return;
             }
             currentProdutoIndex = 0;
