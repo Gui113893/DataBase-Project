@@ -561,16 +561,34 @@ namespace CompanyBrandManager
             {
                 stock_circulação = reader["QuantidadeTotal"].ToString();
             } 
-
             if (filterProdutoByLoja > 0)
             {
                 // Se o filtro por loja está ativo mostra stock_em_loja/stock_em_circulação
-                stockProdutoLabel.Text = produto.QuantidadeLoja.ToString() + "/" + stock_circulação;
+                stockLabel.Text = "Stock Loja:";
+                stockProdutoLabel.Text = produto.QuantidadeLoja.ToString();
             }
             else
             {
-                stockProdutoLabel.Text = stock_circulação + "/" + produto.QuantidadeTotal.ToString();
+                stockLabel.Text = "Stock em Lojas:";
+                stockProdutoLabel.Text = stock_circulação;
             }
+            cn.Close();
+            // Colocar o stock disponível (stock fornecido - stock_circulação) por query
+            if (!verifyConnection())
+            {
+                return;
+            }
+            SqlCommand cmd2 = new SqlCommand("SELECT (dbo.fn_TotalFornecidoPorProduto(@id_produto) - dbo.fn_QuantidadeProdutoLojas(@id_produto)) AS QuantidadeDisponível;",cn);
+            cmd2.Parameters.Clear();
+            cmd2.Parameters.Add(new SqlParameter("@id_produto", SqlDbType.Int) { Value = produto.ID });
+            cmd2.Connection = cn;
+            SqlDataReader reader2 = cmd2.ExecuteReader();
+            String stock_disponivel = "0";
+            if (reader2.Read())
+            {
+                stock_disponivel = reader2["QuantidadeDisponível"].ToString();
+            }
+            stockDisponivelLabel.Text = stock_disponivel;
             cn.Close();
         }
 

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.ToolStripMenuItem addToolStripMarcas;
+            System.Windows.Forms.Label label4;
             this.tabControlLojasPessoas = new System.Windows.Forms.TabControl();
             this.pessoasTab = new System.Windows.Forms.TabPage();
             this.fimContratoTxt = new System.Windows.Forms.TextBox();
@@ -104,7 +105,6 @@
             this.editButtonProduto = new System.Windows.Forms.Button();
             this.addButtonProduto = new System.Windows.Forms.Button();
             this.stockProdutoLabel = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.marcaTxtProduto = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -114,6 +114,12 @@
             this.NomeLabelProduto = new System.Windows.Forms.Label();
             this.ProdutosList = new System.Windows.Forms.ListBox();
             this.marcastTab = new System.Windows.Forms.TabPage();
+            this.deleteButtonMarca = new System.Windows.Forms.Button();
+            this.editButtonMarca = new System.Windows.Forms.Button();
+            this.addButtonMarca = new System.Windows.Forms.Button();
+            this.deleteLocalidadeButtonMarca = new System.Windows.Forms.Button();
+            this.addLocalidadeButtonMarca = new System.Windows.Forms.Button();
+            this.localidadeTxtMarca = new System.Windows.Forms.TextBox();
             this.LocalidadesListMarca = new System.Windows.Forms.ListBox();
             this.label10 = new System.Windows.Forms.Label();
             this.dataVencimentoTxtMarca = new System.Windows.Forms.TextBox();
@@ -125,13 +131,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.menuStrip4 = new System.Windows.Forms.MenuStrip();
             this.MarcasList = new System.Windows.Forms.ListBox();
-            this.localidadeTxtMarca = new System.Windows.Forms.TextBox();
-            this.addLocalidadeButtonMarca = new System.Windows.Forms.Button();
-            this.deleteLocalidadeButtonMarca = new System.Windows.Forms.Button();
-            this.addButtonMarca = new System.Windows.Forms.Button();
-            this.editButtonMarca = new System.Windows.Forms.Button();
-            this.deleteButtonMarca = new System.Windows.Forms.Button();
+            this.stockDisponivelLabel = new System.Windows.Forms.Label();
+            this.stockLabel = new System.Windows.Forms.Label();
             addToolStripMarcas = new System.Windows.Forms.ToolStripMenuItem();
+            label4 = new System.Windows.Forms.Label();
             this.tabControlLojasPessoas.SuspendLayout();
             this.pessoasTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -809,6 +812,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.stockLabel);
+            this.tabPage1.Controls.Add(this.stockDisponivelLabel);
+            this.tabPage1.Controls.Add(label4);
             this.tabPage1.Controls.Add(this.searchProduto);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.searchProdutoByLoja);
@@ -818,7 +824,6 @@
             this.tabPage1.Controls.Add(this.editButtonProduto);
             this.tabPage1.Controls.Add(this.addButtonProduto);
             this.tabPage1.Controls.Add(this.stockProdutoLabel);
-            this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.marcaTxtProduto);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
@@ -930,21 +935,11 @@
             // 
             this.stockProdutoLabel.AutoSize = true;
             this.stockProdutoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stockProdutoLabel.Location = new System.Drawing.Point(107, 337);
+            this.stockProdutoLabel.Location = new System.Drawing.Point(191, 337);
             this.stockProdutoLabel.Name = "stockProdutoLabel";
-            this.stockProdutoLabel.Size = new System.Drawing.Size(198, 25);
+            this.stockProdutoLabel.Size = new System.Drawing.Size(23, 25);
             this.stockProdutoLabel.TabIndex = 41;
-            this.stockProdutoLabel.Text = "Circulação/Fornecido";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(33, 337);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 25);
-            this.label4.TabIndex = 40;
-            this.label4.Text = "Stock:";
+            this.stockProdutoLabel.Text = "0";
             // 
             // marcaTxtProduto
             // 
@@ -1050,6 +1045,70 @@
             this.marcastTab.Text = "Marcas";
             this.marcastTab.UseVisualStyleBackColor = true;
             this.marcastTab.Click += new System.EventHandler(this.marcastTab_Click);
+            // 
+            // deleteButtonMarca
+            // 
+            this.deleteButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteButtonMarca.Location = new System.Drawing.Point(1056, 508);
+            this.deleteButtonMarca.Name = "deleteButtonMarca";
+            this.deleteButtonMarca.Size = new System.Drawing.Size(120, 45);
+            this.deleteButtonMarca.TabIndex = 67;
+            this.deleteButtonMarca.Text = "Delete";
+            this.deleteButtonMarca.UseVisualStyleBackColor = true;
+            this.deleteButtonMarca.Click += new System.EventHandler(this.DeleteButtonMarca_Click);
+            // 
+            // editButtonMarca
+            // 
+            this.editButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editButtonMarca.Location = new System.Drawing.Point(871, 508);
+            this.editButtonMarca.Name = "editButtonMarca";
+            this.editButtonMarca.Size = new System.Drawing.Size(120, 45);
+            this.editButtonMarca.TabIndex = 66;
+            this.editButtonMarca.Text = "Edit";
+            this.editButtonMarca.UseVisualStyleBackColor = true;
+            this.editButtonMarca.Click += new System.EventHandler(this.EditButtonMarca_Click);
+            // 
+            // addButtonMarca
+            // 
+            this.addButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addButtonMarca.Location = new System.Drawing.Point(659, 508);
+            this.addButtonMarca.Name = "addButtonMarca";
+            this.addButtonMarca.Size = new System.Drawing.Size(120, 45);
+            this.addButtonMarca.TabIndex = 65;
+            this.addButtonMarca.Text = "Add";
+            this.addButtonMarca.UseVisualStyleBackColor = true;
+            this.addButtonMarca.Click += new System.EventHandler(this.AddButtonMarca_Click);
+            // 
+            // deleteLocalidadeButtonMarca
+            // 
+            this.deleteLocalidadeButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteLocalidadeButtonMarca.Location = new System.Drawing.Point(42, 508);
+            this.deleteLocalidadeButtonMarca.Name = "deleteLocalidadeButtonMarca";
+            this.deleteLocalidadeButtonMarca.Size = new System.Drawing.Size(120, 45);
+            this.deleteLocalidadeButtonMarca.TabIndex = 64;
+            this.deleteLocalidadeButtonMarca.Text = "Delete";
+            this.deleteLocalidadeButtonMarca.UseVisualStyleBackColor = true;
+            this.deleteLocalidadeButtonMarca.Visible = false;
+            this.deleteLocalidadeButtonMarca.Click += new System.EventHandler(this.DeleteLocalidadeButtonMarca_Click);
+            // 
+            // addLocalidadeButtonMarca
+            // 
+            this.addLocalidadeButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addLocalidadeButtonMarca.Location = new System.Drawing.Point(361, 236);
+            this.addLocalidadeButtonMarca.Name = "addLocalidadeButtonMarca";
+            this.addLocalidadeButtonMarca.Size = new System.Drawing.Size(65, 38);
+            this.addLocalidadeButtonMarca.TabIndex = 63;
+            this.addLocalidadeButtonMarca.Text = "+";
+            this.addLocalidadeButtonMarca.UseVisualStyleBackColor = true;
+            this.addLocalidadeButtonMarca.Click += new System.EventHandler(this.AddButtonLocalidadeMarca_Click);
+            // 
+            // localidadeTxtMarca
+            // 
+            this.localidadeTxtMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.localidadeTxtMarca.Location = new System.Drawing.Point(156, 240);
+            this.localidadeTxtMarca.Name = "localidadeTxtMarca";
+            this.localidadeTxtMarca.Size = new System.Drawing.Size(189, 30);
+            this.localidadeTxtMarca.TabIndex = 62;
             // 
             // LocalidadesListMarca
             // 
@@ -1162,69 +1221,35 @@
             this.MarcasList.TabIndex = 51;
             this.MarcasList.SelectedIndexChanged += new System.EventHandler(this.MarcasList_SelectedIndexChanged);
             // 
-            // localidadeTxtMarca
+            // label4
             // 
-            this.localidadeTxtMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.localidadeTxtMarca.Location = new System.Drawing.Point(156, 240);
-            this.localidadeTxtMarca.Name = "localidadeTxtMarca";
-            this.localidadeTxtMarca.Size = new System.Drawing.Size(189, 30);
-            this.localidadeTxtMarca.TabIndex = 62;
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            label4.Location = new System.Drawing.Point(328, 337);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(163, 25);
+            label4.TabIndex = 51;
+            label4.Text = "Stock Disponível:";
             // 
-            // addLocalidadeButtonMarca
+            // stockDisponivelLabel
             // 
-            this.addLocalidadeButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addLocalidadeButtonMarca.Location = new System.Drawing.Point(361, 236);
-            this.addLocalidadeButtonMarca.Name = "addLocalidadeButtonMarca";
-            this.addLocalidadeButtonMarca.Size = new System.Drawing.Size(65, 38);
-            this.addLocalidadeButtonMarca.TabIndex = 63;
-            this.addLocalidadeButtonMarca.Text = "+";
-            this.addLocalidadeButtonMarca.UseVisualStyleBackColor = true;
-            this.addLocalidadeButtonMarca.Click += new System.EventHandler(this.AddButtonLocalidadeMarca_Click);
+            this.stockDisponivelLabel.AutoSize = true;
+            this.stockDisponivelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockDisponivelLabel.Location = new System.Drawing.Point(497, 337);
+            this.stockDisponivelLabel.Name = "stockDisponivelLabel";
+            this.stockDisponivelLabel.Size = new System.Drawing.Size(23, 25);
+            this.stockDisponivelLabel.TabIndex = 52;
+            this.stockDisponivelLabel.Text = "0";
             // 
-            // deleteLocalidadeButtonMarca
+            // stockLabel
             // 
-            this.deleteLocalidadeButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteLocalidadeButtonMarca.Location = new System.Drawing.Point(42, 508);
-            this.deleteLocalidadeButtonMarca.Name = "deleteLocalidadeButtonMarca";
-            this.deleteLocalidadeButtonMarca.Size = new System.Drawing.Size(120, 45);
-            this.deleteLocalidadeButtonMarca.TabIndex = 64;
-            this.deleteLocalidadeButtonMarca.Text = "Delete";
-            this.deleteLocalidadeButtonMarca.UseVisualStyleBackColor = true;
-            this.deleteLocalidadeButtonMarca.Visible = false;
-            this.deleteLocalidadeButtonMarca.Click += new System.EventHandler(this.DeleteLocalidadeButtonMarca_Click);
-            // 
-            // addButtonMarca
-            // 
-            this.addButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addButtonMarca.Location = new System.Drawing.Point(659, 508);
-            this.addButtonMarca.Name = "addButtonMarca";
-            this.addButtonMarca.Size = new System.Drawing.Size(120, 45);
-            this.addButtonMarca.TabIndex = 65;
-            this.addButtonMarca.Text = "Add";
-            this.addButtonMarca.UseVisualStyleBackColor = true;
-            this.addButtonMarca.Click += new System.EventHandler(this.AddButtonMarca_Click);
-            // 
-            // editButtonMarca
-            // 
-            this.editButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editButtonMarca.Location = new System.Drawing.Point(871, 508);
-            this.editButtonMarca.Name = "editButtonMarca";
-            this.editButtonMarca.Size = new System.Drawing.Size(120, 45);
-            this.editButtonMarca.TabIndex = 66;
-            this.editButtonMarca.Text = "Edit";
-            this.editButtonMarca.UseVisualStyleBackColor = true;
-            this.editButtonMarca.Click += new System.EventHandler(this.EditButtonMarca_Click);
-            // 
-            // deleteButtonMarca
-            // 
-            this.deleteButtonMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteButtonMarca.Location = new System.Drawing.Point(1056, 508);
-            this.deleteButtonMarca.Name = "deleteButtonMarca";
-            this.deleteButtonMarca.Size = new System.Drawing.Size(120, 45);
-            this.deleteButtonMarca.TabIndex = 67;
-            this.deleteButtonMarca.Text = "Delete";
-            this.deleteButtonMarca.UseVisualStyleBackColor = true;
-            this.deleteButtonMarca.Click += new System.EventHandler(this.DeleteButtonMarca_Click);
+            this.stockLabel.AutoSize = true;
+            this.stockLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockLabel.Location = new System.Drawing.Point(33, 337);
+            this.stockLabel.Name = "stockLabel";
+            this.stockLabel.Size = new System.Drawing.Size(152, 25);
+            this.stockLabel.TabIndex = 53;
+            this.stockLabel.Text = "Stock em Lojas:";
             // 
             // Form1
             // 
@@ -1324,7 +1349,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ListBox ProdutosList;
         private System.Windows.Forms.Label stockProdutoLabel;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox marcaTxtProduto;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -1361,6 +1385,8 @@
         private System.Windows.Forms.Button deleteLocalidadeButtonMarca;
         private System.Windows.Forms.Button addLocalidadeButtonMarca;
         private System.Windows.Forms.TextBox localidadeTxtMarca;
+        private System.Windows.Forms.Label stockDisponivelLabel;
+        private System.Windows.Forms.Label stockLabel;
     }
 }
 
