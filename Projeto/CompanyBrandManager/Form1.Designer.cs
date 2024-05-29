@@ -286,7 +286,7 @@
             // 
             this.salariomedioPessoaDiretoresLabel.AutoSize = true;
             this.salariomedioPessoaDiretoresLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.salariomedioPessoaDiretoresLabel.Location = new System.Drawing.Point(907, 160);
+            this.salariomedioPessoaDiretoresLabel.Location = new System.Drawing.Point(926, 160);
             this.salariomedioPessoaDiretoresLabel.Name = "salariomedioPessoaDiretoresLabel";
             this.salariomedioPessoaDiretoresLabel.Size = new System.Drawing.Size(23, 25);
             this.salariomedioPessoaDiretoresLabel.TabIndex = 59;
@@ -1630,7 +1630,7 @@
             // 
             this.salariomedioPessoaEfetivosLabel.AutoSize = true;
             this.salariomedioPessoaEfetivosLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.salariomedioPessoaEfetivosLabel.Location = new System.Drawing.Point(907, 185);
+            this.salariomedioPessoaEfetivosLabel.Location = new System.Drawing.Point(926, 185);
             this.salariomedioPessoaEfetivosLabel.Name = "salariomedioPessoaEfetivosLabel";
             this.salariomedioPessoaEfetivosLabel.Size = new System.Drawing.Size(23, 25);
             this.salariomedioPessoaEfetivosLabel.TabIndex = 61;
@@ -1650,7 +1650,7 @@
             // 
             this.salariomedioPessoaPartTimesLabel.AutoSize = true;
             this.salariomedioPessoaPartTimesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.salariomedioPessoaPartTimesLabel.Location = new System.Drawing.Point(907, 210);
+            this.salariomedioPessoaPartTimesLabel.Location = new System.Drawing.Point(926, 210);
             this.salariomedioPessoaPartTimesLabel.Name = "salariomedioPessoaPartTimesLabel";
             this.salariomedioPessoaPartTimesLabel.Size = new System.Drawing.Size(23, 25);
             this.salariomedioPessoaPartTimesLabel.TabIndex = 63;
