@@ -16,7 +16,7 @@ GO
 CREATE TABLE Patente (
     id_patente INT IDENTITY(1,1) PRIMARY KEY,
     data_registo DATE NOT NULL,
-    data_vencimento DATE NOT NULL,
+    data_vencimento DATE NOT NULL CHECK (data_vencimento >= CAST(GETDATE() AS DATE)),
     logo VARCHAR(100),
 );
 GO
@@ -138,7 +138,7 @@ GO
 CREATE TABLE Contrato (
     id_contrato INT IDENTITY(1,1) PRIMARY KEY,
     data_inicio DATE NOT NULL,
-    data_fim DATE NOT NULL,
+    data_fim DATE NOT NULL CHECK (data_fim >= CAST(GETDATE() AS DATE)),
 );
 GO
 
@@ -177,3 +177,10 @@ GO
 ALTER TABLE Loja
 ADD FOREIGN KEY (gerente)
 REFERENCES Funcionario(nif);
+
+-- INDEXES
+
+CREATE INDEX idx_Marca_marcaNome ON Marca(marcaNome);
+CREATE INDEX idx_Produto_nome ON Produto(nome);
+CREATE INDEX idx_Pessoa_tipoNome ON Pessoa(tipo, nome);
+CREATE INDEX idx_SubEmpresa_nome ON SubEmpresa(nome);
