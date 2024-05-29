@@ -246,7 +246,7 @@ BEGIN
         )
         BEGIN
             -- Levantar um erro se a localidade da loja não estiver nas Pat_Locs da marca
-            RAISERROR('Não é possível adicionar quantidade do produto %d na loja %d, pois a localidade %s não está permitida para a marca.', 16, 1, @id_produto, @loja, @localidade_loja);
+            RAISERROR('Não é possível adicionar quantidade do produto %d na loja %d, pois a localidade %s não é permitida para a marca.', 16, 1, @id_produto, @loja, @localidade_loja);
             ROLLBACK TRANSACTION;
             RETURN;
         END
@@ -313,5 +313,44 @@ BEGIN
 
     CLOSE cur;
     DEALLOCATE cur;
+END;
+GO
+
+-- Trigger que não deixa que um fornecedor de uma localidade forneça um produto cuja patente não contém essa localidade
+CREATE TRIGGER trg_ValidarFornecedorProduto
+ON Stock_Fornecido
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    DECLARE @id_produto INT;
+    DECLARE @fornecedor INT;
+    DECLARE @marca INT;
+    DECLARE @localidade VARCHAR(100);
+
+    SELECT @id_produto = inserted.produto, @fornecedor = inserted.fornecedor
+    FROM inserted;
+
+    -- Obter a marca do produto
+    SELECT @marca = marca
+    FROM Produto
+    WHERE id_produto = @id_produto;
+
+    -- Obter a localidade do Fornecedor
+    SELECT @localidade = localidade
+    FROM Fornecedor
+    WHERE id_fornecedor = @fornecedor;
+
+    -- Verificar se a localidade do fornecedor está nas Pat_Locs da marca do produto
+    IF NOT EXISTS (
+        SELECT 1
+        FROM Pat_Locs
+        WHERE patente = @marca AND Ploc = @localidade
+    )
+    BEGIN
+        -- Levantar um erro se a localidade da loja não estiver nas Pat_Locs da marca
+        RAISERROR('Fornecedor %d não pode forneceder quantidade do produto %d, pois a localidade %s não é permitida para a marca.', 16, 1, @fornecedor, @id_produto, @localidade);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
 END;
 GO

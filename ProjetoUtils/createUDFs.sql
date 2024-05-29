@@ -37,15 +37,3 @@ BEGIN
     RETURN @total_fornecido;
 END;
 GO
-
-CREATE FUNCTION fn_SalarioMedioSubEmpresa(@id_subempresa INT)
-RETURNS DECIMAL(10, 2)
-AS
-BEGIN
-	DECLARE @salario INT;
-	SELECT @salario = AVG(Salario)
-	FROM Pessoa, Funcionario, Loja
-	WHERE Pessoa.nif = Funcionario.nif AND Funcionario.loja = Loja.id_loja AND Loja.subempresa = @id_subempresa
-	RETURN @salario
-END;
-GO

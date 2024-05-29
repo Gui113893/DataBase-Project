@@ -243,6 +243,66 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE SearchPessoa
+    @nome_pessoa VARCHAR(100),
+    @tipo VARCHAR(20),
+    @nome_subempresa VARCHAR(100),
+    @id_loja INT
+AS
+BEGIN
+    WITH PessoaFiltrada AS (
+        SELECT DISTINCT P.*
+        FROM Pessoa P
+        LEFT JOIN Funcionario F ON P.nif = F.nif
+        LEFT JOIN Loja L ON F.loja = L.id_loja
+        LEFT JOIN SubEmpresa SE ON L.subempresa = SE.id
+        LEFT JOIN Diretor D ON SE.diretor = D.nif
+        WHERE 
+            (P.nome LIKE '%' + @nome_pessoa + '%' OR @nome_pessoa IS NULL)
+            AND (SE.nome LIKE '%' + @nome_subempresa + '%' OR @nome_subempresa IS NULL)
+            AND (L.id_loja = @id_loja OR @id_loja IS NULL OR SE.id IS NULL)
+            AND (P.tipo = @tipo OR @tipo IS NULL)
+            OR 
+            (
+                P.nif IN (
+                    SELECT diretor
+                    FROM SubEmpresa
+                    JOIN Loja ON SubEmpresa.id = Loja.subempresa
+                    WHERE nome LIKE '%' + @nome_subempresa + '%'
+                    AND @id_loja = Loja.id_loja
+                )
+                AND (P.tipo = @tipo OR @tipo IS NULL)
+            )
+            OR 
+            (
+                @id_loja IS NULL
+                AND P.nif IN (
+                    SELECT diretor
+                    FROM SubEmpresa
+                    WHERE nome LIKE '%' + @nome_subempresa + '%'
+                )
+                AND (P.tipo = @tipo OR @tipo IS NULL)
+            )
+    )
+    SELECT 
+        P.*,
+        Salario_Medios.Salario_Medio
+    FROM 
+        PessoaFiltrada P
+    LEFT JOIN (
+        SELECT 
+            P.tipo,
+            AVG(P.salario) AS Salario_Medio
+        FROM 
+            PessoaFiltrada P
+        GROUP BY 
+            P.tipo
+    ) Salario_Medios
+    ON P.tipo = Salario_Medios.tipo;
+END;
+GO
+
+
 
 
 
