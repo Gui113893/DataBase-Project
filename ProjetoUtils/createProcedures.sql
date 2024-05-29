@@ -302,6 +302,39 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE SearchProduto
+    @marcaNome VARCHAR(100),
+    @nomeProduto VARCHAR(100),
+    @quantidadeMin INT,
+    @id_loja INT
+AS 
+BEGIN
+
+    SELECT 
+        p.id_produto, 
+        p.preco, 
+        p.nome AS nome, 
+        m.marcaNome, 
+        ISNULL(sl.quantidade, 0) AS quantidade, 
+        dbo.fn_TotalFornecidoPorProduto(p.id_produto) AS quantidade_total, 
+        p.marca 
+    FROM 
+        Produto p 
+        JOIN Marca m ON p.marca = m.patente 
+        LEFT JOIN Stock_Loja sl ON p.id_produto = sl.produto AND sl.loja = @id_loja 
+    WHERE 
+        (@marcaNome IS NULL OR m.marcaNome LIKE '%' + @marcaNome + '%') 
+        AND (@nomeProduto IS NULL OR p.nome LIKE '%' + @nomeProduto + '%') 
+        AND (@quantidadeMin IS NULL OR CASE 
+            WHEN @id_loja IS NOT NULL THEN 
+                (SELECT quantidade FROM Stock_Loja WHERE loja = @id_loja AND produto = p.id_produto) 
+            ELSE 
+                dbo.fn_QuantidadeProdutoLojas(p.id_produto) 
+            END >= @quantidadeMin)
+END;
+GO
+
+
 
 
 

@@ -33,6 +33,10 @@
             System.Windows.Forms.ToolStripMenuItem addToolStripFornecedores;
             this.tabControlLojasPessoas = new System.Windows.Forms.TabControl();
             this.pessoasTab = new System.Windows.Forms.TabPage();
+            this.salariomedioPessoaPartTimesLabel = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.salariomedioPessoaEfetivosLabel = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.salariomedioPessoaDiretoresLabel = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.searchSubempresaPessoaTxt = new System.Windows.Forms.TextBox();
@@ -164,10 +168,9 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.menuStrip5 = new System.Windows.Forms.MenuStrip();
-            this.label22 = new System.Windows.Forms.Label();
-            this.salariomedioPessoaEfetivosLabel = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.salariomedioPessoaPartTimesLabel = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.searchSubempresaLojaTxt = new System.Windows.Forms.TextBox();
+            this.searchButtonLoja = new System.Windows.Forms.Button();
             addToolStripMarcas = new System.Windows.Forms.ToolStripMenuItem();
             label4 = new System.Windows.Forms.Label();
             addToolStripFornecedores = new System.Windows.Forms.ToolStripMenuItem();
@@ -218,7 +221,7 @@
             this.tabControlLojasPessoas.Controls.Add(this.marcastTab);
             this.tabControlLojasPessoas.Controls.Add(this.fornecedoresPage);
             this.tabControlLojasPessoas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControlLojasPessoas.Location = new System.Drawing.Point(28, 25);
+            this.tabControlLojasPessoas.Location = new System.Drawing.Point(27, 25);
             this.tabControlLojasPessoas.Name = "tabControlLojasPessoas";
             this.tabControlLojasPessoas.SelectedIndex = 0;
             this.tabControlLojasPessoas.Size = new System.Drawing.Size(1206, 619);
@@ -281,6 +284,46 @@
             this.pessoasTab.TabIndex = 0;
             this.pessoasTab.Text = "Pessoas";
             this.pessoasTab.UseVisualStyleBackColor = true;
+            // 
+            // salariomedioPessoaPartTimesLabel
+            // 
+            this.salariomedioPessoaPartTimesLabel.AutoSize = true;
+            this.salariomedioPessoaPartTimesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.salariomedioPessoaPartTimesLabel.Location = new System.Drawing.Point(926, 210);
+            this.salariomedioPessoaPartTimesLabel.Name = "salariomedioPessoaPartTimesLabel";
+            this.salariomedioPessoaPartTimesLabel.Size = new System.Drawing.Size(23, 25);
+            this.salariomedioPessoaPartTimesLabel.TabIndex = 63;
+            this.salariomedioPessoaPartTimesLabel.Text = "0";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(669, 210);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(239, 25);
+            this.label23.TabIndex = 62;
+            this.label23.Text = "Salário Médio Part-Times:";
+            // 
+            // salariomedioPessoaEfetivosLabel
+            // 
+            this.salariomedioPessoaEfetivosLabel.AutoSize = true;
+            this.salariomedioPessoaEfetivosLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.salariomedioPessoaEfetivosLabel.Location = new System.Drawing.Point(926, 185);
+            this.salariomedioPessoaEfetivosLabel.Name = "salariomedioPessoaEfetivosLabel";
+            this.salariomedioPessoaEfetivosLabel.Size = new System.Drawing.Size(23, 25);
+            this.salariomedioPessoaEfetivosLabel.TabIndex = 61;
+            this.salariomedioPessoaEfetivosLabel.Text = "0";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(669, 185);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(212, 25);
+            this.label22.TabIndex = 60;
+            this.label22.Text = "Salário Médio Efetivos:";
             // 
             // salariomedioPessoaDiretoresLabel
             // 
@@ -769,6 +812,9 @@
             // 
             // lojasTab
             // 
+            this.lojasTab.Controls.Add(this.searchButtonLoja);
+            this.lojasTab.Controls.Add(this.searchSubempresaLojaTxt);
+            this.lojasTab.Controls.Add(this.label24);
             this.lojasTab.Controls.Add(this.gerenteTxtLoja);
             this.lojasTab.Controls.Add(this.menuStrip2);
             this.lojasTab.Controls.Add(this.deleteButtonLoja);
@@ -959,9 +1005,9 @@
             // 
             this.LojasList.FormattingEnabled = true;
             this.LojasList.ItemHeight = 25;
-            this.LojasList.Location = new System.Drawing.Point(664, 48);
+            this.LojasList.Location = new System.Drawing.Point(664, 123);
             this.LojasList.Name = "LojasList";
-            this.LojasList.Size = new System.Drawing.Size(510, 504);
+            this.LojasList.Size = new System.Drawing.Size(510, 429);
             this.LojasList.TabIndex = 0;
             this.LojasList.SelectedIndexChanged += new System.EventHandler(this.LojasList_SelectedIndexChanged);
             // 
@@ -1616,45 +1662,34 @@
             this.menuStrip5.TabIndex = 53;
             this.menuStrip5.Text = "menuStrip5";
             // 
-            // label22
+            // label24
             // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(669, 185);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(212, 25);
-            this.label22.TabIndex = 60;
-            this.label22.Text = "Salário Médio Efetivos:";
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(659, 72);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(132, 25);
+            this.label24.TabIndex = 57;
+            this.label24.Text = "SubEmpresa:";
             // 
-            // salariomedioPessoaEfetivosLabel
+            // searchSubempresaLojaTxt
             // 
-            this.salariomedioPessoaEfetivosLabel.AutoSize = true;
-            this.salariomedioPessoaEfetivosLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.salariomedioPessoaEfetivosLabel.Location = new System.Drawing.Point(926, 185);
-            this.salariomedioPessoaEfetivosLabel.Name = "salariomedioPessoaEfetivosLabel";
-            this.salariomedioPessoaEfetivosLabel.Size = new System.Drawing.Size(23, 25);
-            this.salariomedioPessoaEfetivosLabel.TabIndex = 61;
-            this.salariomedioPessoaEfetivosLabel.Text = "0";
+            this.searchSubempresaLojaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchSubempresaLojaTxt.Location = new System.Drawing.Point(797, 67);
+            this.searchSubempresaLojaTxt.Name = "searchSubempresaLojaTxt";
+            this.searchSubempresaLojaTxt.Size = new System.Drawing.Size(173, 30);
+            this.searchSubempresaLojaTxt.TabIndex = 58;
             // 
-            // label23
+            // searchButtonLoja
             // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(669, 210);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(239, 25);
-            this.label23.TabIndex = 62;
-            this.label23.Text = "Salário Médio Part-Times:";
-            // 
-            // salariomedioPessoaPartTimesLabel
-            // 
-            this.salariomedioPessoaPartTimesLabel.AutoSize = true;
-            this.salariomedioPessoaPartTimesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.salariomedioPessoaPartTimesLabel.Location = new System.Drawing.Point(926, 210);
-            this.salariomedioPessoaPartTimesLabel.Name = "salariomedioPessoaPartTimesLabel";
-            this.salariomedioPessoaPartTimesLabel.Size = new System.Drawing.Size(23, 25);
-            this.salariomedioPessoaPartTimesLabel.TabIndex = 63;
-            this.salariomedioPessoaPartTimesLabel.Text = "0";
+            this.searchButtonLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchButtonLoja.Location = new System.Drawing.Point(1001, 62);
+            this.searchButtonLoja.Name = "searchButtonLoja";
+            this.searchButtonLoja.Size = new System.Drawing.Size(103, 45);
+            this.searchButtonLoja.TabIndex = 59;
+            this.searchButtonLoja.Text = "Search";
+            this.searchButtonLoja.UseVisualStyleBackColor = true;
+            this.searchButtonLoja.Click += new System.EventHandler(this.SearchLojaButton_Click);
             // 
             // Form1
             // 
@@ -1831,6 +1866,9 @@
         private System.Windows.Forms.Label label23;
         public System.Windows.Forms.Label salariomedioPessoaEfetivosLabel;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button searchButtonLoja;
+        private System.Windows.Forms.TextBox searchSubempresaLojaTxt;
+        private System.Windows.Forms.Label label24;
     }
 }
 

@@ -43,7 +43,7 @@ namespace CompanyBrandManager
             InitializeComponent();
             cn = getSqlConnection();
             loadPessoas("");
-            loadLojas(0);
+            loadLojas("");
             loadProdutos(0);
             loadMarcas();
             loadFornecedores();
@@ -80,7 +80,7 @@ namespace CompanyBrandManager
         private void TabControlPessoasLojas_Click(object sender, EventArgs e)
         {
             loadPessoas(filterPessoa);
-            loadLojas(0); 
+            loadLojas(""); 
             loadProdutos(filterProdutoByLoja); 
             loadMarcas(); 
             loadFornecedores();
@@ -166,6 +166,11 @@ namespace CompanyBrandManager
         private void SearchPessoaButton_Click(object sender, EventArgs e)
         {
             loadPessoas(filterPessoa);
+        }
+
+        private void SearchLojaButton_Click(object sender, EventArgs e)
+        {
+            loadLojas(searchSubempresaLojaTxt.Text);
         }
 
         private void DistributeProduto_Click(object sender, EventArgs e)
@@ -767,7 +772,9 @@ namespace CompanyBrandManager
             nomeTxtProduto.Text = "";
             marcaTxtProduto.Text = "";
             stockProdutoLabel.Text = "";
+            stockDisponivelLabel.Text = "";
         }
+
 
         public void ClearMarcaFields()
         {
@@ -867,7 +874,7 @@ namespace CompanyBrandManager
                 if (UpdateLoja(loja, currentLoja))
                 {
                     LojasList.Items[currentLojaIndex] = loja;
-                    loadLojas(0);
+                    loadLojas("");
                 }
                 else
                 return false;
@@ -877,7 +884,7 @@ namespace CompanyBrandManager
                 if (AddLoja(loja))
                 {
                     LojasList.Items.Add(loja);
-                    loadLojas(0);
+                    loadLojas("");
                 }
                 else
                     return false;
@@ -1763,17 +1770,13 @@ namespace CompanyBrandManager
             ShowPessoa();
         }
 
-        private void loadLojas(int subempresaId)
+        private void loadLojas(String subempresaName)
         {
             if (!verifyConnection())
                 return;
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Loja JOIN SubEmpresa ON Loja.subempresa = Subempresa.id", cn);
-
-            if (subempresaId > 0)
-                cmd = new SqlCommand("SELECT * FROM Loja JOIN SubEmpresa ON Loja.subempresa = Subempresa.id WHERE subempresa = @subempresaId", cn);
-                cmd.Parameters.Add(new SqlParameter("@subempresaId", SqlDbType.Int) { Value = subempresaId });
-
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Loja JOIN SubEmpresa ON Loja.subempresa = SubEmpresa.id WHERE SubEmpresa.nome LIKE @subempresaName", cn);
+            cmd.Parameters.Add(new SqlParameter("@subempresaName", SqlDbType.VarChar, 100) { Value = "%" + subempresaName + "%" });
             SqlDataReader reader = cmd.ExecuteReader();
             LojasList.Items.Clear();
 
@@ -1791,6 +1794,13 @@ namespace CompanyBrandManager
                 LojasList.Items.Add(loja);
             }
             cn.Close();
+            // Se nao houverem items na lista
+            if (LojasList.Items.Count == 0)
+            {
+                MessageBox.Show("Não há lojas resultado desta pesquisa");
+                return;
+            }
+
             currentLojaIndex = 0;
             currentLoja = (Loja)LojasList.Items[currentLojaIndex];
             ShowLoja();
@@ -1800,16 +1810,13 @@ namespace CompanyBrandManager
         {
             if (!verifyConnection())
                 return;
-
-            
-            SqlCommand cmd = new SqlCommand("SELECT p.id_produto, p.nome AS nome, p.preco, m.marcaNome, dbo.fn_TotalFornecidoPorProduto(p.id_produto) AS quantidade_total, p.marca FROM Produto p JOIN Marca m ON p.marca = m.patente WHERE (@marcaNome IS NULL OR m.marcaNome LIKE '%' + @marcaNome + '%') AND (@nomeProduto IS NULL OR p.nome LIKE '%' + @nomeProduto + '%') AND (@quantidadeMin IS NULL OR dbo.fn_QuantidadeProdutoLojas(p.id_produto) >= @quantidadeMin);", cn);
-            if (lojaId > 0){
-                cmd = new SqlCommand("SELECT p.id_produto, p.preco , p.nome AS nome, m.marcaNome, ISNULL(sl.quantidade, 0) AS quantidade, dbo.fn_TotalFornecidoPorProduto(p.id_produto) AS quantidade_total, p.marca FROM Produto p JOIN Marca m ON p.marca = m.patente JOIN Stock_Loja sl ON p.id_produto = sl.produto AND sl.loja = @id_loja WHERE (@marcaNome IS NULL OR m.marcaNome LIKE '%' + @marcaNome + '%') AND (@nomeProduto IS NULL OR p.nome LIKE '%' + @nomeProduto + '%') AND (@quantidadeMin IS NULL OR CASE WHEN @id_loja IS NOT NULL THEN (SELECT quantidade FROM Stock_Loja WHERE loja = @id_loja AND produto = p.id_produto) ELSE dbo.fn_QuantidadeProdutoLojas(p.id_produto) END >= @quantidadeMin);", cn);
-                cmd.Parameters.Add(new SqlParameter("@id_loja", SqlDbType.Int) { Value = lojaId });
-            }
+    
+            SqlCommand cmd = new SqlCommand("SearchProduto", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@id_loja", SqlDbType.Int) { Value = lojaId == 0 ? DBNull.Value : (object)lojaId });
             cmd.Parameters.Add(new SqlParameter("@marcaNome", SqlDbType.VarChar, 100) { Value = marcaSearchTxtProduto.Text == "" ? DBNull.Value : (object)marcaSearchTxtProduto.Text });
             cmd.Parameters.Add(new SqlParameter("@nomeProduto", SqlDbType.VarChar, 100) { Value = produtoNomeSearchTxt.Text == "" ? DBNull.Value :(object)produtoNomeSearchTxt.Text });
-            cmd.Parameters.Add(new SqlParameter("@quantidadeMin", SqlDbType.Int) { Value = minStockProdutoSearchTxt.Text == "" ? DBNull.Value : (object)minStockProdutoSearchTxt.Text});
+            cmd.Parameters.Add(new SqlParameter("@quantidadeMin", SqlDbType.Int) { Value = minStockProdutoSearchTxt.Text == "" ? 0 : Convert.ToInt32(minStockProdutoSearchTxt.Text)});
  
             SqlDataReader reader = cmd.ExecuteReader();
             ProdutosList.Items.Clear();
