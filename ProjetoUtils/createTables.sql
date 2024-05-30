@@ -79,7 +79,7 @@ GO
 CREATE TABLE Pessoa (
     nif NUMERIC(9,0) PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    sexo CHAR(1) NOT NULL,
+    sexo CHAR(1) NOT NULL CHECK (sexo IN ('M', 'F')),
     email VARCHAR(100),
     telefone VARCHAR(20),
     rua VARCHAR(100),
@@ -112,7 +112,7 @@ GO
 -- Tabela Loja
 CREATE TABLE Loja (
     id_loja INT IDENTITY(1,1) PRIMARY KEY,
-    telefone VARCHAR(20) NOT NULL,
+    telefone VARCHAR(20) NOT NULL UNIQUE,
     rua VARCHAR(100) NOT NULL,
     codigo_postal VARCHAR(10) NOT NULL,
     localidade VARCHAR(100) NOT NULL,
@@ -127,7 +127,7 @@ GO
 -- Tabela Funcionario
 CREATE TABLE Funcionario (
     nif NUMERIC(9,0) PRIMARY KEY,
-    loja INT,
+    loja INT NOT NULL,
     FOREIGN KEY (nif) REFERENCES Pessoa(nif) ON UPDATE CASCADE,
     FOREIGN KEY (loja) REFERENCES Loja(id_loja) ON UPDATE CASCADE,
 );

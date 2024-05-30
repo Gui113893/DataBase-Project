@@ -90,6 +90,9 @@
             this.partTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removerFiltroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lojasTab = new System.Windows.Forms.TabPage();
+            this.searchButtonLoja = new System.Windows.Forms.Button();
+            this.searchSubempresaLojaTxt = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.gerenteTxtLoja = new System.Windows.Forms.TextBox();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.adicionarLojaToolStrip = new System.Windows.Forms.ToolStripMenuItem();
@@ -168,9 +171,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.menuStrip5 = new System.Windows.Forms.MenuStrip();
-            this.label24 = new System.Windows.Forms.Label();
-            this.searchSubempresaLojaTxt = new System.Windows.Forms.TextBox();
-            this.searchButtonLoja = new System.Windows.Forms.Button();
             addToolStripMarcas = new System.Windows.Forms.ToolStripMenuItem();
             label4 = new System.Windows.Forms.Label();
             addToolStripFornecedores = new System.Windows.Forms.ToolStripMenuItem();
@@ -761,6 +761,7 @@
             this.diretorToolStripMenuItem.Name = "diretorToolStripMenuItem";
             this.diretorToolStripMenuItem.Size = new System.Drawing.Size(290, 32);
             this.diretorToolStripMenuItem.Text = "Diretor";
+            this.diretorToolStripMenuItem.Click += new System.EventHandler(this.AddDiretor_Click);
             // 
             // filtrarToolStripMenuItem
             // 
@@ -840,6 +841,35 @@
             this.lojasTab.TabIndex = 1;
             this.lojasTab.Text = "Lojas";
             this.lojasTab.UseVisualStyleBackColor = true;
+            // 
+            // searchButtonLoja
+            // 
+            this.searchButtonLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchButtonLoja.Location = new System.Drawing.Point(1001, 62);
+            this.searchButtonLoja.Name = "searchButtonLoja";
+            this.searchButtonLoja.Size = new System.Drawing.Size(103, 45);
+            this.searchButtonLoja.TabIndex = 59;
+            this.searchButtonLoja.Text = "Search";
+            this.searchButtonLoja.UseVisualStyleBackColor = true;
+            this.searchButtonLoja.Click += new System.EventHandler(this.SearchLojaButton_Click);
+            // 
+            // searchSubempresaLojaTxt
+            // 
+            this.searchSubempresaLojaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchSubempresaLojaTxt.Location = new System.Drawing.Point(797, 67);
+            this.searchSubempresaLojaTxt.Name = "searchSubempresaLojaTxt";
+            this.searchSubempresaLojaTxt.Size = new System.Drawing.Size(173, 30);
+            this.searchSubempresaLojaTxt.TabIndex = 58;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(659, 72);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(132, 25);
+            this.label24.TabIndex = 57;
+            this.label24.Text = "SubEmpresa:";
             // 
             // gerenteTxtLoja
             // 
@@ -1661,35 +1691,6 @@
             this.menuStrip5.Size = new System.Drawing.Size(1198, 36);
             this.menuStrip5.TabIndex = 53;
             this.menuStrip5.Text = "menuStrip5";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(659, 72);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(132, 25);
-            this.label24.TabIndex = 57;
-            this.label24.Text = "SubEmpresa:";
-            // 
-            // searchSubempresaLojaTxt
-            // 
-            this.searchSubempresaLojaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchSubempresaLojaTxt.Location = new System.Drawing.Point(797, 67);
-            this.searchSubempresaLojaTxt.Name = "searchSubempresaLojaTxt";
-            this.searchSubempresaLojaTxt.Size = new System.Drawing.Size(173, 30);
-            this.searchSubempresaLojaTxt.TabIndex = 58;
-            // 
-            // searchButtonLoja
-            // 
-            this.searchButtonLoja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButtonLoja.Location = new System.Drawing.Point(1001, 62);
-            this.searchButtonLoja.Name = "searchButtonLoja";
-            this.searchButtonLoja.Size = new System.Drawing.Size(103, 45);
-            this.searchButtonLoja.TabIndex = 59;
-            this.searchButtonLoja.Text = "Search";
-            this.searchButtonLoja.UseVisualStyleBackColor = true;
-            this.searchButtonLoja.Click += new System.EventHandler(this.SearchLojaButton_Click);
             // 
             // Form1
             // 

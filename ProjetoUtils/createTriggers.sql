@@ -177,7 +177,7 @@ BEGIN
     INNER JOIN inserted ON deleted.id_loja = inserted.id_loja;
 
     -- Se o gerente da loja foi alterado
-    IF @oldGerente <> @newGerente
+    IF @oldGerente <> @newGerente OR (@oldGerente IS NULL AND @newGerente IS NOT NULL)
     BEGIN
         -- Garante que o novo gerente pertence á loja alterada
         IF NOT EXISTS (SELECT 1 FROM Funcionario WHERE nif = @newGerente AND loja = @loja)

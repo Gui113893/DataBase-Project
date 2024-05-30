@@ -278,7 +278,7 @@ namespace CompanyBrandManager
             if (RemovePessoa(currentPessoa))
             {
                 PessoasList.Items.RemoveAt(PessoasList.SelectedIndex);
-                if (currentPessoaIndex == PessoasList.Items.Count)
+                if (currentPessoaIndex == PessoasList.Items.Count && currentPessoaIndex != 0)
                 {
                     currentPessoaIndex = PessoasList.Items.Count - 1;
                     currentPessoa = (Pessoa)PessoasList.Items[currentPessoaIndex];
@@ -308,7 +308,7 @@ namespace CompanyBrandManager
             if (RemoveLoja(currentLoja))
             {
                 LojasList.Items.RemoveAt(LojasList.SelectedIndex);
-                if (currentLojaIndex == LojasList.Items.Count)
+                if (currentLojaIndex == LojasList.Items.Count && currentLojaIndex != 0)
                 {
                     currentLojaIndex = LojasList.Items.Count - 1;
                     currentLoja = (Loja)LojasList.Items[currentLojaIndex];
@@ -338,7 +338,7 @@ namespace CompanyBrandManager
             if (RemoveProduto(currentProduto))
             {
                 ProdutosList.Items.RemoveAt(ProdutosList.SelectedIndex);
-                if (currentProdutoIndex == ProdutosList.Items.Count)
+                if (currentProdutoIndex == ProdutosList.Items.Count && currentProdutoIndex != 0)
                 {
                     currentProdutoIndex = ProdutosList.Items.Count - 1;
                     currentProduto = (Produto)ProdutosList.Items[currentProdutoIndex];
@@ -368,7 +368,7 @@ namespace CompanyBrandManager
             if (RemoveMarca(currentMarca))
             {
                 MarcasList.Items.RemoveAt(MarcasList.SelectedIndex);
-                if (currentMarcaIndex == MarcasList.Items.Count)
+                if (currentMarcaIndex == MarcasList.Items.Count && currentMarcaIndex != 0)
                 {
                     currentMarcaIndex = MarcasList.Items.Count - 1;
                     currentMarca = (Marca)MarcasList.Items[currentMarcaIndex];
@@ -398,7 +398,7 @@ namespace CompanyBrandManager
             if (RemoveFornecedor(currentFornecedor))
             {
                 FornecedoresList.Items.RemoveAt(FornecedoresList.SelectedIndex);
-                if (currentFornecedorIndex == FornecedoresList.Items.Count)
+                if (currentFornecedorIndex == FornecedoresList.Items.Count && currentFornecedorIndex != 0)
                 {
                     currentFornecedorIndex = FornecedoresList.Items.Count - 1;
                     currentFornecedor = (Fornecedor)FornecedoresList.Items[currentFornecedorIndex];
@@ -535,6 +535,12 @@ namespace CompanyBrandManager
         {
             showEfetivoSpecifics();
         }
+
+        private void AddDiretor_Click(object sender, EventArgs e)
+        {
+            showDiretorSpecifics();
+        }
+
 
         private void PessoaFilterByDiretor_Click(object sender, EventArgs e)
         {
@@ -689,8 +695,9 @@ namespace CompanyBrandManager
             {
                 stock_disponivel = reader2["QuantidadeDisponível"].ToString();
             }
-            stockDisponivelLabel.Text = stock_disponivel;
+            stockDisponivelLabel.Text = stock_disponivel.ToString();
             cn.Close();
+
         }
 
         public void ShowMarca()
@@ -1090,7 +1097,7 @@ namespace CompanyBrandManager
                         cmd.Parameters.Add(new SqlParameter("@CodigoPostal", SqlDbType.VarChar, 10) { Value = pessoa.Codigo_Postal });
                         cmd.Parameters.Add(new SqlParameter("@Localidade", SqlDbType.VarChar, 100) { Value = pessoa.Localidade });
                         cmd.Parameters.Add(new SqlParameter("@Salario", SqlDbType.Decimal) { Value = pessoa.Salario });
-                        cmd.Parameters.Add(new SqlParameter("@Loja", SqlDbType.Int) { Value = lojaTxtPessoa.Text });
+                        cmd.Parameters.Add(new SqlParameter("@Loja", SqlDbType.Int) { Value = string.IsNullOrEmpty(lojaTxtPessoa.Text) ? (object)DBNull.Value : Convert.ToInt32(lojaTxtPessoa.Text) });
                         cmd.Parameters.Add(new SqlParameter("@InicioContrato", SqlDbType.Date) { Value = inicioContratoTxt.Text });
                         cmd.Parameters.Add(new SqlParameter("@FimContrato", SqlDbType.Date) { Value = fimContratoTxt.Text });
 
@@ -1575,19 +1582,43 @@ namespace CompanyBrandManager
             if (!verifyConnection())
                 return false;
 
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM Produto WHERE id_produto = @id_produto", cn))
+            if (filterProdutoByLoja <= 0)
             {
-                try
+                using (SqlCommand cmd = new SqlCommand("DELETE FROM Produto WHERE id_produto = @id_produto", cn))
                 {
-                    cmd.Parameters.Add(new SqlParameter("@id_produto", SqlDbType.Int) { Value = currentProduto.ID });
-                    cmd.ExecuteNonQuery();
+                    try
+                    {
+                        cmd.Parameters.Add(new SqlParameter("@id_produto", SqlDbType.Int) { Value = currentProduto.ID });
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show("Erro ao eliminar este produto| " + exc.Message);
+                        cn.Close();
+                        return false;
+                    }
                 }
-                catch (Exception exc)
+            }
+            else 
+            {
+                using (SqlCommand cmd = new SqlCommand("DELETE FROM Stock_Loja WHERE loja = @loja AND produto = @produto", cn))
                 {
-                    MessageBox.Show("Erro ao eliminar este produto| " + exc.Message);
-                    cn.Close();
-                    return false;
+
+                    try
+                    {
+                        cmd.Parameters.Add(new SqlParameter("@loja", SqlDbType.Int) { Value = filterProdutoByLoja });
+                        cmd.Parameters.Add(new SqlParameter("@produto", SqlDbType.Int) { Value = currentProduto.ID });
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show("Erro ao eliminar este produto desta loja| " + exc.Message);
+                        cn.Close();
+                        return false;
+                    }
                 }
+
             }
             MessageBox.Show("Produto eliminado com sucesso");
             cn.Close();
@@ -1673,6 +1704,10 @@ namespace CompanyBrandManager
 
         }
 
+        private void showDiretorSpecifics()
+        {
+            // Can't be done
+        }
         private bool doesLojaExist(int lojaid)
         {
             if (!verifyConnection())
