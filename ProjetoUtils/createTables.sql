@@ -1,15 +1,3 @@
-USE master
-GO
-if exists (select * from sysdatabases where name='CompanyBrandManager')
-		drop database CompanyBrandManager
-go
-
-CREATE DATABASE CompanyBrandManager;
-GO
-
-USE CompanyBrandManager;
-GO
-
 -- TABELAS
 -- Tabela Patente
 

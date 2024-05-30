@@ -1,10 +1,10 @@
 INSERT INTO Pessoa (nif, nome, sexo, email, telefone, rua, codigo_postal, localidade, tipo, salario) VALUES
 (123456789, 'Manuel Silva', 'M', NULL, '912345678', 'Rua da Alegria 123', '1234-567', 'Porto', 'Diretor' , 900.00),
 (234567890, 'Maria Santos', 'F', NUll, '923456789', 'Rua da Tristeza 234', '2345-678', 'Lisboa', 'Diretor', 900.00),
-(345678901, 'Carlos Santos', 'M', NULL, '934567890', 'Rua da Alegria 345', '3456-789', 'Porto', 'Part-Time' , 800.00),
-(456789012, 'Ana Silva', 'F', NULL, '945678901', 'Rua da Tristeza 456', '4567-890', 'Lisboa', 'Part-Time' ,800.00),
+(345678901, 'Carlos Santos', 'M', NULL, '934567890', 'Rua da Alegria 345', '3456-789', 'Porto', 'Efetivo' , 800.00),
+(456789012, 'Ana Silva', 'F', NULL, '945678901', 'Rua da Tristeza 456', '4567-890', 'Lisboa', 'Efetivo' ,800.00),
 (567890123, 'Joao Santos', 'M', NULL, '956789012', 'Rua da Alegria 567', '5678-901', 'Porto', 'Part-Time' ,750.00),
-(678901234, 'Luis Silva', 'M', NULL, '967890123', 'Rua da Tristeza 678', '6789-012', 'Lisboa', 'Part-Time' ,750.00),
+(678901234, 'Luis Silva', 'M', NULL, '967890123', 'Rua da Tristeza 678', '6789-012', 'Lisboa', 'Efetivo' ,750.00),
 (789012345, 'Rita Santos', 'F', NULL, '978901234', 'Rua da Alegria 789', '7890-123', 'Porto', 'Part-Time' ,750.00),
 (890123456, 'Marta Silva', 'F', NULL, '989012345', 'Rua da Tristeza 890', '8901-234', 'Lisboa', 'Efetivo' ,750.00),
 (901234567, 'Pedro Santos', 'M', NULL, '900123456', 'Rua da Alegria 901', '9012-345', 'Porto', 'Efetivo' ,750.00),
@@ -38,9 +38,11 @@ INSERT INTO Loja (telefone, rua, codigo_postal, localidade, subempresa, gerente)
 ('945678901', 'Rua da Tristeza 456', '4567-890', 'Lisboa', 2, NULL),
 ('956789012', 'Rua da Alegria 567', '5678-901', 'Porto', 1, NULL),
 ('967890123', 'Rua da Tristeza 678', '6789-012', 'Aveiro', 3, NULL),
-('978901234', 'Rua da Alegria 789', '7890-123', 'Aveiro', 3, NULL);
+('978901234', 'Rua da Alegria 789', '7890-123', 'Aveiro', 3, NULL),
+('989012345', 'Rua da Tristeza 890', '8901-234', 'Lisboa', 2, NULL);
 
 INSERT INTO Funcionario (nif, loja) VALUES
+
 (345678901, 2),
 (456789012, 3),
 (567890123, 1),
@@ -65,6 +67,9 @@ INSERT INTO Contrato(data_inicio, data_fim) VALUES
 ('2023-05-16', '2025-09-07'),
 ('2023-05-16', '2025-09-07'),
 ('2023-05-16', '2025-09-07'),
+('2023-05-16', '2025-09-07'),
+('2023-05-16', '2025-09-07'),
+('2023-05-16', '2025-09-07'),
 ('2023-05-16', '2025-09-07');
 
 
@@ -73,14 +78,13 @@ INSERT INTO Efetivo(nif, contrato) VALUES
 (901234567, 2),
 (555555555, 3),
 (777777777, 4),
-(222222222, 5);
-
+(222222222, 5),
+(345678901, 6),
+(456789012, 7),
+(678901234, 8);
 
 INSERT INTO Part_Time (nif, horas_semanais) VALUES
-(345678901, 20),
-(456789012, 30),
 (567890123, 20),
-(678901234, 15),
 (789012345, 20),
 (123456780, 12),
 (111111111, 20),
@@ -90,7 +94,7 @@ INSERT INTO Part_Time (nif, horas_semanais) VALUES
 (888888888, 20),
 (999999999, 12);
 
-UPDATE Loja SET gerente = 567890123 WHERE id_loja = 1;
+UPDATE Loja SET gerente = 901234567 WHERE id_loja = 1;
 UPDATE Loja SET gerente = 345678901 WHERE id_loja = 2;
 UPDATE Loja SET gerente = 456789012 WHERE id_loja = 3;
 UPDATE Loja SET gerente = 678901234 WHERE id_loja = 6;
@@ -153,7 +157,8 @@ INSERT INTO Produto (preco, nome, marca) VALUES
 (1.00, 'Proteina', 7),
 (1.00, 'Cerveja', 8),
 (1000.00, 'Laptop', 9),
-(1000.00, 'Smartphone', 10);
+(1000.00, 'Smartphone', 10),
+(55.00, 'T-Shirt', 1);
 
 INSERT INTO Fornecedor (telefone, rua, codigo_postal, localidade) VALUES
 ( '912345678', 'Rua da Alegria 123', '1234-567', 'Porto'),
@@ -170,14 +175,15 @@ INSERT INTO Fornecedor (telefone, rua, codigo_postal, localidade) VALUES
 INSERT INTO Stock_Fornecido (fornecedor, produto, quantidade) VALUES
 (1, 1, 200),
 (2, 2, 150),
-(3, 3, 100),
-(4, 4, 300),
-(5, 5, 100),
-(6, 6, 200),
-(7, 7, 100),
-(8, 8, 150),
-(9, 9, 120),
-(10, 10, 100);
+(3, 3, 210),
+(1, 4, 300),
+(5, 5, 124),
+(6, 6, 280),
+(7, 7, 150),
+(8, 8, 180),
+(9, 9, 220),
+(6, 10, 200),
+(1,11, 250);
 
 INSERT INTO Stock_Loja (loja, produto, quantidade) VALUES
 (1, 3, 10),
@@ -185,11 +191,9 @@ INSERT INTO Stock_Loja (loja, produto, quantidade) VALUES
 (3, 3, 20),
 (5, 3, 5),
 (1, 6, 10),
-(2, 6, 50),
 (3, 6, 20),
 (5, 6, 5),
 (1, 7, 10),
-(2, 7, 50),
 (3, 7, 20),
 (5, 7, 5),
 (1, 8, 10),
@@ -200,9 +204,10 @@ INSERT INTO Stock_Loja (loja, produto, quantidade) VALUES
 (4, 2, 120),
 (6, 4, 100),
 (7, 4, 60),
-(6, 5, 20),
-(7, 5, 60),
 (6, 9, 20),
 (7, 9, 60),
 (6, 10, 20),
-(7, 10, 60);
+(7, 10, 60),
+(4, 11, 100),
+(8, 11, 100),
+(8, 2, 100);

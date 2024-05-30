@@ -29,7 +29,8 @@ namespace CompanyBrandManager
 
         private SqlConnection getSqlConnection()
         {
-            return new SqlConnection("Data Source = localhost; Initial Catalog = CompanyBrandManager; integrated security=true");
+            string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p5g10;User Id=p5g10;Password=sql_grupo10;";
+            return new SqlConnection(connectionString);
         }
 
         private bool verifyConnection()
