@@ -4,14 +4,9 @@ INSTEAD OF DELETE
 AS
 BEGIN
     SET NOCOUNT ON;
-
     DECLARE @deleted_nif NUMERIC(9,0);
     DECLARE @deleted_tipo VARCHAR(20);
-
-    -- Captura o NIF e o tipo da pessoa a ser deletada
     SELECT @deleted_nif = nif, @deleted_tipo = tipo FROM deleted;
-
-    -- Chama a procedure correspondente com base no tipo da pessoa
     IF @deleted_tipo = 'Diretor'
     BEGIN
         EXEC DeleteDirector @Nif = @deleted_nif;
@@ -24,7 +19,6 @@ BEGIN
     BEGIN
         EXEC DeletePartTime @Nif = @deleted_nif;
     END
-
     DELETE FROM Pessoa
     WHERE nif = @deleted_nif;
 END;
@@ -139,7 +133,6 @@ BEGIN
     FROM Funcionario
     WHERE loja = @deleted_id;
 
-    -- Cursor para percorrer a tabela de funcionario para eliminar
     DECLARE @nif INT;
     DECLARE funcionario_cursor CURSOR FOR
     SELECT nif FROM @nifs_todelete;
@@ -202,64 +195,44 @@ BEGIN
     DECLARE @marca INT;
     DECLARE @loja INT;
     DECLARE @localidade_loja VARCHAR(100);
-
-    -- Cursor para iterar por todas as linhas afetadas
     DECLARE cur CURSOR FOR
     SELECT produto, quantidade, loja
     FROM inserted;
-
     OPEN cur;
     FETCH NEXT FROM cur INTO @id_produto, @quantidade_nova, @loja;
-
     WHILE @@FETCH_STATUS = 0
     BEGIN
-        -- Obter a quantidade total em todas as lojas após o update
         SELECT @quantidade_total_lojas = dbo.fn_QuantidadeProdutoLojas(@id_produto);
-
-        -- Obter a quantidade total fornecida
         SELECT @quantidade_fornecida = dbo.fn_TotalFornecidoPorProduto(@id_produto);
-
-        -- Obter a marca do produto
         SELECT @marca = marca
         FROM Produto
         WHERE id_produto = @id_produto;
-
-        -- Obter a localidade da loja
         SELECT @localidade_loja = localidade
         FROM Loja
         WHERE id_loja = @loja;
-
-        -- Verificar se a quantidade total em circulação após o update ultrapassa a quantidade fornecida
         IF @quantidade_total_lojas > @quantidade_fornecida
         BEGIN
-            -- Levantar um erro se ultrapassar
             RAISERROR('A quantidade total em circulação do produto %d ultrapassa a quantidade fornecida.', 16, 1, @id_produto);
             ROLLBACK TRANSACTION;
             RETURN;
         END
-
-        -- Verificar se a localidade da loja está nas Pat_Locs da marca do produto
         IF NOT EXISTS (
             SELECT 1
             FROM Pat_Locs
             WHERE patente = @marca AND Ploc = @localidade_loja
         )
         BEGIN
-            -- Levantar um erro se a localidade da loja não estiver nas Pat_Locs da marca
             RAISERROR('Não é possível adicionar quantidade do produto %d na loja %d, pois a localidade %s não é permitida para a marca.', 16, 1, @id_produto, @loja, @localidade_loja);
             ROLLBACK TRANSACTION;
             RETURN;
         END
-
         FETCH NEXT FROM cur INTO @id_produto, @quantidade_nova, @loja;
     END
-
     CLOSE cur;
     DEALLOCATE cur;
 END;
 GO
 
--- Trigger que garante que, depois de uma localidade de uma marca for eliminada, elimina todos os produtos dessa marca no stock das lojas que fazem parte da localidade eliminada
 CREATE TRIGGER trg_eliminar_produtos_localidade
 ON Pat_Locs
 AFTER DELETE
@@ -270,7 +243,6 @@ BEGIN
     DECLARE @id_produto INT;
     DECLARE @loja INT;
 
-    -- Cursor para iterar por todas as linhas afetadas
     DECLARE cur CURSOR FOR
     SELECT patente, Ploc
     FROM deleted;
@@ -280,7 +252,6 @@ BEGIN
 
     WHILE @@FETCH_STATUS = 0
     BEGIN
-        -- Obter todos os produtos da marca que estão na localidade eliminada
         DECLARE produtos_cursor CURSOR FOR
         SELECT produto, loja
         FROM Stock_Loja
@@ -330,24 +301,20 @@ BEGIN
     SELECT @id_produto = inserted.produto, @fornecedor = inserted.fornecedor
     FROM inserted;
 
-    -- Obter a marca do produto
     SELECT @marca = marca
     FROM Produto
     WHERE id_produto = @id_produto;
 
-    -- Obter a localidade do Fornecedor
     SELECT @localidade = localidade
     FROM Fornecedor
     WHERE id_fornecedor = @fornecedor;
 
-    -- Verificar se a localidade do fornecedor está nas Pat_Locs da marca do produto
     IF NOT EXISTS (
         SELECT 1
         FROM Pat_Locs
         WHERE patente = @marca AND Ploc = @localidade
     )
     BEGIN
-        -- Levantar um erro se a localidade da loja não estiver nas Pat_Locs da marca
         RAISERROR('Fornecedor %d não pode forneceder quantidade do produto %d, pois a localidade %s não é permitida para a marca.', 16, 1, @fornecedor, @id_produto, @localidade);
         ROLLBACK TRANSACTION;
         RETURN;

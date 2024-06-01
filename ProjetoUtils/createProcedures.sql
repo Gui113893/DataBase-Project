@@ -180,30 +180,18 @@ CREATE PROCEDURE DeleteEfetivo
 AS
 BEGIN
     BEGIN TRANSACTION;
-
     BEGIN TRY
         DECLARE @deleted_contrato INT;
-
-        -- Captura o contrato do efetivo a ser deletado
         SELECT @deleted_contrato = contrato FROM Efetivo WHERE nif = @Nif;
-
-        -- Se o Efetivo deletado for gerente de alguma loja, definir o gerente como NULL
         UPDATE Loja
         SET gerente = NULL
         WHERE gerente = @Nif;
-
-        -- Deleta o Efetivo da tabela Efetivo
         DELETE FROM Efetivo
         WHERE nif = @Nif;
-
-        -- Deleta o Contrato relacionado
         DELETE FROM Contrato
         WHERE id_contrato = @deleted_contrato;
-
-        -- Deleta o Funcionario relacionado
         DELETE FROM Funcionario
         WHERE nif = @Nif;
-
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH
@@ -270,8 +258,7 @@ BEGIN
                     JOIN Loja ON SubEmpresa.id = Loja.subempresa
                     WHERE nome LIKE '%' + @nome_subempresa + '%'
                     AND @id_loja = Loja.id_loja
-                )
-                AND (P.tipo = @tipo OR @tipo IS NULL)
+                ) AND (P.tipo = @tipo OR @tipo IS NULL)
             )
             OR 
             (
@@ -280,13 +267,10 @@ BEGIN
                     SELECT diretor
                     FROM SubEmpresa
                     WHERE nome LIKE '%' + @nome_subempresa + '%'
-                )
-                AND (P.tipo = @tipo OR @tipo IS NULL)
+                ) AND (P.tipo = @tipo OR @tipo IS NULL)
             )
     )
-    SELECT 
-        P.*,
-        Salario_Medios.Salario_Medio
+    SELECT P.*, Salario_Medios.Salario_Medio
     FROM 
         PessoaFiltrada P
     LEFT JOIN (
@@ -294,11 +278,7 @@ BEGIN
             P.tipo,
             AVG(P.salario) AS Salario_Medio
         FROM 
-            PessoaFiltrada P
-        GROUP BY 
-            P.tipo
-    ) Salario_Medios
-    ON P.tipo = Salario_Medios.tipo;
+            PessoaFiltrada P GROUP BY P.tipo ) Salario_Medios ON P.tipo = Salario_Medios.tipo;
 END;
 GO
 

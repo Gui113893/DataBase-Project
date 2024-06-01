@@ -19,4 +19,4 @@ PRINT 'Inserted ' + str(@nelem) + ' total records'
 SET @end_time = GETDATE()
 PRINT 'Miliseconds used: ' + CONVERT(VARCHAR(20), DATEDIFF(MILLISECOND, @start_time, @end_time));
 
-EXEC SearchPessoa @nome_pessoa = 'jo', @tipo = 'Efetivo', @nome_subempresa = 'Con', @id_loja = 1;
+EXEC SearchPessoa @nome_pessoa = '', @tipo = 'Efetivo', @nome_subempresa = 'Con', @id_loja = 1;

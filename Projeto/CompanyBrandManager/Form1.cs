@@ -1737,11 +1737,8 @@ namespace CompanyBrandManager
 
 
             SqlCommand cmd = new SqlCommand("SearchPessoa", cn);
-
             cmd.CommandType = CommandType.StoredProcedure;
-            // Adiciona os parametros das caixas de texto da pesquisa
             cmd.Parameters.Add(new SqlParameter("@nome_pessoa", SqlDbType.VarChar, 100) { Value = searchNomePessoaTxt.Text == "" ? DBNull.Value : (object)searchNomePessoaTxt.Text });
-
             cmd.Parameters.Add(new SqlParameter("@id_loja", SqlDbType.Int) { Value = searchLojaPessoaTxt.Text == "" ? DBNull.Value : (object)searchLojaPessoaTxt.Text });
             cmd.Parameters.Add(new SqlParameter("@tipo", SqlDbType.VarChar, 100) { Value = filtro == "" ? DBNull.Value : (object)filtro });
 
@@ -1749,7 +1746,6 @@ namespace CompanyBrandManager
             {
                 // Se não houver loja pode ser null
                 cmd.Parameters.Add(new SqlParameter("@nome_subempresa", SqlDbType.VarChar, 100) { Value = searchSubempresaPessoaTxt.Text == ""? DBNull.Value : (object)searchSubempresaPessoaTxt.Text });
-
             }
             else
             {

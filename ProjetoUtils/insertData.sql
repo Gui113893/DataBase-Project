@@ -209,5 +209,4 @@ INSERT INTO Stock_Loja (loja, produto, quantidade) VALUES
 (6, 10, 20),
 (7, 10, 60),
 (4, 11, 100),
-(8, 11, 100),
-(8, 2, 100);
+(8, 11, 100);
