@@ -62,7 +62,7 @@ namespace CompanyBrandManager
 
         private SqlConnection getSqlConnection()
         {
-            string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p5g10;User Id=p5g10;Password=sql_grupo10;";
+            string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p5g10;User Id=;Password=;"; // TODO: Change the user id and password
             return new SqlConnection(connectionString);
         }
 
