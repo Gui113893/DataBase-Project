@@ -1,8 +1,8 @@
 # BD: Trabalho Prático APF-T
 
 **Grupo**: P5G10
-- Guilherme Santos, MEC: 113893
-- Diogo Guedes, MEC: 114256
+- Guilherme Santos, MEC: 113893 (17/20)
+- Diogo Guedes, MEC: 114256     (10/20)
 
 ## Introdução / Introduction
  
